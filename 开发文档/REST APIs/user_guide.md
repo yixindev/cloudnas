@@ -44,10 +44,10 @@ Rest API对每个访问请求进行身份验证，验证失败的请求无法调
 /**
  * 签名算法说明：
  * 按序拼接字符串 appId + timestamp + bodymd5 + nonce + clientType + clientVersion + deviceId + version + appSecret, 进行SHA256哈希计算，转化成16进制字符(String，小写)
- * <p>
  * 注意：
- * 1. appSecret为平台分配的应用appId对应的秘钥
- * 2. apache commons-codec参考版本1.13
+ * * appSecret为平台分配的应用appId对应的秘钥
+ * * 所有输入参数建议先调用org.apache.commons.lang3.StringUtils#trimToEmpty，避免前后多余的空格导致校验失败
+ * * apache commons-codec参考版本1.13
  */
 public class CheckSumBuilder {
 
