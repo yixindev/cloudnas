@@ -3,6 +3,8 @@
 智家云硬盘 Rest API 是提供给开发者接入智家云硬盘开放平台的入口。
 开发者可以通过智家云硬盘 API 进行二次开发。
 
+![SDK接入系统流程图](../../images/flowchart.png)
+
 ## 变更记录
 
 | 日期 | 版本 | 变更内容 |
@@ -102,7 +104,7 @@ public class CheckSumBuilder {
 2. 接口请求地址
 
 ```
-POST https:/${domain}/nas/sdk/token HTTP/1.1
+POST https://${domain}/nas/sdk/token HTTP/1.1
 Content-Type: application/json;charset=utf-8
 ```
 
