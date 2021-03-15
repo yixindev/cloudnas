@@ -24,14 +24,14 @@ Rest API对每个访问请求进行身份验证，验证失败的请求无法调
 签名用的请求头参数
 
 | 参数 | 类型 | 必选(默认值) | 描述 |
-| :------: | :------: | :------: | :------: |
+| :------ | :------ | :------ | :------ |
 | X-NAS-APPID  | String | 是 | 平台分配的应用appkey |
 | X-NAS-NONCE | String | 是 | 随机字符串（最大长度128个字符）,例如fdsfafewfd |
 | X-NAS-TIMESTAMP | String| 是 | 当前 UNIX 时间戳，可记录发起 API 请求的时间。例如1594639036，单位为秒。注意：如果与服务器时间相差超过1分钟，会引起签名过期错误。 |
 | X-NAS-CLIENTTYPE  | Integer | 否(99999) | 客户端类型，ios: 51, aos: 50, web: 80, misc: 99999 |
 | X-NAS-CLIENTVERSION  | Integer | 否(1) | 客户端版本号 |
-| X-NAS-DEVICEID  | String | 否(空字符串) | 设备ID |
-| X-NAS-VERSION  | String | 否(1) | NAS接口版本号 |
+| X-NAS-DEVICEID  | String | 否(空字符串) | 设备ID，第三方APP维护的设备ID，可以选填 |
+| X-NAS-VERSION  | Integer | 否(1) | NAS接口版本号 |
 | X-NAS-CHECKSUM | String | 是 | 签名串 [签名代码](#sign_code) |
 
 ## 签名代码Demo
