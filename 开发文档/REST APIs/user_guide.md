@@ -116,9 +116,10 @@ Content-Type: application/json;charset=utf-8
 
 4. 输出参数
 
-```    
+ 
 //成功结果示例
 "Content-Type": "application/json; charset=utf-8"
+```json
 {
   "code": 200,
   "msg": "OK",
@@ -128,8 +129,9 @@ Content-Type: application/json;charset=utf-8
     "expires_in": 3600 
   }
 }
-
+```
 //失败结果示例
+```json
 {
     "code":500,
     "msg":"服务器内部错误"
