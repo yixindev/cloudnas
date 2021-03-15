@@ -28,10 +28,10 @@ Rest API对每个访问请求进行身份验证，验证失败的请求无法调
 | X-NAS-APPID  | String | 是 | 平台分配的应用appkey |
 | X-NAS-NONCE | String | 是 | 随机字符串（最大长度128个字符）,例如fdsfafewfd |
 | X-NAS-TIMESTAMP | String| 是 | 当前 UNIX 时间戳，可记录发起 API 请求的时间。例如1594639036000，单位为毫秒。注意：如果与服务器时间相差超过1分钟，会引起签名过期错误。 |
-| X-NAS-CLIENTTYPE  | String | 否(空字符串) | 客户端类型，ios: 51, aos: 50, web: 80, misc: 99999 |
-| X-NAS-CLIENTVERSION  | String | 否(空字符串) | 客户端版本号 |
-| X-NAS-DEVICEID  | String | 否(空字符串) | 设备ID，第三方APP维护的设备ID，可以选填 |
-| X-NAS-VERSION  | String | 否(空字符串) | NAS接口版本号 |
+| X-NAS-CLIENTTYPE  | String | 否(空字符串) | 客户端类型，ios: 51, aos: 50, web: 80, misc: 99999，可以选填 |
+| X-NAS-CLIENTVERSION  | String | 否(空字符串) | 客户端版本号，可以选填 |
+| X-NAS-DEVICEID  | String | 否(空字符串) | 第三方APP维护的设备ID，可以选填 |
+| X-NAS-VERSION  | String | 否(空字符串) | NAS接口版本号，可以选填 |
 | X-NAS-CHECKSUM | String | 是 | 签名串，具体算法参考 [签名代码](#sign_code) |
 
 ## 签名代码Demo
@@ -42,18 +42,18 @@ Rest API对每个访问请求进行身份验证，验证失败的请求无法调
 /**
  * 签名算法说明：
  * 按序拼接字符串 appId + timestamp + bodymd5 + nonce + clientType + clientVersion + deviceId + version + appSecret, 进行SHA256哈希计算，转化成16进制字符(String，小写)
- *
+ * <p>
  * 注意：
  * 1. AppSecret为AppKey对应的秘钥
  * 2. apache commons-codecb参考版本1.13
  */
 public class CheckSumBuilder {
 
-    public static final String getCheckSum(String appId, Long timestamp, String bodymd5, String nonce, String appSecret) {
+    public static final String getCheckSum(String appId, String timestamp, String bodymd5, String nonce, String appSecret) {
         return getCheckSum(appId, timestamp, bodymd5, nonce, "", "", "", "", appSecret);
     }
 
-    public static final String getCheckSum(String appId, Long timestamp, String bodymd5, String nonce, String clientType, String clientVersion, String deviceId, String version, String appSecret) {
+    public static final String getCheckSum(String appId, String timestamp, String bodymd5, String nonce, String clientType, String clientVersion, String deviceId, String version, String appSecret) {
         String source = appId + timestamp + bodymd5 + nonce + clientType + clientVersion + deviceId + version;
         return org.apache.commons.codec.digest.DigestUtils.sha256Hex(source + appSecret);
     }
@@ -62,14 +62,13 @@ public class CheckSumBuilder {
      * 计算并获取md5值(小写)
      */
     public static final String getMD5(String requestBody) {
-        String bodymd5 = org.apache.commons.codec.digest.DigestUtils.md5Hex(requestBody);
-        return bodymd5;
+        return org.apache.commons.codec.digest.DigestUtils.md5Hex(requestBody);
     }
 
     public static final void main(String[] args) {
         String sampleRequestBody = "{}";
         String bodymd5 = getMD5(sampleRequestBody);
-        String checkSum = getCheckSum("demo", System.currentTimeMillis(), bodymd5, "dkfafkdjfk", "demosecret");
+        String checkSum = getCheckSum("demo", System.currentTimeMillis() + "", bodymd5, "dkfafkdjfk", "demosecret");
         System.out.println(checkSum);
     }
 }
