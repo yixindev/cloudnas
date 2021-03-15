@@ -1,135 +1,152 @@
-## 概述
+## 易信云Nas-SDK 安卓用户手册
 
-智家云硬盘iOS SDK提供了一套简单易用的接口，允许开发者通过调用cloudNas SDK(以下简称SDK)提供的API，快速地集成存储功能至现有iOS应用中。
+[TOC]
 
-## 变更记录
+### 1.项目介绍
 
-[CHANGELOG.md](CHANGELOG.md)
+* 概述：本文档指导客户端开发人员，用于快速集成云Nas-SDK，使app具备基于SMB协议的远程文件的快速访问/上传/下载/预览等能力；
+* 本SDK的主要能力是基于flutter技术实现；
 
-## 快速接入
+### 2.接入准备
 
-#### 开发环境准备
+#### 2.1 环境要求
+* android-minsdk >= 16
+* app额外权限申请： sdk通过gradle方式导入，无需额外进行配置
 
-| 名称 | 要求 |
-| :------ | :------ |
-| JDK版本  | >1.8.0 |
-| 最小Android API 版本 | API 19 |
-| CPU架构支持 | ARM64、ARMV7 |
-| IDE | Android Studio |
-| 其他 | 依赖androidx，不支持support库 |
+> manifest配置
+```xml
+略；
+```
 
-#### SDK快速接入
+#### 2.2 依赖库导入
 
-1. 新建Android工程
+### 3.API列表
 
-    a. 运行Android Sudio，顶部菜单依次选择“File -> New -> New Project...”新建工程，选择'Phone and Tablet' -> 'Empty Activity' 单击Next。
+* api具体的调用时机及方式可参考同Git项目下的安卓Demo工程；
 
-    ![new android project](images/new_project.png)
-    
-    b. 配置工程相关信息，请注意Minimum API Level为API 19。
-    
-    
-    c. 单击'Finish'完成工程创建。
+#### 3.1 SDK初始化
 
-2. 添加SDK编译依赖
+* 参数列表
+    *  app: 类型Application | 必传 | 应用上下文；
+    *  appkey: 类型string | 必传 | app唯一标识，可通过后台申请；
+    *  appsecret: 类型string | 必传 | app后台签名标识，可通过后台申请；
+    *  callback: 类型interface, sdk初始化回调；
+        * code: 类型int | 错误码
+        * message: 类型string | 错误码描述
+* 接口调用说明：应用启动时，在`application.onCreate`方法中调用，通过callback中的code值是否等于`200`判断是否初始化成功。
 
-    修改工程目录下的'app/build.gradle'文件，添加SDK的依赖。
-    ```groovy
-    dependencies {
-      //声明SDK依赖，版本可根据实际需要修改
+> 调用示例
+```java
+val appkey = 'xxx'
+val appsecret = 'xxxx'
+
+YXNasSDK.instance.init(this, appkey, appsecret, object : INasInvokeCallback<Void> {
+
+    override fun onResult(code: Int, message: String?, data: Void?) {
+        //通过 code==200 判断sdk是否初始化成功
     }
-    ```
-    之后通过顶部菜单'Build -> Make Project'构建工程，触发依赖下载，完成后即可在代码中引入SDK中的类和方法。
+})
 
-3. 权限处理
-
-    SDK正常工作需要应用获取以下权限
-    ```xml
-    <!-- 网络相关 -->
-
-    <!-- 读写外部存储 -->
-
-    <!-- 多媒体 -->
-    ```
-    以上权限已经在SDK内部进行声明，开发者可以不用在```AndroidManifest.xml```文件中重新声明这些权限，但运行时的权限申请需要应用开发者自己编码实现，可在应用首页中统一申请，详情可参考[Android运行时权限申请示例](https://developer.android.google.cn/guide/topics/permissions/overview)。如果运行时对应权限缺失，SDK可能无法正常工作，如会议时无图像、对方听不到己方声音等。
-
-4. SDK初始化
-
-    在使用SDK其他功能之前首先需要完成SDK初始化，初始化操作需要保证在**Application**的**onCreate**方法中执行。代码示例如下：
-    ```java
-    ```
-
-5. 调用相关接口完成特定功能，详情请参考API文档。
-
-- [登录鉴权](#登录鉴权)
-    ```java
-    //Token登录
-
-    ```
-- [注销登录](#注销)
-    ```java
-    NEMeetingSDK.getInstance().logout(NECallback<Void> callback);
-    ```
-
-## 业务开发
-
-### 初始化
-
-#### 描述
-
-在使用SDK其他接口之前，首先需要完成初始化操作。
-
-#### 业务流程
-
-1. 配置初始化相关参数
-
-```java
 ```
 
-2. 调用接口并进行回调处理，该接口无额外回调结果数据
+#### 3.2 添加token刷新监听器
 
+* 参数列表
+    * listener: 类型interface | 建议必传 | 请求刷新token的监听器；
+* 接口调用说明：当底层token过期时，通过监听器回调给主app，主app需刷新token，并将结果通过`MethodCall`回传给sdk；
+
+> 调用示例
 ```java
+//建议在应用启动时添加token监听器
+
+YXNasSDK.instance.init()
+
+//需要提前执行init方法
+YXNasSDK.instance.setTokenRequestListener(object : ITokenRequestListener {
+
+    //ps: 此方法通过主线程回调
+    override fun onTokenRequest(methodCall: IMethodCall<UserToken>?) {
+        //主app异步获取userToken，将结果返回sdk, 成功调用succes返回token数据，失败调用error方法返回code + message
+        if(success){
+            val token: UserToken = UserToken();
+            methodCall.success(token)
+        }else{
+            methodCall.error(code, message);
+        }
+    }
+}
 ```
 
-#### 注意事项
+#### 3.3 获取Fragment容器
 
-- 初始化操作需要保证在**Application**类的**onCreate**方法中执行
+* 接口调用说明：如主app以Fragment方式引入sdk界面，需通过本接口实例化Fragment
 
---------------------
-
-### 登录鉴权
-
-#### 描述
-
-请求SDK进行登录鉴权，只有完成SDK登录鉴权才允许进行后续操作。说明如下：
-
-
-下面就`Token登录`方式说明SDK登录逻辑，其他登录方式同理。
-
-#### 业务流程
-
-1. 获取登录用账号ID和Token。Token由应用服务器下发，但SDK不提供对应接口获取该信息，需要开发者自己实现。
-
-```java
-String accountId = "accountId";
-String accountToken = "accountToken";
+> 调用示例
+```kotlin
+val nasFragment = YXNasSDK.instance.obtainFlutterHost()
 ```
 
-2. 登录并进行回调处理，该接口无额外回调结果数据
+#### 3.4 授权登录
 
+* 参数列表
+    * mobile: 类型string | 必传 | 用户手机号
+    * token: 类型string | 必传 | 用户access-token
+    * callback: 类型interface | 建议必传 | 用户授权登录回调，当云nas授权结束后将结果回调给主app
+* 接口调用说明: 
+    * 前置条件: SDK初始化成功，即初始化回调中code==200
+    * 主app获取到sdk的用户token数据之后，再调用此接口
+
+> 调用示例
 ```java
+YXNasSDK.instance.authLogin(mobile, token, object : INasInvokeCallback<Void> {
+    override fun onResult(code: Int, message: String?, data: Void?) {
+        //通过code判断SDK用户授权结果
+    }
+}
 ```
 
-#### 注意事项
+#### 3.5 用户退出登录
+* 参数列表
+    * callback: 类型interface | 建议必传 | 用户退出回调，当云nas退出登录后将结果回调给主app
+* 接口调用说明:
+    * 前置条件: SDK初始化成功，即初始化接口的回调中code==200
+    * 主app退出登录之后，调用此接口退出sdk，并清除SDK底层用户数据
+
+> 调用示例
+```java
+YXNasSDK.instance.logout(object : INasInvokeCallback<Void> {
+    override fun onResult(code: Int, message: String?, data: Void?) {
+        //通过code判断SDK用户登出结果
+    }
+}
+```
+
+### 4.统一错误码对照表
+
+|错误码|描述 |
+| :-- | :-- |
+| 200 | 调用成功 |
+| 400 | 请求参数错误 |
+| 4002 | 数据解析异常 |
+| 4003 | 刷新token失败， 用户数据为空或未登录 |
+| 4004 | 获取token失败 |
+
+### 5.release混淆配置
+
+```xml
+-keep im.yixin.nas.sdk.**{*;}
+```
 
 
---------------------
+### 6.附录
+#### 6.1 环境配置
+| api环境 | base-url地址 |
+| :-- | :-- |
+| 测试环境 | http://test.yixin.im |
+| 生产环境 | http://zjdrive.cn|
 
-### 注销
 
-#### 描述
 
-在已经完成SDK登录鉴权的状态下，创建并开始登录。
 
-#### 业务流程
+
 
