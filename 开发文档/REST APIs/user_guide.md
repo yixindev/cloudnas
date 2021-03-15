@@ -93,7 +93,48 @@ public class CheckSumBuilder {
 
 ## Rest APIs
 
-### 获取Access Token
+### 获取SDK Access Token
+
+1. 接口描述  
+
+获取sdk access token，授权后可以调用更多服务api接口
+
+2. 接口请求地址
+
+```
+POST https:/${domain}/nas/sdk/token HTTP/1.1
+Content-Type: application/json;charset=utf-8
+```
+
+
+3. 输入参数
+```json
+{
+  "user_id": 18100000000
+}
+```
+
+4. 输出参数
+
+```    
+//成功结果示例
+"Content-Type": "application/json; charset=utf-8"
+{
+  "code": 200,
+  "msg": "OK",
+  "data": { 
+    "access_token": "1D45T7ofpx",
+    "refresh_token": "723YU6x8qxp",
+    "expires_in": 3600 
+  }
+}
+
+//失败结果示例
+{
+    "code":500,
+    "msg":"服务器内部错误"
+}
+```
 
 ## 错误码
 
