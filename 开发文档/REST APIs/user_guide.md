@@ -3,7 +3,7 @@
 智家云硬盘 Rest API 是提供给开发者接入智家云硬盘开放平台的入口。
 开发者可以通过智家云硬盘 API 进行二次开发。
 
-![SDK接入系统流程图](../../images/flowchart.png)
+![SDK接入系统流程图](images/SDK认证流程图.jpg)
 
 ## 变更记录
 
