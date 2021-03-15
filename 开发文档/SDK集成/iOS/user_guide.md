@@ -1,10 +1,12 @@
 ## 概述
 
-智家云硬盘iOS SDK提供了一套简单易用的接口，允许开发者通过调用cloudNas SDK(以下简称SDK)提供的API，快速地集成存储功能至现有iOS应用中。
+智家云硬盘iOS SDK提供了一套简单易用的接口， 允许开发者通过调用NAS SDK(以下简称SDK)提供的API，快速地集成智家云硬盘的界面和功能至现有的iOS应用中。
 
 ## 变更记录
 
-[CHANGELOG.md](CHANGELOG.md)
+| 日期 | 版本 | 变更记录 |
+| :------: | :------: | :------ |
+| 2021-03-15 | 1.0.0 | 首次发布 |
 
 ## 快速接入
 
@@ -13,7 +15,7 @@
 | 名称 | 要求 |
 | :------ | :------ |
 | iOS版本 | 10.0以上 |
-| CPU架构支持 | ARM64|
+| CPU架构支持 | ARM64 ARMV7|
 | IDE | XCode |
 | 其他 | CocoaPods |
 
@@ -29,15 +31,13 @@
     c. 然后选择合适的工程本地路径，选择Create完成工程创建。
 
 2. 通过CocoaPods集成SDK
-
-    进入到工程路径执行pod命令，生成Podfile文件，注意CocoaPods版本使用1.9.1以上的，防止因为版本过低导致无法拉取sdk。
-    ```groovy
-    pod init
-    ```
+	
+    进入到工程路径执行pod初始化命令```pod init``` ，生成Podfile文件，注意CocoaPods版本使用1.9.1以上的，防止因为版本过低导致无法拉取sdk。
+    
     打开Podfile文件添加如下代码，保存。
 
     ```
-    pod 'cloudNasSDK'
+    pod 'NASSDK'
     ```
 
     执行pod命令，安装SDK
@@ -45,48 +45,73 @@
     ```
     pod install
     ```
-    
-2. SDK初始化
-
-    在使用SDK其他功能之前首先需要完成SDK初始化，初始化操作建议在**AppDelegate.m**的**application:didFinishLaunchingWithOptions:**方法执行。代码示例如下：
-    ```objective-c
-   ```
-
-    **注意：其他操作一定更要等到初始化接口的回调返回之后再执行，否则会失败。**
-
-6. 调用相关接口完成特定功能，详情请参考API文档。
-
-- 登录鉴权
-    ```objective-c
-    ```
-    
-- 注销登录
-    ```objective-c
-    ```
 
 ## 业务开发
+
+### 全局实例
+
+#### 描述
+
+获取SDK的全局实例对象。
+
+#### 接口定义
+
+```
++(instancetype)sharedInstance;
+```
+
+--------------------
+
+### 界面容器
+
+#### 描述
+
+获取SDK的业务界面，返回值是UIViewController类的实例，将获取的对象添加到相应的位置，例如：TabbarController。
+
+#### 接口定义
+
+```
+-(UIViewController*)contentViewController;
+```
+
+#### 注意事项
+
+- 容器内部的导航栏样式和跳转由SDK内部定制，不跟随App的全局样式。
+
+--------------------
 
 ### 初始化
 
 #### 描述
 
-在使用SDK其他接口之前，首先需要完成初始化操作。
+在调用SDK其他接口之前，首先需要传入应用的**appKey**和**appSecret**完成SDK的初始化。
+
+#### 接口定义
+
+```
+-(void)initializeWithAppKey:(NSString*)appKey
+                  appSecret:(NSString*)appSecret
+                 completion:(NASCompletionBlock)completion
+```
 
 #### 业务流程
 
-1. 配置初始化相关参数
-
-```objective-c
 ```
-
-2. 调用接口并进行回调处理，该接口无额外回调结果数据
-
-```objective-c
+[[NASSDK sharedInstance] initializeWithAppKey:appKey
+                                    appSecret:appSecret
+                                   completion:^(NSInteger resultCode, NSString *resultMsg) {
+    if (resultCode == NAS_RESULT_SUCCESS) {
+        //初始化成功
+    }
+    else{
+        //初始化失败
+    }
+}];
 ```
 
 #### 注意事项
 
-- 其他操作一定更要等到初始化接口的回调返回之后再执行，否则会失败
+- 其他操作要等到初始化接口的回调执行之后再进行，否则会失败
 
 --------------------
 
@@ -94,24 +119,83 @@
 
 #### 描述
 
-请求SDK进行登录鉴权，只有完成SDK登录鉴权才允许后续操作。
+请求SDK进行登录鉴权，只有SDK获取登录鉴权信息完成登录后，用户才可以正常使用智家云硬盘的相关功能。
+
+#### 接口定义
+
+```
+-(void)authWithMobile:(NSString*)mobile
+                token:(NSString*)token
+            completion:(NASCompletionBlock)completion;
+```
 
 #### 业务流程
 
-1. 获取登录用Account和Token。Token由应用服务器下发，但SDK不提供对应接口获取该信息，需要开发者自己实现。
+1. 获取登录用户手机号和token，token由应用服务器下发。
 
 ```objective-c
-NSString *accountId = @"mobile";
-NSString *accountToken = @"accountToken";
+NSString *mobile = @"mobile";
+NSString *token = @"token";
 ```
 
-2. 登录并进行回调处理，该接口无额外回调结果数据
+2. 传入获取的信息后SDK进行登录授权并回调登录结果。
 
-```objective-c
+```
+[[NASSDK sharedInstance] authWithMobile:mobile
+                                  token:token
+                             completion:^(NSInteger resultCode, NSString *resultMsg) {
+    if (resultCode == NAS_RESULT_SUCCESS) {
+        //登录成功
+    }
+    else{
+        //登录失败
+    }
+}];
 ```
 
 #### 注意事项
-app切换账号或者登出时必须调用注销接口
+- 应用切换账号或者登出时必须调用SDK的注销接口。
 
 --------------------
+
+### 注销
+
+#### 描述
+
+请求SDK注销自己当前的登录账号，变成未登录状态。
+
+#### 接口定义
+
+```
+-(void)logoutWithCompletion:(NASCompletionBlock)completion;
+```
+
+--------------------
+
+### 监听token过期
+
+#### 描述
+
+添加SDK token过期的监听回调，获取新的token后回传给SDK。
+
+#### 接口定义
+
+```
+-(void)addTokenExpiredListener:(NASTokenListenBlock)listenser;
+```
+
+#### 业务流程
+
+```
+[[NASSDK sharedInstance] addTokenExpiredListener:^(NASTokenSendBlock sendBlock) {
+    //应用请求新的token
+    [app fetchToken:^(NSString *token) {
+        //回传给SDK
+        sendBlock(token);
+    }];
+}];
+```
+
+
+
 
