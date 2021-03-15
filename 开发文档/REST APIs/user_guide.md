@@ -25,7 +25,7 @@ Rest API对每个访问请求进行身份验证，验证失败的请求无法调
 
 | 参数 | 类型 | 必选(默认值) | 描述 |
 | :------ | :------ | :------ | :------ |
-| X-NAS-APPID  | String | 是 | 平台分配的应用appkey |
+| X-NAS-APPID  | String | 是 | 平台分配的应用appid |
 | X-NAS-NONCE | String | 是 | 随机字符串（最大长度128个字符）,例如fdsfafewfd |
 | X-NAS-TIMESTAMP | String| 是 | 当前 UNIX 时间戳，可记录发起 API 请求的时间。例如1594639036000，单位为毫秒。注意：如果与服务器时间相差超过1分钟，会引起签名过期错误。 |
 | X-NAS-CLIENTTYPE  | String | 否(空字符串) | 客户端类型，ios: 51, aos: 50, web: 80, misc: 99999，可以选填 |
@@ -44,7 +44,7 @@ Rest API对每个访问请求进行身份验证，验证失败的请求无法调
  * 按序拼接字符串 appId + timestamp + bodymd5 + nonce + clientType + clientVersion + deviceId + version + appSecret, 进行SHA256哈希计算，转化成16进制字符(String，小写)
  * <p>
  * 注意：
- * 1. AppSecret为AppKey对应的秘钥
+ * 1. appSecret为平台分配的应用appId对应的秘钥
  * 2. apache commons-codec参考版本1.13
  */
 public class CheckSumBuilder {
