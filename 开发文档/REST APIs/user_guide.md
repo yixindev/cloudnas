@@ -45,7 +45,7 @@ Rest API对每个访问请求进行身份验证，验证失败的请求无法调
  * <p>
  * 注意：
  * 1. AppSecret为AppKey对应的秘钥
- * 2. apache commons-codecb参考版本1.13
+ * 2. apache commons-codec参考版本1.13
  */
 public class CheckSumBuilder {
 
