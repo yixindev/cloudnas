@@ -61,12 +61,12 @@ public class CheckSumBuilder {
     /**
      * 计算并获取md5值(小写)
      */
-    public static String getMD5(String requestBody) {
+    public static final String getMD5(String requestBody) {
         String bodymd5 = org.apache.commons.codec.digest.DigestUtils.md5Hex(requestBody);
         return bodymd5;
     }
 
-    public static void main(String[] args) {
+    public static final void main(String[] args) {
         String sampleRequestBody = "{}";
         String bodymd5 = getMD5(sampleRequestBody);
         String checkSum = getCheckSum("demo", System.currentTimeMillis(), bodymd5, "dkfafkdjfk", "demosecret");
