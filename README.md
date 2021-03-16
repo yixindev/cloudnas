@@ -24,4 +24,4 @@
 
 ## 调用流程
 本SDK了给用户带来良好的体验避免二次登录，同时确保数据获取安全性，采用通过第三方服务器使用Appkey+AppSecret+Mobile获取Token的方式进行快捷登录。
-![调用流程](images/flowchart.png)
+![调用流程](SDK认证流程图.jpg)
