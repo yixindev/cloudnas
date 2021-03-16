@@ -29,7 +29,6 @@
 * 参数列表
     *  app: 类型Application | 必传 | 应用上下文；
     *  appkey: 类型string | 必传 | app唯一标识，可通过后台申请；
-    *  appsecret: 类型string | 必传 | app后台签名标识，可通过后台申请；
     *  callback: 类型interface, sdk初始化回调；
         * code: 类型int | 错误码
         * message: 类型string | 错误码描述
@@ -40,7 +39,7 @@
 val appkey = 'xxx'
 val appsecret = 'xxxx'
 
-YXNasSDK.instance.init(this, appkey, appsecret, object : INasInvokeCallback<Void> {
+YXNasSDK.instance.init(this, appkey, object : INasInvokeCallback<Void> {
 
     override fun onResult(code: Int, message: String?, data: Void?) {
         //通过 code==200 判断sdk是否初始化成功
@@ -143,7 +142,7 @@ YXNasSDK.instance.logout(object : INasInvokeCallback<Void> {
 | api环境 | base-url地址 |
 | :-- | :-- |
 | 测试环境 | http://test.yixin.im |
-| 生产环境 | http://zjdrive.cn|
+| 生产环境 | https://zjdrive.cn|
 
 
 
