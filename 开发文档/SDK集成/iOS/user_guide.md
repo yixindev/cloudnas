@@ -24,6 +24,7 @@
 1. 新建iOS工程
 
     a. 运行XCode，选择Create a new Xcode project，选择Single View App，选择Next。
+    
     ![new android project](images/new_project.png)
     
     b. 配置工程相关信息，选择Next。
@@ -45,7 +46,18 @@
     ```
     pod install
     ```
+    
+3. 权限配置
 
+	打开项目目录下的xcworkspace工程文件，点击打开```Info.plist```文件，在其中增加相册相关的访问权限配置：
+	
+	```
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>需要您的允许才能保存图片到相册</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>需要您的允许才能访问相册</string>
+	```
+	
 ## 接口开发
 
 ### 获取全局实例
