@@ -46,11 +46,11 @@
     pod install
     ```
 
-## 业务开发
+## 接口开发
 
-### 全局实例
+### 获取全局实例
 
-#### 描述
+#### 接口描述
 
 获取SDK的全局实例对象。
 
@@ -62,9 +62,9 @@
 
 --------------------
 
-### 界面容器
+### 获取界面容器
 
-#### 描述
+#### 接口描述
 
 获取SDK的业务界面，返回值是UIViewController类的实例，将获取的对象添加到相应的位置，例如：TabbarController。
 
@@ -84,21 +84,19 @@
 
 #### 描述
 
-在调用SDK其他接口之前，首先需要传入应用的**appKey**和**appSecret**完成SDK的初始化。
+在调用SDK其他接口之前，首先需要传入应用的**appKey**完成SDK的初始化。
 
 #### 接口定义
 
 ```
 -(void)initializeWithAppKey:(NSString*)appKey
-                  appSecret:(NSString*)appSecret
                  completion:(NASCompletionBlock)completion
 ```
 
-#### 业务流程
+#### 调用示例
 
 ```
 [[NASSDK sharedInstance] initializeWithAppKey:appKey
-                                    appSecret:appSecret
                                    completion:^(NSInteger resultCode, NSString *resultMsg) {
     if (resultCode == NAS_RESULT_SUCCESS) {
         //初始化成功
@@ -117,7 +115,7 @@
 
 ### 登录鉴权
 
-#### 描述
+#### 接口描述
 
 请求SDK进行登录鉴权，只有SDK获取登录鉴权信息完成登录后，用户才可以正常使用智家云硬盘的相关功能。
 
@@ -129,7 +127,7 @@
             completion:(NASCompletionBlock)completion;
 ```
 
-#### 业务流程
+#### 调用示例
 
 1. 获取登录用户手机号和token，token由应用服务器下发。
 
@@ -138,7 +136,7 @@ NSString *mobile = @"mobile";
 NSString *token = @"token";
 ```
 
-2. 传入获取的信息后SDK进行登录授权并回调登录结果。
+2. 传入获取的参数后SDK进行登录授权并回调登录结果。
 
 ```
 [[NASSDK sharedInstance] authWithMobile:mobile
@@ -160,7 +158,7 @@ NSString *token = @"token";
 
 ### 注销
 
-#### 描述
+#### 接口描述
 
 请求SDK注销自己当前的登录账号，变成未登录状态。
 
@@ -174,7 +172,7 @@ NSString *token = @"token";
 
 ### 监听token过期
 
-#### 描述
+#### 接口描述
 
 添加SDK token过期的监听回调，获取新的token后回传给SDK。
 
@@ -184,11 +182,11 @@ NSString *token = @"token";
 -(void)addTokenExpiredListener:(NASTokenListenBlock)listenser;
 ```
 
-#### 业务流程
+#### 调用示例
 
 ```
 [[NASSDK sharedInstance] addTokenExpiredListener:^(NASTokenSendBlock sendBlock) {
-    //应用请求新的token
+    //应用获取新的token
     [app fetchToken:^(NSString *token) {
         //回传给SDK
         sendBlock(token);
