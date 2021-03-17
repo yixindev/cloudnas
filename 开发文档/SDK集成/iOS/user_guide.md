@@ -19,6 +19,10 @@
 | IDE | XCode |
 | 其他 | CocoaPods |
 
+#### 注意事项
+
+- 由于SDK底层使用Flutter跨平台进行开发，所以SDK不支持模拟器编译运行。
+
 #### SDK快速接入
 
 1. 新建iOS工程
