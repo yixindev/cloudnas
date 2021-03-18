@@ -1,0 +1,26 @@
+${PODS_ROOT}/Target Support Files/Pods-NASSDKDemo/Pods-NASSDKDemo-frameworks.sh
+${PODS_ROOT}/NASSDK/nas_sdk/App.framework
+${PODS_ROOT}/NASSDK/nas_sdk/audioplayers.framework
+${PODS_ROOT}/NASSDK/nas_sdk/connectivity.framework
+${PODS_ROOT}/NASSDK/nas_sdk/device_info.framework
+${PODS_ROOT}/NASSDK/nas_sdk/DKImagePickerController.framework
+${PODS_ROOT}/NASSDK/nas_sdk/DKPhotoGallery.framework
+${PODS_ROOT}/NASSDK/nas_sdk/ext_storage.framework
+${PODS_ROOT}/NASSDK/nas_sdk/file_picker.framework
+${PODS_ROOT}/NASSDK/nas_sdk/Flutter.framework
+${PODS_ROOT}/NASSDK/nas_sdk/fluttertoast.framework
+${PODS_ROOT}/NASSDK/nas_sdk/flutter_filereader.framework
+${PODS_ROOT}/NASSDK/nas_sdk/FMDB.framework
+${PODS_ROOT}/NASSDK/nas_sdk/gallery_saver.framework
+${PODS_ROOT}/NASSDK/nas_sdk/package_info.framework
+${PODS_ROOT}/NASSDK/nas_sdk/path_provider.framework
+${PODS_ROOT}/NASSDK/nas_sdk/Reachability.framework
+${PODS_ROOT}/NASSDK/nas_sdk/shared_preferences.framework
+${PODS_ROOT}/NASSDK/nas_sdk/sqflite.framework
+${PODS_ROOT}/NASSDK/nas_sdk/sqlite3.framework
+${PODS_ROOT}/NASSDK/nas_sdk/sqlite3_flutter_libs.framework
+${PODS_ROOT}/NASSDK/nas_sdk/SwiftyGif.framework
+${PODS_ROOT}/NASSDK/nas_sdk/Toast.framework
+${PODS_ROOT}/NASSDK/nas_sdk/webview_flutter.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework
