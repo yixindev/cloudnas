@@ -18,6 +18,8 @@
 
 @property (assign,nonatomic)BOOL sdkInit;
 
+@property (assign,nonatomic)BOOL sdkSetted;
+
 @end
 
 @implementation AppDelegate
@@ -31,7 +33,7 @@
     self.window.rootViewController = loginVC;
     [self.window makeKeyAndVisible];
     
-    [self initNASSDK];
+    [self NASSDKInit];
     
     return YES;
 }
@@ -65,7 +67,7 @@
     
     self.window.rootViewController = tabBarVC;
     
-    [self fetchToken];
+    [self NASSDKSetMobile];
 }
 
 
@@ -79,72 +81,86 @@
     loginVC.delegate = self;
     self.window.rootViewController = loginVC;
     
-    [self logoutNASSDK];
+    [self NASSDKLogout];
 }
-
 
 
 #pragma mark - sdk handle
 
 //SDK初始化
--(void)initNASSDK{
+-(void)NASSDKInit{
     NSString* appKey = @"appkey";
-    [[NASSDK sharedInstance] initializeWithAppKey:appKey completion:^(NSInteger resultCode, NSString *resultMsg) {
+    [[NASSDK sharedInstance] initWithAppKey:appKey completion:^(NSInteger resultCode, NSString *resultMsg) {
+        //SDK初始化成功
         if (resultCode == NAS_RESULT_SUCCESS) {
             self.sdkInit = YES;
-            [self fetchToken];
+            [self NASSDKSetMobile];
+            [self NASSDKTokenRequest];
+        }
+        //SDK初始化失败
+        else{
+            
         }
     }];
 }
 
 
-//SDK登录授权
--(void)authNASSDK{
-    if (self.mobile.length && self.token.length) {
-        [[NASSDK sharedInstance] authWithMobile:self.mobile token:self.token completion:^(NSInteger resultCode, NSString *resultMsg) {
+//设置SDK登录手机号
+-(void)NASSDKSetMobile{
+    if (self.sdkInit && self.mobile.length && !self.sdkSetted) {
+        self.sdkSetted = YES;
+        [[NASSDK sharedInstance] setLoginMobile:self.mobile completion:^(NSInteger resultCode, NSString *resultMsg) {
+            //SDK登录成功
             if (resultCode == NAS_RESULT_SUCCESS) {
-                //SDK登录成功
-                [self handleNASSDKTokenExpired];
             }
+            //SDK登录失败
             else{
-                //SDK登录失败
+                
             }
         }];
+        
     }
+    
 }
 
-//SDK登出
--(void)logoutNASSDK{
+//SDK退出登录
+-(void)NASSDKLogout{
+    self.sdkSetted = NO;
     [[NASSDK sharedInstance] logoutWithCompletion:^(NSInteger resultCode, NSString *resultMsg) {
+        //SDK退出登录成功
         if (resultCode == NAS_RESULT_SUCCESS) {
-            //SDK退出登录成功
+
         }
+        //SDK退出登录失败
         else{
-            //SDK退出登录失败
+            
         }
     }];
 }
 
 
 //监听SDK token过期
--(void)handleNASSDKTokenExpired{
-    [[NASSDK sharedInstance] addTokenExpiredListener:^(NASTokenSendBlock sendBlock) {
-        //模拟从服务器获取token
-        [[NASSDK sharedInstance] mockTokenFetchWithMobile:self.mobile completion:^(NSString *token) {
-            sendBlock(token);
+-(void)NASSDKTokenRequest{
+    [[NASSDK sharedInstance] addTokenRequestListener:^(NASTokenResponseBlock responseBlock) {
+        //客户端从服务器获取token
+        [self fetchToken:^(NSString *token) {
+            if (token) {
+                //回传给SDK
+                responseBlock(token);
+            }
         }];
     }];
 }
 
 
-
-
--(void)fetchToken{
-    if (_sdkInit && _token.length == 0 && _mobile.length > 0) {
-        //模拟从服务器获取token
+//模拟从服务器获取token
+-(void)fetchToken:(void(^)(NSString* token))completion{
+    if (_mobile.length) {
         [[NASSDK sharedInstance] mockTokenFetchWithMobile:_mobile completion:^(NSString *token) {
-            self.token = token;
-            [self authNASSDK];
+            token = token == nil ? @"" : token;
+            if (completion) {
+                completion(token);
+            }
         }];
     }
 }

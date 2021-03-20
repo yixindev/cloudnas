@@ -21,7 +21,7 @@
 
 #### 注意事项
 
-- 由于SDK底层使用Flutter跨平台进行开发，所以SDK不支持模拟器编译运行。
+- 由于SDK底层使用Flutter跨平台进行开发，目前不支持x86_64架构的AOT包导出，所以SDK无法在模拟器上编译运行。
 
 #### SDK快速接入
 
@@ -129,35 +129,32 @@
 
 --------------------
 
-### 登录鉴权
+### 设置登录手机号
 
 #### 接口描述
 
-请求SDK进行登录鉴权，只有SDK获取登录鉴权信息完成登录后，用户才可以正常使用智家云硬盘的相关功能。
+设置SDK登录授权必须的手机号，SDK会验证手机号并进行相关的授权。
 
 #### 接口定义
 
 ```
--(void)authWithMobile:(NSString*)mobile
-                token:(NSString*)token
-            completion:(NASCompletionBlock)completion;
+-(void)setLoginMobile:(NSString*)mobile
+           completion:(NASCompletionBlock)completion;
 ```
 
 #### 调用示例
 
-1. 获取登录用户手机号和token，token由应用服务器下发。
+1. 获取登录用户手机号
 
 ```objective-c
 NSString *mobile = @"mobile";
-NSString *token = @"token";
 ```
 
 2. 传入获取的参数后SDK进行登录授权并回调登录结果。
 
 ```
-[[NASSDK sharedInstance] authWithMobile:mobile
-                                  token:token
-                             completion:^(NSInteger resultCode, NSString *resultMsg) {
+[[NASSDK sharedInstance] setLoginMobile:mobile
+								   completion:^(NSInteger resultCode, NSString *resultMsg) {
     if (resultCode == NAS_RESULT_SUCCESS) {
         //登录成功
     }
@@ -186,26 +183,26 @@ NSString *token = @"token";
 
 --------------------
 
-### 监听token过期
+### 监听token请求
 
 #### 接口描述
 
-添加SDK token过期的监听回调，获取新的token后回传给SDK。
+当SDK进行授权登录或者token过期失效时，会调用传入的回调函数，应用获取新的token后在回传给SDK。
 
 #### 接口定义
 
 ```
--(void)addTokenExpiredListener:(NASTokenListenBlock)listenser;
+-(void)addTokenRequestListener:(NASTokenRequestBlock)listenser;
 ```
 
 #### 调用示例
 
 ```
-[[NASSDK sharedInstance] addTokenExpiredListener:^(NASTokenSendBlock sendBlock) {
+[[NASSDK sharedInstance] addTokenRequestListener:^(NASTokenResponseBlock responseBlock) {
     //应用获取新的token
     [app fetchToken:^(NSString *token) {
         //回传给SDK
-        sendBlock(token);
+        responseBlock(token);
     }];
 }];
 ```
