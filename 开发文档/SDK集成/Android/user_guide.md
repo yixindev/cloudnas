@@ -109,6 +109,7 @@ YXNasSDK.instance.setTokenRequestListener(object : ITokenRequestListener {
 #### 3.3 获取Fragment容器
 
 * 接口调用说明：如主app以Fragment方式引入sdk界面，需通过本接口实例化Fragment
+* 返回的fragment类型为**androidx.fragment.app**
 
 > 调用示例
 ```kotlin
@@ -121,7 +122,7 @@ val nasFragment = YXNasSDK.instance.obtainFlutterHost()
     * mobile: 类型string | 必传 | 用户手机号
     * callback: 类型interface | 建议必传 | 用户授权登录回调，当云nas授权结束后将结果回调给主app
 * 接口调用说明: 
-    * 前置条件: SDK初始化成功，即初始化回调中code==200
+    * 前置条件: SDK初始化成功，即初始化回调中 `code==200`
     * 主app获取到sdk的用户token数据之后，再调用此接口
 
 > 调用示例
@@ -172,4 +173,9 @@ YXNasSDK.instance.logout(object : INasInvokeCallback<Void> {
 | :-- | :-- |
 | 测试环境 | http://test.yixin.im |
 | 生产环境 | https://zjdrive.cn|
+
+
+
+
+
 
