@@ -10,7 +10,7 @@
 ### 2.接入准备
 
 #### 2.1 环境要求
-* android-minsdk >= 16
+* android-minsdk >= 17
 * app额外权限申请： sdk通过gradle方式导入，无需额外进行配置
 
 > manifest配置
@@ -19,6 +19,37 @@
 ```
 
 #### 2.2 依赖库导入
+
+> 修改位于项目根目录下的build.gradle
+```xml
+allprojects {
+    repositories {
+        maven { url 'http://download.flutter.io' }
+        maven {
+            url 'https://dl.bintray.com/sbinder/sqlite3-native-library/'
+        }
+        maven {
+            url "http://nexus.yixin.im/repository/maven-public/"
+            credentials {
+                username 'yixinnas'
+                password 'nas123'
+            }
+        }       
+    }
+    
+    //配置snapshot版本时需要添加，release版本不需要
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+}
+```
+
+> 项目app目录下的build.gradle，添加sdk依赖
+```xml
+dependencies{
+    implementation "im.yixin.nas:nasFlutterSDK:1.0.0-SNAPSHOT"    
+}
+```
 
 ### 3.API列表
 
@@ -37,7 +68,6 @@
 > 调用示例
 ```java
 val appkey = 'xxx'
-val appsecret = 'xxxx'
 
 YXNasSDK.instance.init(this, appkey, object : INasInvokeCallback<Void> {
 
@@ -64,10 +94,10 @@ YXNasSDK.instance.init()
 YXNasSDK.instance.setTokenRequestListener(object : ITokenRequestListener {
 
     //ps: 此方法通过主线程回调
-    override fun onTokenRequest(methodCall: IMethodCall<UserToken>?) {
+    override fun onTokenRequest(methodCall: IMethodCall<String>?) {
         //主app异步获取userToken，将结果返回sdk, 成功调用succes返回token数据，失败调用error方法返回code + message
         if(success){
-            val token: UserToken = UserToken();
+            val token: String = "${access_token}";
             methodCall.success(token)
         }else{
             methodCall.error(code, message);
@@ -89,7 +119,6 @@ val nasFragment = YXNasSDK.instance.obtainFlutterHost()
 
 * 参数列表
     * mobile: 类型string | 必传 | 用户手机号
-    * token: 类型string | 必传 | 用户access-token
     * callback: 类型interface | 建议必传 | 用户授权登录回调，当云nas授权结束后将结果回调给主app
 * 接口调用说明: 
     * 前置条件: SDK初始化成功，即初始化回调中code==200
@@ -97,7 +126,7 @@ val nasFragment = YXNasSDK.instance.obtainFlutterHost()
 
 > 调用示例
 ```java
-YXNasSDK.instance.authLogin(mobile, token, object : INasInvokeCallback<Void> {
+YXNasSDK.instance.authLogin(mobile, object : INasInvokeCallback<Void> {
     override fun onResult(code: Int, message: String?, data: Void?) {
         //通过code判断SDK用户授权结果
     }
@@ -143,9 +172,4 @@ YXNasSDK.instance.logout(object : INasInvokeCallback<Void> {
 | :-- | :-- |
 | 测试环境 | http://test.yixin.im |
 | 生产环境 | https://zjdrive.cn|
-
-
-
-
-
 
