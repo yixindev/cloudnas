@@ -4,10 +4,12 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import im.yixin.nas.embed.demo.impl.NasInvocationProxy
+import im.yixin.nas.sdk.ServerEnv
 import im.yixin.nas.sdk.YXNasSDK
 import im.yixin.nas.sdk.api.IMethodCall
 import im.yixin.nas.sdk.api.INasInvokeCallback
 import im.yixin.nas.sdk.api.ITokenRequestListener
+import im.yixin.nas.sdk.api.IVideoPlayListener
 import im.yixin.nas.sdk.const.YXNasConstants
 import im.yixin.nas.sdk.entity.UserToken
 
@@ -35,6 +37,8 @@ class NasDemoApp : Application() {
                 NasInvocationProxy.instance.notifySDKInitResult(code, message)
             }
         })
+
+        //添加token刷新回调
         YXNasSDK.instance.setTokenRequestListener(object : ITokenRequestListener {
             override fun onTokenRequest(methodCall: IMethodCall<String>?) {
                 Log.i(
@@ -85,6 +89,32 @@ class NasDemoApp : Application() {
                     }
                 }
             }
+        })
+
+        YXNasSDK.instance.serverEnv = ServerEnv.dev //设置测试环境
+
+        //添加视频播放回调
+        YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
+            override fun onVideoPlayCallback(
+                videoURL: String,
+                videoName: String?,
+                methodCall: IMethodCall<Void>?
+            ) {
+                Log.i(
+                    TAG,
+                    "response flutter video play with URL: $videoURL, name: $videoName ~"
+                )
+                //播放视频通过methodCall 回调播放结果
+                if (videoURL.isNotEmpty()) {
+                    methodCall?.success()
+                } else {
+                    methodCall?.error(
+                        YXNasConstants.ResultCode.CODE_VIDEO_PLAY_ERROR,
+                        "视频播放失败，URL解析异常"
+                    )
+                }
+            }
+
         })
     }
 }
