@@ -15,6 +15,7 @@ ${PODS_ROOT}/NASSDK/nas_sdk/gallery_saver.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/package_info.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/path_provider.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/Reachability.framework
+${PODS_ROOT}/NASSDK/nas_sdk/SDWebImage.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/shared_preferences.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/sqflite.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/sqlite3.framework
