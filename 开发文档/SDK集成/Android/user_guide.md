@@ -82,12 +82,13 @@ YXNasSDK.instance.init(this, appkey, object : INasInvokeCallback<Void> {
 
 * 参数列表
     * listener: 类型interface | 建议必传 | 请求刷新token的监听器；
-* 接口调用说明：当底层token过期时，通过监听器回调给主app，主app需刷新token，并将结果通过`MethodCall`回传给sdk；
+* 接口调用说明：
+    * 前置条件：sdk.init调用
+    * 当底层token过期时，通过监听器回调给主app，主app需刷新token，并将结果通过`MethodCall`回传给sdk；
 
 > 调用示例
 ```java
 //建议在应用启动时添加token监听器
-
 YXNasSDK.instance.init()
 
 //需要提前执行init方法
@@ -121,7 +122,7 @@ val nasFragment = YXNasSDK.instance.obtainFlutterHost()
 * 参数列表
     * mobile: 类型string | 必传 | 用户手机号
     * callback: 类型interface | 建议必传 | 用户授权登录回调，当云nas授权结束后将结果回调给主app
-* 接口调用说明: 
+* 接口调用说明:
     * 前置条件: SDK初始化成功，即初始化回调中 `code==200`
     * 主app获取到sdk的用户token数据之后，再调用此接口
 
@@ -150,6 +151,40 @@ YXNasSDK.instance.logout(object : INasInvokeCallback<Void> {
 }
 ```
 
+#### 3.6 视频播放URL监听接口
+* 参数列表
+    * listener: 类型interfalce | 建议必传 | 视频url播放回调监听器
+        * videoURL: 类型string | 非空 | 视频url，本地视频格式file://${文件绝对路径}；线上http(s)://xx
+        * videoName: 类型string | 视频名称
+        * methodCall: 结果回调
+* 接口调用说明：
+    * 前置条件：sdk.init调用
+    * 底层回传视频URL和视频名称给集成方，由集成方自行进行播放，成功通过success回传结果，失败通过error返回错误码及提示信息
+
+> 调用示例
+```
+YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
+    override fun onVideoPlayCallback(
+        videoURL: String,
+        videoName: String?,
+        methodCall: IMethodCall<Void>?
+    ) {
+        //视频播放能力由集成方自己实现
+
+        //通过methodCall回调播放结果
+        if (videoURL.isNotEmpty()) {
+            methodCall?.success()
+        } else {
+            methodCall?.error(
+                YXNasConstants.ResultCode.CODE_VIDEO_PLAY_ERROR,
+                "xxx" //错误信息
+            )
+        }
+    }
+
+})
+```
+
 ### 4.统一错误码对照表
 
 |错误码|描述 |
@@ -166,16 +201,9 @@ YXNasSDK.instance.logout(object : INasInvokeCallback<Void> {
 -keep im.yixin.nas.sdk.**{*;}
 ```
 
-
 ### 6.附录
 #### 6.1 环境配置
 | api环境 | base-url地址 |
 | :-- | :-- |
 | 测试环境 | http://test.yixin.im |
 | 生产环境 | https://zjdrive.cn|
-
-
-
-
-
-

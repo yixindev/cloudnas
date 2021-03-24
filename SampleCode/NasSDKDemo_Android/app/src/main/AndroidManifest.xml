@@ -28,9 +28,6 @@
         <meta-data
             android:name="nas_sdk_appkey"
             android:value="856d46d77e4742aab37b868457b683f2" />
-        <meta-data
-            android:name="nas_sdk_appsecret"
-            android:value="97830b8e1f3445538c3ff8f8379bb34e" />
     </application>
 
 </manifest>
