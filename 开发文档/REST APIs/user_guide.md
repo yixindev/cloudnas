@@ -110,11 +110,14 @@ Content-Type: application/json;charset=utf-8
 
 
 3. 输入参数
+
 ```json
 {
   "user_id": 18100000000
 }
 ```
+
+user_id: 手机号
 
 4. 输出参数
 * Content-Type: application/json; charset=utf-8
