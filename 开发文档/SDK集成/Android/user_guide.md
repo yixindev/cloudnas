@@ -219,7 +219,7 @@ YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
 | 测试环境 | http://test.yixin.im |
 | 生产环境 | https://zjdrive.cn|
 
-> SDK 环境切换保留接口
+> SDK 环境切换保留接口，必须在sdk.init方法调用之后执行
 ```
 //集成方可以通过以下方式切换联调环境, dev对应测试环境，online对应生产环境，默认为生产环境
 YXNasSDK.instance.serverEnv = ServerEnv.dev
