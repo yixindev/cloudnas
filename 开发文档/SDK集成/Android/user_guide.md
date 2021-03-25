@@ -12,6 +12,7 @@
 #### 2.1 环境要求
 * android-minsdk >= 17
 * app额外权限申请： sdk通过gradle方式导入，无需额外进行配置
+* android.useAndroidX=true
 
 > manifest配置
 ```xml
@@ -46,6 +47,13 @@ allprojects {
 
 > 项目app目录下的build.gradle，添加sdk依赖
 ```xml
+defaultConfig {
+    multiDexEnabled true
+    ndk {
+        abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+    }
+}
+
 dependencies{
     implementation "im.yixin.nas:nasFlutterSDK:1.0.0-SNAPSHOT"    
 }
@@ -95,13 +103,13 @@ YXNasSDK.instance.init()
 YXNasSDK.instance.setTokenRequestListener(object : ITokenRequestListener {
 
     //ps: 此方法通过主线程回调
-    override fun onTokenRequest(methodCall: IMethodCall<String>?) {
-        //主app异步获取userToken，将结果返回sdk, 成功调用succes返回token数据，失败调用error方法返回code + message
+    override fun onTokenRequest(methodCall: ITokenRefreshCall?) {
+        //主app异步获取userToken，将结果返回sdk, 成功调用succes返回token数据，失败调用error方法返回message
         if(success){
             val token: String = "${access_token}";
             methodCall.success(token)
         }else{
-            methodCall.error(code, message);
+            methodCall.error(message);
         }
     }
 }
@@ -122,7 +130,7 @@ val nasFragment = YXNasSDK.instance.obtainFlutterHost()
 * 参数列表
     * mobile: 类型string | 必传 | 用户手机号
     * callback: 类型interface | 建议必传 | 用户授权登录回调，当云nas授权结束后将结果回调给主app
-* 接口调用说明:
+* 接口调用说明: 
     * 前置条件: SDK初始化成功，即初始化回调中 `code==200`
     * 主app获取到sdk的用户token数据之后，再调用此接口
 
@@ -151,9 +159,9 @@ YXNasSDK.instance.logout(object : INasInvokeCallback<Void> {
 }
 ```
 
-#### 3.6 视频播放URL监听接口
+#### 3.6 视频播放URL监听器接口
 * 参数列表
-    * listener: 类型interfalce | 建议必传 | 视频url播放回调监听器
+    * listener: 类型interface | 建议必传 | 视频url播放回调监听器
         * videoURL: 类型string | 非空 | 视频url，本地视频格式file://${文件绝对路径}；线上http(s)://xx
         * videoName: 类型string | 视频名称
         * methodCall: 结果回调
@@ -167,18 +175,15 @@ YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
     override fun onVideoPlayCallback(
         videoURL: String,
         videoName: String?,
-        methodCall: IMethodCall<Void>?
+        methodCall: IVideoPlayCall?
     ) {
-        //视频播放能力由集成方自己实现
-
+        //视频播放能力由集成方自行实现
+        ...
         //通过methodCall回调播放结果
         if (videoURL.isNotEmpty()) {
             methodCall?.success()
         } else {
-            methodCall?.error(
-                YXNasConstants.ResultCode.CODE_VIDEO_PLAY_ERROR,
-                "xxx" //错误信息
-            )
+            methodCall?.error("xxx") //错误信息
         }
     }
 
@@ -190,10 +195,15 @@ YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
 |错误码|描述 |
 | :-- | :-- |
 | 200 | 调用成功 |
-| 400 | 请求参数错误 |
-| 4002 | 数据解析异常 |
-| 4003 | 刷新token失败， 用户数据为空或未登录 |
-| 4004 | 获取token失败 |
+| 4000 | 请求参数错误 |
+| 4001 | 用户已登录，无需重复登录 |
+| 4002 | 用户已退出，无需重复退出 |
+| 4003 | 用户退出失败 |
+| 4004 | 方法未实现 |
+| 4005 | 返回数据解析异常 |
+| 4006 | 视频播放失败， 用于sdk内部回调 |
+| 4007 | 刷新token失败， 用于sdk内部回调 |
+
 
 ### 5.release混淆配置
 
@@ -201,9 +211,24 @@ YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
 -keep im.yixin.nas.sdk.**{*;}
 ```
 
+
 ### 6.附录
 #### 6.1 环境配置
 | api环境 | base-url地址 |
 | :-- | :-- |
 | 测试环境 | http://test.yixin.im |
 | 生产环境 | https://zjdrive.cn|
+
+> SDK 环境切换保留接口
+```
+//集成方可以通过以下方式切换联调环境, dev对应测试环境，online对应生产环境，默认为生产环境
+YXNasSDK.instance.serverEnv = ServerEnv.dev
+```
+
+#### 6.2 关于Demo
+* 下载地址: https://www.pgyer.com/kNQy
+* 二维码扫码地址: <br>
+![](./images/android_download_QRCode.png)
+
+
+

@@ -6,10 +6,7 @@ import android.util.Log
 import im.yixin.nas.embed.demo.impl.NasInvocationProxy
 import im.yixin.nas.sdk.ServerEnv
 import im.yixin.nas.sdk.YXNasSDK
-import im.yixin.nas.sdk.api.IMethodCall
-import im.yixin.nas.sdk.api.INasInvokeCallback
-import im.yixin.nas.sdk.api.ITokenRequestListener
-import im.yixin.nas.sdk.api.IVideoPlayListener
+import im.yixin.nas.sdk.api.*
 import im.yixin.nas.sdk.const.YXNasConstants
 import im.yixin.nas.sdk.entity.UserToken
 
@@ -40,7 +37,7 @@ class NasDemoApp : Application() {
 
         //添加token刷新回调
         YXNasSDK.instance.setTokenRequestListener(object : ITokenRequestListener {
-            override fun onTokenRequest(methodCall: IMethodCall<String>?) {
+            override fun onTokenRequest(methodCall: ITokenRefreshCall?) {
                 Log.i(
                     TAG,
                     "response flutter refresh-token ~"
@@ -49,14 +46,12 @@ class NasDemoApp : Application() {
                 val userInfo = NasInvocationProxy.instance.getCurrentUserInfo()
                 if (userInfo == null) {
                     methodCall?.error(
-                        YXNasConstants.ResultCode.CODE_REFRESH_TOKEN_ERROR,
                         "当前用户数据为空"
                     )
                 } else {
                     val isLogin = userInfo.isLogin
                     if (isLogin == null || isLogin == false) {
                         methodCall?.error(
-                            YXNasConstants.ResultCode.CODE_REFRESH_TOKEN_ERROR,
                             "当前用户未登录"
                         )
                     } else {
@@ -80,7 +75,6 @@ class NasDemoApp : Application() {
                                         methodCall?.success(data?.accessToken)
                                     } else {
                                         methodCall?.error(
-                                            YXNasConstants.ResultCode.CODE_MOCK_TOKEN_ERROR,
                                             "刷新token失败: $message"
                                         )
                                     }
@@ -98,7 +92,7 @@ class NasDemoApp : Application() {
             override fun onVideoPlayCallback(
                 videoURL: String,
                 videoName: String?,
-                methodCall: IMethodCall<Void>?
+                methodCall: IVideoPlayCall?
             ) {
                 Log.i(
                     TAG,
@@ -109,7 +103,6 @@ class NasDemoApp : Application() {
                     methodCall?.success()
                 } else {
                     methodCall?.error(
-                        YXNasConstants.ResultCode.CODE_VIDEO_PLAY_ERROR,
                         "视频播放失败，URL解析异常"
                     )
                 }
