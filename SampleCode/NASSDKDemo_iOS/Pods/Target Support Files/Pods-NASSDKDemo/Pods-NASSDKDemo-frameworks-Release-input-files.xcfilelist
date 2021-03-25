@@ -1,0 +1,26 @@
+${PODS_ROOT}/Target Support Files/Pods-NASSDKDemo/Pods-NASSDKDemo-frameworks.sh
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/App.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/audioplayers.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/connectivity.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/device_info.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/DKImagePickerController.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/DKPhotoGallery.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/ext_storage.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/file_picker.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/Flutter.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/fluttertoast.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/flutter_filereader.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/FMDB.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/gallery_saver.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/package_info.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/path_provider.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/Reachability.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/shared_preferences.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/sqflite.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/sqlite3.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/sqlite3_flutter_libs.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/SwiftyGif.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/Toast.framework
+${PODS_ROOT}/NASSDK_NOIJK/nas_sdk_no_ijk/webview_flutter.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework

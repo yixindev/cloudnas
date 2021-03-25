@@ -96,6 +96,7 @@
             self.sdkInit = YES;
             [self NASSDKSetMobile];
             [self NASSDKTokenRequest];
+            [self NASSDKVideoPlayRequest];
         }
         //SDK初始化失败
         else{
@@ -165,5 +166,12 @@
     }
 }
 
+//监听SDK 视频播放请求
+-(void)NASSDKVideoPlayRequest{
+    [[NASSDK sharedInstance] addVideoPlayRequestListener:^(NSString *videoName, NSString *videoURL, NASVideoPlayResponseBlock responseBlock) {
+        NSLog(@"request play video : %@ ,url :%@",videoName,videoURL);
+        responseBlock(YES,nil);
+    }];
+}
 
 @end
