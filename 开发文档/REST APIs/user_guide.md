@@ -57,6 +57,7 @@ public class CheckSumBuilder {
 
     public static final String getCheckSum(String appId, String timestamp, String bodymd5, String nonce, String clientType, String clientVersion, String deviceId, String version, String appSecret) {
         String source = appId + timestamp + bodymd5 + nonce + clientType + clientVersion + deviceId + version;
+        System.out.println("source: " + source");
         return org.apache.commons.codec.digest.DigestUtils.sha256Hex(source + appSecret);
     }
 
