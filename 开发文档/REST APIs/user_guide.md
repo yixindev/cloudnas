@@ -140,7 +140,7 @@ user_id: 手机号
   "data": { 
     "access_token": "1D45T7ofpx",
     "refresh_token": "723YU6x8qxp",
-    "expires_in": 3600 
+    "expire": 3600 #seconds
   }
 }
 ```
