@@ -41,12 +41,12 @@ Rest API对每个访问请求进行身份验证，验证失败的请求无法调
 <span id="sign_code" />
 
 ```java
+
 /**
  * 签名算法说明：
  * 按序拼接字符串 appId + timestamp + bodymd5 + nonce + clientType + clientVersion + deviceId + version + appSecret, 进行SHA256哈希计算，转化成16进制字符(String，小写)
  * 注意：
  * * appSecret为平台分配的应用appId对应的秘钥
- * * 所有输入参数建议先调用org.apache.commons.lang3.StringUtils#trimToEmpty，避免前后多余的空格导致校验失败
  * * apache commons-codec参考版本1.13
  */
 public class CheckSumBuilder {
@@ -55,15 +55,24 @@ public class CheckSumBuilder {
         return getCheckSum(appId, timestamp, bodymd5, nonce, "", "", "", "", appSecret);
     }
 
+    /**
+     * 所有输入参数建议先调用org.apache.commons.lang3.StringUtils#trimToEmpty，避免前后多余的空格导致校验失败
+     */
     public static final String getCheckSum(String appId, String timestamp, String bodymd5, String nonce, String clientType, String clientVersion, String deviceId, String version, String appSecret) {
         String source = appId + timestamp + bodymd5 + nonce + clientType + clientVersion + deviceId + version;
+        //签名没通过，请反馈以下输出
+        //System.out.println("source fields: " + appId + "," + timestamp + "," + bodymd5 + "," + nonce + "," + clientType + "," + clientVersion + "," + deviceId + "," + version + ".");
         return org.apache.commons.codec.digest.DigestUtils.sha256Hex(source + appSecret);
     }
 
     /**
+     * 请求包体内容和输入参数保持相等，包括任何字符，比如回车
+     * <p>
      * 计算并获取md5值(小写)
      */
     public static final String getMD5(String requestBody) {
+        //签名没通过，请反馈以下输出
+        //System.out.println("request body: " + requestBody + ".");
         return org.apache.commons.codec.digest.DigestUtils.md5Hex(requestBody);
     }
 
@@ -74,6 +83,7 @@ public class CheckSumBuilder {
         System.out.println(checkSum);
     }
 }
+
 ```
 
 
@@ -130,7 +140,7 @@ user_id: 手机号
   "data": { 
     "access_token": "1D45T7ofpx",
     "refresh_token": "723YU6x8qxp",
-    "expires_in": 3600 
+    "expire": 3600 #seconds
   }
 }
 ```
