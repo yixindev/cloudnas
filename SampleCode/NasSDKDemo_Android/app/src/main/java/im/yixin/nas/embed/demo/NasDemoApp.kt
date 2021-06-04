@@ -85,7 +85,7 @@ class NasDemoApp : Application() {
             }
         })
 
-        YXNasSDK.instance.serverEnv = ServerEnv.dev //设置测试环境
+        YXNasSDK.instance.serverEnv = ServerEnv.online //设置测试环境
 
         //添加视频播放回调
         YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {

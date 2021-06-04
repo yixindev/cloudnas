@@ -28,7 +28,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -47,5 +47,5 @@ dependencies {
     implementation 'com.kaopiz:kprogresshud:1.0.2'
     implementation 'com.google.code.gson:gson:2.8.6'
 
-    implementation "im.yixin.nas:nasFlutterSDK:1.0.0-SNAPSHOT"
+    implementation "im.yixin.nas:nasFlutterSDK:1.0.1-SNAPSHOT"
 }

@@ -125,12 +125,21 @@ YXNasSDK.instance.setTokenRequestListener(object : ITokenRequestListener {
 val nasFragment = YXNasSDK.instance.obtainFlutterHost()
 ```
 
+#### 3.3.1 通过Intent启动云Nas
+
+* 以非Fragment方式，单独拉起Flutter页面，适用于应用内点击banner/小程序/子功能模块 等场景
+
+> 调用示例
+```
+startActivity(YXNasSDK.instance.obtainFlutterIntent())
+```
+
 #### 3.4 授权登录
 
 * 参数列表
     * mobile: 类型string | 必传 | 用户手机号
     * callback: 类型interface | 建议必传 | 用户授权登录回调，当云nas授权结束后将结果回调给主app
-* 接口调用说明: 
+* 接口调用说明:
     * 前置条件: SDK初始化成功，即初始化回调中 `code==200`
     * 主app获取到sdk的用户token数据之后，再调用此接口
 
@@ -219,7 +228,7 @@ YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
 | 测试环境 | http://test.yixin.im |
 | 生产环境 | https://zjdrive.cn|
 
-> SDK 环境切换保留接口，必须在sdk.init方法调用之后执行
+> SDK 环境切换保留接口
 ```
 //集成方可以通过以下方式切换联调环境, dev对应测试环境，online对应生产环境，默认为生产环境
 YXNasSDK.instance.serverEnv = ServerEnv.dev
@@ -229,6 +238,3 @@ YXNasSDK.instance.serverEnv = ServerEnv.dev
 * 下载地址: https://www.pgyer.com/kNQy
 * 二维码扫码地址: <br>
 ![](./images/android_download_QRCode.png)
-
-
-
