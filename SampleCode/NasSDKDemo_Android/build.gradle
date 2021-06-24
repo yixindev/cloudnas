@@ -3,7 +3,7 @@ buildscript {
     ext.kotlin_version = "1.4.10"
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0"
@@ -17,12 +17,9 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
 
         maven { url 'http://download.flutter.io' }
-        maven {
-            url 'https://dl.bintray.com/sbinder/sqlite3-native-library/'
-        }
         maven {
             url "http://nexus.yixin.im/repository/maven-public/"
             credentials {

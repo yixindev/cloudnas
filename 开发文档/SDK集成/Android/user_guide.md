@@ -28,9 +28,6 @@ allprojects {
     repositories {
         maven { url 'http://download.flutter.io' }
         maven {
-            url 'https://dl.bintray.com/sbinder/sqlite3-native-library/'
-        }
-        maven {
             url "http://nexus.yixin.im/repository/maven-public/"
             credentials {
                 username 'yixinnas'
@@ -223,7 +220,7 @@ YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
 ### 5.release混淆配置
 
 ```xml
--keep im.yixin.nas.**{*;}
+-keep im.yixin.nas.sdk.**{*;}
 ```
 
 
@@ -246,3 +243,4 @@ YXNasSDK.instance.serverEnv = ServerEnv.dev
 <!--* 下载地址: https://www.pgyer.com/kNQy-->
 <!--* 二维码扫码地址: <br>-->
 <!--![](./images/android_download_QRCode.png)-->
+
