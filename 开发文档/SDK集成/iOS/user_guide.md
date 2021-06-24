@@ -7,6 +7,7 @@
 | 日期 | 版本 | 变更记录 |
 | :------: | :------: | :------ |
 | 2021-03-22 | 1.0.2 | 正式版本发布 |
+| 2021-06-24 | 1.0.3 | 版本更新:1.支持视频转流播放 2.支持小翼管家接入 3.问题修复 |
 
 ## 快速接入
 
@@ -15,7 +16,7 @@
 | 名称 | 要求 |
 | :------ | :------ |
 | iOS版本 | 10.0以上 |
-| CPU架构支持 | ARM64 ARMV7|
+| CPU架构支持 | ARM64 |
 | IDE | XCode |
 | 其他 | CocoaPods |
 
@@ -125,47 +126,41 @@
 
 #### 注意事项
 
-- 其他操作要等到初始化接口的回调执行之后再进行，否则会失败
+- 其他操作必须要等到初始化接口的回调执行之后再进行，否则会失败
 
 --------------------
 
-### 设置登录手机号
+### 设置授权令牌
 
 #### 接口描述
 
-设置SDK登录授权必须的手机号，SDK会验证手机号并进行相关的授权。
+设置SDK登录授权所必须的token、授权类型以及登录结果回调。
+
+目前小翼管家接入授权类型为**NASAuthTypeXiaoYi**，其他接入方授权类型为**NASAuthTypeUniversal**。
 
 #### 接口定义
 
 ```
--(void)setLoginMobile:(NSString*)mobile
-           completion:(NASCompletionBlock)completion;
+-(void)setAuthToken:(NSString*)token
+               type:(NASAuthType)type
+         completion:(NASCompletionBlock)completion;
 ```
 
 #### 调用示例
 
-1. 获取登录用户手机号
-
-```objective-c
-NSString *mobile = @"mobile";
 ```
-
-2. 传入获取的参数后SDK进行登录授权并回调登录结果。
-
-```
-[[NASSDK sharedInstance] setLoginMobile:mobile
-								   completion:^(NSInteger resultCode, NSString *resultMsg) {
-    if (resultCode == NAS_RESULT_SUCCESS) {
-        //登录成功
-    }
-    else{
-        //登录失败
-    }
+[[NASSDK sharedInstance] setAuthToken:self.token type:NASAuthTypeXiaoYi completion:^(NSInteger resultCode, NSString *resultMsg) {
+   //SDK登录成功
+   if (resultCode == NAS_RESULT_SUCCESS) {
+   }
+   //SDK登录失败
+   else{
+   }
 }];
 ```
 
 #### 注意事项
-- 应用切换账号或者登出时必须调用SDK的注销接口。
+- 根据接入方授权流程的不同，授权类型请确保输入正确。
 
 --------------------
 
@@ -183,29 +178,26 @@ NSString *mobile = @"mobile";
 
 --------------------
 
-### 监听token请求
-
+### 监听视频播放请求
 #### 接口描述
-
-当SDK进行授权登录或者token过期失效时，会调用传入的回调函数，应用获取新的token后在回传给SDK。
+当SDK点击视频文件进行在线播放时，会调用传入的回调函数，并将处理后的视频地址作为参数传入，应用获取到视频的播放地址时，将传入应用自定义的播放组件进行播放。
 
 #### 接口定义
-
-```
--(void)addTokenRequestListener:(NASTokenRequestBlock)listenser;
-```
+```-(void)addVideoPlayRequestListener:(NASVideoPlayRequestBlock)listener```
 
 #### 调用示例
-
 ```
-[[NASSDK sharedInstance] addTokenRequestListener:^(NASTokenResponseBlock responseBlock) {
-    //应用获取新的token
-    [app fetchToken:^(NSString *token) {
-        //回传给SDK
-        responseBlock(token);
-    }];
+[[NASSDK sharedInstance] addVideoPlayRequestListener:^(NSString *videoName, NSString *videoURL, NASVideoPlayResponseBlock responseBlock) {
+     NASVideoPlayViewController* videoPlayVC = [[NASVideoPlayViewController alloc] initWithVideoUrl:videoURL];
+     UINavigationController* navi = [[UINavigationController alloc] initWithRootViewController:videoPlayVC];
+     [self.window.rootViewController presentViewController:navi animated:YES completion:nil];
+      //播放成功回调
+      responseBlock(YES,nil);
 }];
 ```
+* 注：SDK采用内部转流的方式对视频数据进行规范化处理，所以应用接收到的将是以`http://localhost`开头的视频播放地址。
+
+--------------------
 
 ## 错误码对照表
 

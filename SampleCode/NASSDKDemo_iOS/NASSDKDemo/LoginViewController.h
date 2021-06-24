@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LoginViewControllerDelegate <NSObject>
 
--(void)loginSuccess:(NSString*)mobile;
+-(void)loginSuccess:(NSString*)token;
 
 @end
 

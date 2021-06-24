@@ -9,7 +9,7 @@
 #import <NASSDK/NASSDK.h>
 
 @interface LoginViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *mobileTextField;
+@property (weak, nonatomic) IBOutlet UITextField *tokenTextField;
 
 @end
 
@@ -21,11 +21,11 @@
 
 
 - (IBAction)loginButtonPressed:(id)sender {
-    NSString* mobile = _mobileTextField.text;
+    NSString* token = _tokenTextField.text;
     
-    if (mobile.length > 0) {
+    if (token.length > 0) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(loginSuccess:)]) {
-            [self.delegate loginSuccess:mobile];
+            [self.delegate loginSuccess:token];
         }
     }
 }
@@ -33,8 +33,7 @@
 
 //模拟从服务器获取Token
 -(void)requestTokenFromServer:(NSString*)mobile{
-    [[NASSDK sharedInstance] mockTokenFetchWithMobile:mobile completion:^(NSString *token) {
-    }];
+    
 }
 
 
