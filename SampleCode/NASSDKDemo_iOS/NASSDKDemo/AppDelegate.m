@@ -100,7 +100,6 @@
 
 //SDK授权
 -(void)NASSDKAuth{
-    self.token = @"2b0fd82a2bdebbc47e19ae02db583d64";
     [[NASSDK sharedInstance] setAuthToken:self.token type:NASAuthTypeXiaoYi completion:^(NSInteger resultCode, NSString *resultMsg) {
         //SDK登录成功
         if (resultCode == NAS_RESULT_SUCCESS) {
