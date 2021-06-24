@@ -51,11 +51,12 @@ allprojects {
 defaultConfig {
     multiDexEnabled true
     ndk {
-        abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+        abiFilters 'armeabi-v7a'//, 'arm64-v8a', 'x86_64'
     }
 }
 
 dependencies{
+    //下方为裁剪库依赖方式，非剪裁库去掉.clip即可
     implementation "im.yixin.nas:nasFlutterSDK.clip:1.0.2-SNAPSHOT"
 }
 ```
@@ -127,7 +128,7 @@ YXNasSDK.instance.setTokenRequestListener(object : ITokenRequestListener {
 val nasFragment = YXNasSDK.instance.obtainFlutterHost()
 ```
 
-#### 3.3.1 通过Intent启动云Nas
+##### 3.3.1 通过Intent启动云Nas
 
 * 以非Fragment方式，单独拉起Flutter页面，适用于应用内点击banner/小程序/子功能模块 等场景
 
@@ -211,7 +212,7 @@ YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
 | 200 | 调用成功 |
 | 4000 | 请求参数错误 |
 | 4001 | 用户已登录，无需重复登录 |
-| 4002 | 用户已退出，无需重复退出 |
+| ~~4002~~ | ~~用户已退出，无需重复退出~~ |
 | 4003 | 用户退出失败 |
 | 4004 | 方法未实现 |
 | 4005 | 返回数据解析异常 |
@@ -241,7 +242,7 @@ YXNasSDK.instance.serverEnv = ServerEnv.dev
 
 #### 6.2 关于Demo
 * 请联系SDK开发人员提供demo.apk
-* 或者前往 [云NasSDK Git库地址](https://github.com/yixindev/cloudnas/tree/main/SampleCode/NasSDKDemo_Android)自行编译按照
+* 或者前往 [云NasSDK Git库地址](https://github.com/yixindev/cloudnas/tree/main/SampleCode/NasSDKDemo_Android)自行编译打包
 <!--* 下载地址: https://www.pgyer.com/kNQy-->
 <!--* 二维码扫码地址: <br>-->
 <!--![](./images/android_download_QRCode.png)-->
