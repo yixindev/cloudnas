@@ -223,7 +223,7 @@ YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
 ### 5.release混淆配置
 
 ```xml
--keep im.yixin.nas.sdk.**{*;}
+-keep im.yixin.nas.**{*;}
 ```
 
 
