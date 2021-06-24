@@ -8,9 +8,8 @@ import com.google.android.material.tabs.TabLayout
 import im.yixin.nas.embed.demo.R
 import im.yixin.nas.embed.demo.adapter.MyFragmentAdapter
 import im.yixin.nas.embed.demo.fragment.EmptyFragment
-import im.yixin.nas.embed.demo.fragment.TabItemFragment
+import im.yixin.nas.embed.demo.fragment.NasDemoFragment
 import im.yixin.nas.embed.demo.widget.MyTabView
-import im.yixin.nas.sdk.YXNasSDK
 import kotlinx.android.synthetic.main.nas_demo_activity_tab_mode.*
 
 class TabModeActivity : AppCompatActivity() {
@@ -39,11 +38,9 @@ class TabModeActivity : AppCompatActivity() {
         var index = 0
         textArray.forEach {
             if (index == _initIndex) {
-                fragments.add(YXNasSDK.instance.obtainFlutterHost())
+                fragments.add(NasDemoFragment())
             } else if (index == textArray.size - 1) {
                 fragments.add(emptyFragment) //显示空页面
-            } else {
-                fragments.add(TabItemFragment.createDemo(it))
             }
             index++
         }
@@ -61,10 +58,6 @@ class TabModeActivity : AppCompatActivity() {
             tabs.add(ly_tabs.getTabAt(i)!!)
         }
         ly_tabs.selectTab(tabs[_initIndex])
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     private fun buildIcons(normalResId: Int, selResId: Int): Array<Drawable> {

@@ -39,6 +39,12 @@ class EmptyFragment(private var title: String? = null, private var message: Stri
         super.onViewCreated(view, savedInstanceState)
         NasInvocationProxy.instance.addNasSDKnitListener(this)
         NasInvocationProxy.instance.setNasUserListener(this)
+        val current = NasInvocationProxy.instance.getCurrentUserInfo()
+        if (current?.isLogin == true) {
+            updateStatus(true)
+        } else {
+            updateStatus(false)
+        }
     }
 
     override fun onDestroyView() {
@@ -68,13 +74,9 @@ class EmptyFragment(private var title: String? = null, private var message: Stri
     override fun onSDKInitSuccess() {
         //判断当前是否已经登录
         val current = NasInvocationProxy.instance.getCurrentUserInfo()
-        if (current == null || current.isLogin == false) {
-            updateStatus(false)
-        } else {
-            updateStatus(true)
-            if (current.isLogin == true) {
-                NasInvocationProxy.instance.execUserLogin(
-                    current.mobile,
+        if (current != null && current.isLogin == true && !current.token.isNullOrEmpty()) {
+            NasInvocationProxy.instance.execUserLogin(
+                    current.token,
                     object : INasInvokeCallback<Void> {
                         override fun onResult(code: Int, message: String?, data: Void?) {
                             Log.i(
@@ -84,7 +86,6 @@ class EmptyFragment(private var title: String? = null, private var message: Stri
                         }
                     }
                 )
-            }
         }
     }
 

@@ -2,6 +2,29 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+def loadProperties(String filePath) {
+    Properties properties = new Properties()
+    File file = file(filePath)
+    if (file.exists()) {
+        file.withReader('utf-8') { reader ->
+            properties.load(reader)
+        }
+    }
+    return properties
+}
+
+def loadProguard(String dirPath) {
+    List<File> files = new ArrayList<>()
+    File directory = file(dirPath)
+    if (directory != null && directory.exists()) {
+        directory.listFiles().each { it ->
+            files.add(it)
+        }
+        return files.toArray()
+    }
+    return null
+}
+
 android {
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
@@ -17,7 +40,7 @@ android {
 
         multiDexEnabled true
         ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+            abiFilters 'armeabi-v7a'//, 'arm64-v8a', 'x86_64'
         }
     }
 
@@ -26,11 +49,34 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+//    signingConfigs {
+//        debug {
+//            storeFile file('../keystore/debug.keystore')
+//        }
+//        release {
+//            // keystore
+//            storeFile file('../keystore/release.keystore')
+//
+//            // keys
+//            Properties properties = loadProperties('../release.properties')
+//            storePassword properties.get('storepassword')
+//            keyAlias properties.get('keyalias')
+//            keyPassword properties.get('keypassword')
+//        }
+//    }
+
     buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        debug {
+            minifyEnabled false
+//            signingConfig signingConfigs.debug
         }
+//        release {
+//            minifyEnabled true
+//            zipAlignEnabled true
+//            debuggable false
+//            signingConfig signingConfigs.release
+//            proguardFiles loadProguard('../proguard')
+//        }
     }
 }
 
@@ -47,5 +93,6 @@ dependencies {
     implementation 'com.kaopiz:kprogresshud:1.0.2'
     implementation 'com.google.code.gson:gson:2.8.6'
 
-    implementation "im.yixin.nas:nasFlutterSDK:1.0.1-SNAPSHOT"
+    //非裁剪库去掉.clip即可
+    implementation "im.yixin.nas:nasFlutterSDK.clip:1.0.2-SNAPSHOT"
 }

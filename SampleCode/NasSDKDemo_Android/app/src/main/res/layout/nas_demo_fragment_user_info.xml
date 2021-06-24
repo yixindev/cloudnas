@@ -28,44 +28,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_use_info"
-                style="@style/yx_nas_textstyle.button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:minWidth="220dp"
-                android:text="获取Nas用户信息"
-                android:textAllCaps="false"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_login_status"
-                style="@style/yx_nas_textstyle.button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:minWidth="220dp"
-                android:text="获取Nas登录态"
-                android:textAllCaps="false"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_use_info" />
-
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_user_mobile"
+                android:id="@+id/tv_token_hint"
                 style="@style/yx_nas_content_textstyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="220dp"
-                android:textSize="24sp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="120dp"
+                android:text="token:"
+                android:textSize="16sp"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_token"
+                style="@style/yx_nas_content_textstyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="40dp"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_token_hint"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintLeft_toRightOf="@+id/tv_token_hint"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:text="15988114226" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -73,26 +59,14 @@
                 style="@style/yx_nas_textstyle.button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:minWidth="220dp"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="20dp"
                 android:text="退出登录"
                 android:textAllCaps="false"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_user_mobile"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_token_hint"
+                app:layout_constraintTop_toBottomOf="@+id/tv_token"
                 app:layout_goneMarginTop="220dp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/yx_nas_content_textstyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="当前用户状态:已登录"
-                android:textColor="@color/yx_nas_light_grey"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_quit" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@
 
 * 概述：本文档指导客户端开发人员，用于快速集成云Nas-SDK，使app具备基于SMB协议的远程文件的快速访问/上传/下载/预览等能力；
 * 本SDK的主要能力是基于flutter技术实现；
+* 远程资源基于本地stream转流进行了封装实现，可以适配绝大多数的音视频播放器；
 
 ### 2.接入准备
 
@@ -35,9 +36,9 @@ allprojects {
                 username 'yixinnas'
                 password 'nas123'
             }
-        }       
+        }
     }
-    
+
     //配置snapshot版本时需要添加，release版本不需要
     configurations.all {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
@@ -55,7 +56,7 @@ defaultConfig {
 }
 
 dependencies{
-    implementation "im.yixin.nas:nasFlutterSDK:1.0.0-SNAPSHOT"    
+    implementation "im.yixin.nas:nasFlutterSDK.clip:1.0.2-SNAPSHOT"
 }
 ```
 
@@ -81,12 +82,13 @@ YXNasSDK.instance.init(this, appkey, object : INasInvokeCallback<Void> {
 
     override fun onResult(code: Int, message: String?, data: Void?) {
         //通过 code==200 判断sdk是否初始化成功
+        //初始化成功之后调用YXNasSDK.authLogin接口
     }
 })
 
 ```
 
-#### 3.2 添加token刷新监听器
+#### 3.2 ~~添加token刷新监听器（暂时废弃）~~
 
 * 参数列表
     * listener: 类型interface | 建议必传 | 请求刷新token的监听器；
@@ -137,17 +139,20 @@ startActivity(YXNasSDK.instance.obtainFlutterIntent())
 #### 3.4 授权登录
 
 * 参数列表
-    * mobile: 类型string | 必传 | 用户手机号
+    * token: 类型string | 必传 | appToken，用于sdk内部交换sdkToken
+    * authType: 类型enum | 授权类型
+        * TypeUniversal：用于翼之家等app集成时传参
+        * TypeXiaoYi：小易管家类型
     * callback: 类型interface | 建议必传 | 用户授权登录回调，当云nas授权结束后将结果回调给主app
 * 接口调用说明:
     * 前置条件: SDK初始化成功，即初始化回调中 `code==200`
-    * 主app获取到sdk的用户token数据之后，再调用此接口
+    * 在SDK.init初始化成功之后调用
 
 > 调用示例
 ```java
-YXNasSDK.instance.authLogin(mobile, object : INasInvokeCallback<Void> {
+YXNasSDK.instance.authLogin(token, NasAuthType.TypeXiaoYi, object : INasInvokeCallback<Void> {
     override fun onResult(code: Int, message: String?, data: Void?) {
-        //通过code判断SDK用户授权结果
+        //通过code判断SDK用户授权结果: 200即为成功
     }
 }
 ```
@@ -235,6 +240,8 @@ YXNasSDK.instance.serverEnv = ServerEnv.dev
 ```
 
 #### 6.2 关于Demo
-* 下载地址: https://www.pgyer.com/kNQy
-* 二维码扫码地址: <br>
-![](./images/android_download_QRCode.png)
+* 请联系SDK开发人员提供demo.apk
+* 或者前往 [云NasSDK Git库地址](https://github.com/yixindev/cloudnas/tree/main/SampleCode/NasSDKDemo_Android)自行编译按照
+<!--* 下载地址: https://www.pgyer.com/kNQy-->
+<!--* 二维码扫码地址: <br>-->
+<!--![](./images/android_download_QRCode.png)-->

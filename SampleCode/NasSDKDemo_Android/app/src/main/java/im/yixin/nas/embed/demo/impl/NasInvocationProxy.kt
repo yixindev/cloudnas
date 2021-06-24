@@ -1,6 +1,7 @@
 package im.yixin.nas.embed.demo.impl
 
 import android.content.Context
+import im.yixin.nas.sdk.NasAuthType
 import im.yixin.nas.sdk.YXNasSDK
 import im.yixin.nas.sdk.api.INasInvokeCallback
 import im.yixin.nas.sdk.const.YXNasConstants
@@ -88,12 +89,15 @@ class NasInvocationProxy {
         }
     }
 
-    fun execUserLogin(mobile: String?, callback: INasInvokeCallback<Void>? = null) {
-        YXNasSDK.instance.authLogin(mobile, object : INasInvokeCallback<Void> {
-            override fun onResult(code: Int, message: String?, data: Void?) {
-                callback?.onResult(code, message, data)
-            }
-        })
+    fun execUserLogin(token: String?, callback: INasInvokeCallback<Void>? = null) {
+        YXNasSDK.instance.authLogin(
+            token,
+            authType = NasAuthType.TypeXiaoYi,
+            object : INasInvokeCallback<Void> {
+                override fun onResult(code: Int, message: String?, data: Void?) {
+                    callback?.onResult(code, message, data)
+                }
+            })
     }
 
     fun execUserLogout(callback: INasInvokeCallback<Void>?) {
