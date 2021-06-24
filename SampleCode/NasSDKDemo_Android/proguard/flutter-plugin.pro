@@ -16,7 +16,7 @@
 -keep class com.tencent.smtt.** {*;}
 -keep class com.tencent.tbs.** {*;}
 
--keep class im.yixin.nas.**{*;}
+-keep class im.yixin.nas.sdk.**{*;}
 -keep class com.mr.flutter.plugin.filepicker.**{*;}
 
 -keep class com.baseflow.permissionhandler.**{*;}
