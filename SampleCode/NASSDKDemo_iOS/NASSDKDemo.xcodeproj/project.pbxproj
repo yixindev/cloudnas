@@ -17,6 +17,9 @@
 		FE95C7FA2602201000CD4BDC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE95C7F82602201000CD4BDC /* LoginViewController.xib */; };
 		FE95C8012602249200CD4BDC /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE95C7FF2602249200CD4BDC /* SettingViewController.m */; };
 		FE95C8022602249200CD4BDC /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE95C8002602249200CD4BDC /* SettingViewController.xib */; };
+		FEBB28082678C2AA000D9616 /* NASAVPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEBB28042678C2AA000D9616 /* NASAVPlayerViewController.m */; };
+		FEBB28092678C2AA000D9616 /* NASIJKPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEBB28052678C2AA000D9616 /* NASIJKPlayerViewController.m */; };
+		FEBB280A2678C2AA000D9616 /* NASVideoPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEBB28072678C2AA000D9616 /* NASVideoPlayViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,12 @@
 		FE95C7FE2602249200CD4BDC /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		FE95C7FF2602249200CD4BDC /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		FE95C8002602249200CD4BDC /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		FEBB28022678C2AA000D9616 /* NASVideoPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NASVideoPlayViewController.h; sourceTree = "<group>"; };
+		FEBB28032678C2AA000D9616 /* NASIJKPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NASIJKPlayerViewController.h; sourceTree = "<group>"; };
+		FEBB28042678C2AA000D9616 /* NASAVPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NASAVPlayerViewController.m; sourceTree = "<group>"; };
+		FEBB28052678C2AA000D9616 /* NASIJKPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NASIJKPlayerViewController.m; sourceTree = "<group>"; };
+		FEBB28062678C2AA000D9616 /* NASAVPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NASAVPlayerViewController.h; sourceTree = "<group>"; };
+		FEBB28072678C2AA000D9616 /* NASVideoPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NASVideoPlayViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +106,12 @@
 				FE95C7F62602201000CD4BDC /* LoginViewController.h */,
 				FE95C7F72602201000CD4BDC /* LoginViewController.m */,
 				FE95C7F82602201000CD4BDC /* LoginViewController.xib */,
+				FEBB28062678C2AA000D9616 /* NASAVPlayerViewController.h */,
+				FEBB28042678C2AA000D9616 /* NASAVPlayerViewController.m */,
+				FEBB28032678C2AA000D9616 /* NASIJKPlayerViewController.h */,
+				FEBB28052678C2AA000D9616 /* NASIJKPlayerViewController.m */,
+				FEBB28022678C2AA000D9616 /* NASVideoPlayViewController.h */,
+				FEBB28072678C2AA000D9616 /* NASVideoPlayViewController.m */,
 				FE95C7DA2601FF9000CD4BDC /* Main.storyboard */,
 				FE95C7DD2601FF9200CD4BDC /* Assets.xcassets */,
 				FE95C7DF2601FF9200CD4BDC /* LaunchScreen.storyboard */,
@@ -206,7 +221,10 @@
 				FE95C7F92602201000CD4BDC /* LoginViewController.m in Sources */,
 				FE95C7D32601FF9000CD4BDC /* AppDelegate.m in Sources */,
 				FE95C7E42601FF9200CD4BDC /* main.m in Sources */,
+				FEBB28082678C2AA000D9616 /* NASAVPlayerViewController.m in Sources */,
+				FEBB280A2678C2AA000D9616 /* NASVideoPlayViewController.m in Sources */,
 				FE95C8012602249200CD4BDC /* SettingViewController.m in Sources */,
+				FEBB28092678C2AA000D9616 /* NASIJKPlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +370,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWYKGVPTJP;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NASSDKDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -373,6 +392,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWYKGVPTJP;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NASSDKDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

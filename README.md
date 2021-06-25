@@ -19,7 +19,7 @@
 1. [Error Code](开发文档/错误码/error_code.md)
 
 ## Sample code
-1. [运行iOS SampleCode](SampleCode/iOS/README.md)
+1. [iOS 示例代码](https://github.com/yixindev/cloudnas/tree/main/SampleCode/NASSDKDemo_iOS)
 2. [运行Android SampleCode](SampleCode/Android/README.md)
 
 ## 调用流程

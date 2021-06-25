@@ -265,3 +265,8 @@ YXNasSDK.instance.serverEnv = ServerEnv.dev
 <!--* 二维码扫码地址: <br>-->
 <!--![](./images/android_download_QRCode.png)-->
 
+### 7.版本更新记录
+
+| 版本名称 | 更新说明 | 日期 |
+| :-- | :-- | :-- |
+| 1.0.2 | 1.支持小易管家接入<br> 2.授权接口入参变更，废弃token刷新接口 | 2021/6/25 |
