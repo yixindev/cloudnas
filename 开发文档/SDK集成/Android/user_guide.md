@@ -33,9 +33,9 @@ allprojects {
                 username 'yixinnas'
                 password 'nas123'
             }
-        }
+        }       
     }
-
+    
     //配置snapshot版本时需要添加，release版本不需要
     configurations.all {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
@@ -54,7 +54,7 @@ defaultConfig {
 
 dependencies{
     //下方为裁剪库依赖方式，非剪裁库去掉.clip即可
-    implementation "im.yixin.nas:nasFlutterSDK.clip:1.0.2-SNAPSHOT"
+    implementation "im.yixin.nas:nasFlutterSDK.clip:1.0.4-SNAPSHOT"    
 }
 ```
 
@@ -142,7 +142,7 @@ startActivity(YXNasSDK.instance.obtainFlutterIntent())
         * TypeUniversal：用于翼之家等app集成时传参
         * TypeXiaoYi：小易管家类型
     * callback: 类型interface | 建议必传 | 用户授权登录回调，当云nas授权结束后将结果回调给主app
-* 接口调用说明:
+* 接口调用说明: 
     * 前置条件: SDK初始化成功，即初始化回调中 `code==200`
     * 在SDK.init初始化成功之后调用
 
@@ -270,3 +270,5 @@ YXNasSDK.instance.serverEnv = ServerEnv.dev
 | 版本名称 | 更新说明 | 日期 |
 | :-- | :-- | :-- |
 | 1.0.2 | 1.支持小易管家接入<br> 2.授权接口入参变更，废弃token刷新接口 | 2021/6/25 |
+| 1.0.3 | 1.修复重命名文件导致的页面变空白问题 <br>2.修复文件下载引发的app卡死问题| 2021/8/2 |
+| 1.0.4 | 1.支持云宽带环境下切换smb协议完成文件上传/下载 <br>2.增加图片本地缩略图功能 <br>3.增加相册自动备份功能 <br>4.增加清除缓存功能| 2021/8/27 |
