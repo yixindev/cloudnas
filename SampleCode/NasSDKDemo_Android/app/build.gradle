@@ -94,5 +94,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     //非裁剪库去掉.clip即可
-    implementation "im.yixin.nas:nasFlutterSDK.clip:1.0.4-SNAPSHOT"
+    implementation("im.yixin.nas:nasFlutterSDK.clip:1.0.3") {
+        exclude group: 'com.tencent.tbs', module: 'tbssdk'
+    }
 }
