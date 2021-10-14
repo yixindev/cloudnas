@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
+            <connections>
+                <outlet property="tokenTextField" destination="1sp-sm-21n" id="7sZ-Re-o4H"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入授权令牌" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1sp-sm-21n">
+                    <rect key="frame" x="107" y="176" width="200" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="HIm-EQ-1HT"/>
+                        <constraint firstAttribute="height" constant="34" id="v3y-ck-baZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NASSDK集成Demo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOx-YY-ntW">
+                    <rect key="frame" x="133.5" y="104" width="147" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="YDR-bE-qbl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="47L-Jo-XiX">
+                    <rect key="frame" x="107" y="270" width="200" height="43"/>
+                    <color key="backgroundColor" systemColor="linkColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="43" id="XdX-Rz-GrD"/>
+                        <constraint firstAttribute="width" constant="200" id="fem-9G-dXX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="登录">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="loginButtonPressed:" destination="-1" eventType="touchUpInside" id="1Db-sc-JIQ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="1sp-sm-21n" firstAttribute="top" secondItem="hOx-YY-ntW" secondAttribute="bottom" constant="51" id="4IN-IW-gzC"/>
+                <constraint firstItem="47L-Jo-XiX" firstAttribute="top" secondItem="1sp-sm-21n" secondAttribute="bottom" constant="60" id="5b8-j8-qJp"/>
+                <constraint firstItem="47L-Jo-XiX" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="HgN-VR-1sH"/>
+                <constraint firstItem="hOx-YY-ntW" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="60" id="JmI-lW-Xf7"/>
+                <constraint firstItem="1sp-sm-21n" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="j8r-mu-hVP"/>
+                <constraint firstItem="hOx-YY-ntW" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="ngz-rX-TPm"/>
+            </constraints>
+            <point key="canvasLocation" x="140.57971014492756" y="119.86607142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
