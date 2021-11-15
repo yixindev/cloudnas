@@ -21,7 +21,7 @@
 
         <activity
             android:name=".activity.DemoHomeActivity"
-            android:theme="@style/NasAppTheme"/>
+            android:theme="@style/NasAppTheme" />
 
         <activity android:name=".activity.TabModeActivity">
             <intent-filter>
