@@ -6,6 +6,8 @@
 //
 
 #import "SettingViewController.h"
+#import <SDImageCache.h>
+#import <SDWebImage/SDWebImage.h>
 
 @interface SettingViewController ()
 
@@ -15,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.title = @"设置";
 }
 
