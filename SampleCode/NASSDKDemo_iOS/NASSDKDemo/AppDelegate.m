@@ -8,8 +8,8 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "SettingViewController.h"
-#import <NASSDK/NASSDK.h>
 #import "NASVideoPlayViewController.h"
+#import <NASSDK/NASSDK.h>
 
 @interface AppDelegate ()<LoginViewControllerDelegate,SettingViewControllerDelegate>
 
@@ -24,6 +24,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [self NASSDKInit];
+
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     LoginViewController* loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     loginVC.delegate = self;
@@ -48,7 +50,7 @@
     sdkVC.tabBarItem.image = [UIImage imageNamed:@"ic_disk_normal"];
     sdkVC.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_disk_sel"];
     sdkVC.tabBarItem.imageInsets = UIEdgeInsetsMake(17, 0, 17, 0);
-
+ 
     
     SettingViewController* settingVC = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];
     settingVC.delegate = self;
@@ -62,7 +64,6 @@
     
     self.window.rootViewController = tabBarVC;
     
-    [self NASSDKInit];
 }
 
 
