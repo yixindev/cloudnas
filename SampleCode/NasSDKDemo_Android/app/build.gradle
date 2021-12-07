@@ -40,9 +40,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
-//        ndk {
-//            abiFilters 'arm64-v8a'//'armeabi-v7a'//, 'armeabi'//, 'arm64-v8a', 'x86_64'
-//        }
+        ndk {
+            abiFilters 'arm64-v8a'
+            //'arm64-v8a', 'armeabi-v7a'//, 'armeabi'//, 'arm64-v8a', 'x86_64'
+        }
     }
 
     compileOptions {
@@ -95,9 +96,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     //非裁剪库去掉.clip即可
-    implementation("im.yixin.nas:nasFlutterSDK.clip:1.0.6-SNAPSHOT") {
+    implementation("im.yixin.nas:nasFlutterSDK.clip:1.0.7-SNAPSHOT") {
         exclude group: 'com.tencent.tbs', module: 'tbssdk'
     }
 
-    api 'com.tencent.tbs:tbssdk:44085'
+    api 'com.tencent.tbs:tbssdk:44115'
 }

@@ -6,6 +6,7 @@ import android.util.Log
 import im.yixin.nas.embed.demo.impl.NasInvocationProxy
 import im.yixin.nas.sdk.YXNasSDK
 import im.yixin.nas.sdk.api.*
+import im.yixin.nas.sdk.util.CPU_ABI
 
 /**
  * Created by jixia.cai on 2021/2/22 5:16 PM
@@ -56,5 +57,21 @@ class NasDemoApp : Application() {
             }
 
         })
+
+        YXNasSDK.instance.setTokenCodeRequestListener(object : ITokenRequestListener {
+            override fun onTokenRequest(methodCall: ITokenRefreshCall?) {
+                val userInfo = NasInvocationProxy.instance.getCurrentUserInfo()
+                if (userInfo != null) {
+                    if (userInfo.tokenCode?.isNotEmpty() == true) {
+                        methodCall?.success(userInfo.tokenCode)
+                    } else {
+                        methodCall?.error("tokenCode为空")
+                    }
+                } else {
+                    methodCall?.error("用户未登录")
+                }
+            }
+        })
+        YXNasSDK.instance.setCpuABIForce(CPU_ABI.arm64_v8a) //强制v8架构
     }
 }

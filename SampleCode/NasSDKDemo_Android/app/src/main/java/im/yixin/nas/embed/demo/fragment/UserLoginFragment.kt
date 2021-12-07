@@ -23,11 +23,15 @@ class UserLoginFragment : Fragment(R.layout.nas_demo_fragment_auth) {
     private fun findViews(view: View) {
         val et_token = view.findViewById<EditText>(R.id.et_token)
         val btn_auth = view.findViewById<View>(R.id.btn_auth)
+        val et_token_code = view.findViewById<EditText>(R.id.et_token_code)
+
         val current = NasInvocationProxy.instance.getCurrentUserInfo()
         if (current != null) {
             et_token.setText(current.token)
-            et_token.requestFocus()
-            et_token.setSelection(current.token?.length ?: 0)
+
+            et_token_code.setText(current.tokenCode)
+            et_token_code.requestFocus()
+            et_token_code.setSelection(current.tokenCode?.length ?: 0)
         }
 
         btn_auth.setOnClickListener {
@@ -36,8 +40,9 @@ class UserLoginFragment : Fragment(R.layout.nas_demo_fragment_auth) {
                 ToastUtil.showToast(requireContext(), "token不能为空")
                 return@setOnClickListener
             }
+            val tokenCode = et_token_code.text?.toString()
             //保存用户数据
-            NasInvocationProxy.instance.updateUserInfo(DemoUserInfo(true, token))
+            NasInvocationProxy.instance.updateUserInfo(DemoUserInfo(true, token, tokenCode))
             NasInvocationProxy.instance.notifyUserAction(UserAction.authSuccess)
         }
     }
