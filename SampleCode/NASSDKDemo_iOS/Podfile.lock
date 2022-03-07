@@ -1,3 +1,98 @@
-PODFILE CHECKSUM: 4117cc495cf53b75013462dbd93f8dbcc2982bfa
+PODS:
+  - CropViewController (2.6.1)
+  - DKCamera (1.6.7)
+  - DKImagePickerController (4.3.2):
+    - DKImagePickerController/Camera (= 4.3.2)
+    - DKImagePickerController/Core (= 4.3.2)
+    - DKImagePickerController/ImageDataManager (= 4.3.2)
+    - DKImagePickerController/InlineCamera (= 4.3.2)
+    - DKImagePickerController/PhotoEditor (= 4.3.2)
+    - DKImagePickerController/PhotoGallery (= 4.3.2)
+    - DKImagePickerController/Resource (= 4.3.2)
+  - DKImagePickerController/Camera (4.3.2):
+    - DKCamera
+    - DKImagePickerController/Core
+  - DKImagePickerController/Core (4.3.2):
+    - DKImagePickerController/ImageDataManager
+    - DKImagePickerController/Resource
+  - DKImagePickerController/ImageDataManager (4.3.2)
+  - DKImagePickerController/InlineCamera (4.3.2):
+    - DKCamera
+    - DKImagePickerController/Core
+  - DKImagePickerController/PhotoEditor (4.3.2):
+    - CropViewController (~> 2.5)
+    - DKImagePickerController/Core
+  - DKImagePickerController/PhotoGallery (4.3.2):
+    - DKImagePickerController/Core
+    - DKPhotoGallery
+  - DKImagePickerController/Resource (4.3.2)
+  - DKPhotoGallery (0.0.17):
+    - DKPhotoGallery/Core (= 0.0.17)
+    - DKPhotoGallery/Model (= 0.0.17)
+    - DKPhotoGallery/Preview (= 0.0.17)
+    - DKPhotoGallery/Resource (= 0.0.17)
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Core (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Preview
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Model (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Preview (0.0.17):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Resource
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Resource (0.0.17):
+    - SDWebImage
+    - SwiftyGif
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - NASSDK (1.2.2):
+    - DKImagePickerController (= 4.3.2)
+    - FMDB (>= 2.7.5)
+    - SDWebImage (>= 5.10.4)
+    - SSZipArchive (= 2.4.2)
+    - YYModel (= 1.0.4)
+  - SDWebImage (5.12.3):
+    - SDWebImage/Core (= 5.12.3)
+  - SDWebImage/Core (5.12.3)
+  - SSZipArchive (2.4.2)
+  - SwiftyGif (5.4.3)
+  - YYModel (1.0.4)
 
-COCOAPODS: 1.10.1
+DEPENDENCIES:
+  - NASSDK (= 1.2.2)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - CropViewController
+    - DKCamera
+    - DKImagePickerController
+    - DKPhotoGallery
+    - FMDB
+    - NASSDK
+    - SDWebImage
+    - SSZipArchive
+    - SwiftyGif
+    - YYModel
+
+SPEC CHECKSUMS:
+  CropViewController: 58fb440f30dac788b129d2a1f24cffdcb102669c
+  DKCamera: a902b66921fca14b7a75266feb8c7568aa7caa71
+  DKImagePickerController: b5eb7f7a388e4643264105d648d01f727110fc3d
+  DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  NASSDK: b7663ca062b03f51efcddde255468eec63276e41
+  SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
+  SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
+  SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+
+PODFILE CHECKSUM: b7c59017ca8f9610cd0762261573f9470934dcc8
+
+COCOAPODS: 1.11.2

@@ -1,0 +1,11 @@
+framework module ext_storage {
+  umbrella header "ext_storage-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module ext_storage.Swift {
+    header "ext_storage-Swift.h"
+    requires objc
+}

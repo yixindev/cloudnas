@@ -1,0 +1,11 @@
+framework module pdf_render {
+  umbrella header "pdf_render-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module pdf_render.Swift {
+    header "pdf_render-Swift.h"
+    requires objc
+}
