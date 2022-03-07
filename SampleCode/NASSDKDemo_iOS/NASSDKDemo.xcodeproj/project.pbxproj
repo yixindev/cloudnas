@@ -132,6 +132,8 @@
 				FE95C7CA2601FF9000CD4BDC /* Sources */,
 				FE95C7CB2601FF9000CD4BDC /* Frameworks */,
 				FE95C7CC2601FF9000CD4BDC /* Resources */,
+				15F815ACEEFB7119C75E2FEB /* [CP] Embed Pods Frameworks */,
+				23FEA550716513F8C5C126F1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,6 +191,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		15F815ACEEFB7119C75E2FEB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NASSDKDemo/Pods-NASSDKDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NASSDKDemo/Pods-NASSDKDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NASSDKDemo/Pods-NASSDKDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		23FEA550716513F8C5C126F1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NASSDKDemo/Pods-NASSDKDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NASSDKDemo/Pods-NASSDKDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NASSDKDemo/Pods-NASSDKDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DB829A9014E3165B03A73D19 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
