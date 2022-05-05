@@ -1,6 +1,0 @@
-framework module des {
-  umbrella header "des-umbrella.h"
-
-  export *
-  module * { export * }
-}
