@@ -1,6 +1,0 @@
-framework module NASSDK {
-  umbrella header "NASSDK-umbrella.h"
-
-  export *
-  module * { export * }
-}
