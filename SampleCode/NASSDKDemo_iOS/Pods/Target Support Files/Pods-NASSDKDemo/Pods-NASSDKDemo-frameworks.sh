@@ -211,9 +211,12 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_ROOT}/NASSDK/nas_sdk/webview_flutter_wkwebview.framework"
   install_framework "${PODS_ROOT}/NASSDK/nas_sdk/YXSMB2.framework"
   install_framework "${PODS_ROOT}/NASSDK/nas_sdk/YXSMBClient.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Sentry/Sentry.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework"
+  install_framework "${PODS_ROOT}/YXADX/YXADX/YXADX.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -252,9 +255,12 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_ROOT}/NASSDK/nas_sdk/webview_flutter_wkwebview.framework"
   install_framework "${PODS_ROOT}/NASSDK/nas_sdk/YXSMB2.framework"
   install_framework "${PODS_ROOT}/NASSDK/nas_sdk/YXSMBClient.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Sentry/Sentry.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework"
+  install_framework "${PODS_ROOT}/YXADX/YXADX/YXADX.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
