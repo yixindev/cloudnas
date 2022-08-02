@@ -8,7 +8,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "NASVideoPlayViewController.h"
-#import <NASSDK/NASSDK.h>
+#import <YXADX/YXADX.h>
 
 @interface AppDelegate ()
 
@@ -28,6 +28,8 @@
     UINavigationController* navi = [[UINavigationController alloc] initWithRootViewController:loginVC];
     self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
+    
+    [YXADXManager setAppKey:@"" appSecret:@""];
     
     return YES;
 }
