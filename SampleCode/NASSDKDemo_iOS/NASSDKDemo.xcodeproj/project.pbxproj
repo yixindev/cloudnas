@@ -13,13 +13,13 @@
 		FE95C7DE2601FF9200CD4BDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE95C7DD2601FF9200CD4BDC /* Assets.xcassets */; };
 		FE95C7E12601FF9200CD4BDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE95C7DF2601FF9200CD4BDC /* LaunchScreen.storyboard */; };
 		FE95C7E42601FF9200CD4BDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FE95C7E32601FF9200CD4BDC /* main.m */; };
-		FE95C7F92602201000CD4BDC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE95C7F72602201000CD4BDC /* LoginViewController.m */; };
-		FE95C7FA2602201000CD4BDC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE95C7F82602201000CD4BDC /* LoginViewController.xib */; };
-		FE95C8012602249200CD4BDC /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE95C7FF2602249200CD4BDC /* SettingViewController.m */; };
-		FE95C8022602249200CD4BDC /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE95C8002602249200CD4BDC /* SettingViewController.xib */; };
 		FEBB28082678C2AA000D9616 /* NASAVPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEBB28042678C2AA000D9616 /* NASAVPlayerViewController.m */; };
 		FEBB28092678C2AA000D9616 /* NASIJKPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEBB28052678C2AA000D9616 /* NASIJKPlayerViewController.m */; };
 		FEBB280A2678C2AA000D9616 /* NASVideoPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEBB28072678C2AA000D9616 /* NASVideoPlayViewController.m */; };
+		FEE43461282372C200DEBEBB /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEE4345F282372C200DEBEBB /* LoginViewController.xib */; };
+		FEE43462282372C200DEBEBB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE43460282372C200DEBEBB /* LoginViewController.m */; };
+		FEE43466282372DE00DEBEBB /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE43463282372DE00DEBEBB /* HomePageViewController.m */; };
+		FEE43467282372DE00DEBEBB /* HomePageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEE43465282372DE00DEBEBB /* HomePageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,18 +34,18 @@
 		FE95C7E02601FF9200CD4BDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE95C7E22601FF9200CD4BDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE95C7E32601FF9200CD4BDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FE95C7F62602201000CD4BDC /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		FE95C7F72602201000CD4BDC /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		FE95C7F82602201000CD4BDC /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		FE95C7FE2602249200CD4BDC /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
-		FE95C7FF2602249200CD4BDC /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
-		FE95C8002602249200CD4BDC /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		FEBB28022678C2AA000D9616 /* NASVideoPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NASVideoPlayViewController.h; sourceTree = "<group>"; };
 		FEBB28032678C2AA000D9616 /* NASIJKPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NASIJKPlayerViewController.h; sourceTree = "<group>"; };
 		FEBB28042678C2AA000D9616 /* NASAVPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NASAVPlayerViewController.m; sourceTree = "<group>"; };
 		FEBB28052678C2AA000D9616 /* NASIJKPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NASIJKPlayerViewController.m; sourceTree = "<group>"; };
 		FEBB28062678C2AA000D9616 /* NASAVPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NASAVPlayerViewController.h; sourceTree = "<group>"; };
 		FEBB28072678C2AA000D9616 /* NASVideoPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NASVideoPlayViewController.m; sourceTree = "<group>"; };
+		FEE4345E282372C200DEBEBB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		FEE4345F282372C200DEBEBB /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		FEE43460282372C200DEBEBB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		FEE43463282372DE00DEBEBB /* HomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
+		FEE43464282372DE00DEBEBB /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
+		FEE43465282372DE00DEBEBB /* HomePageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +100,12 @@
 			children = (
 				FE95C7D12601FF9000CD4BDC /* AppDelegate.h */,
 				FE95C7D22601FF9000CD4BDC /* AppDelegate.m */,
-				FE95C7FE2602249200CD4BDC /* SettingViewController.h */,
-				FE95C7FF2602249200CD4BDC /* SettingViewController.m */,
-				FE95C8002602249200CD4BDC /* SettingViewController.xib */,
-				FE95C7F62602201000CD4BDC /* LoginViewController.h */,
-				FE95C7F72602201000CD4BDC /* LoginViewController.m */,
-				FE95C7F82602201000CD4BDC /* LoginViewController.xib */,
+				FEE4345E282372C200DEBEBB /* LoginViewController.h */,
+				FEE43460282372C200DEBEBB /* LoginViewController.m */,
+				FEE4345F282372C200DEBEBB /* LoginViewController.xib */,
+				FEE43464282372DE00DEBEBB /* HomePageViewController.h */,
+				FEE43463282372DE00DEBEBB /* HomePageViewController.m */,
+				FEE43465282372DE00DEBEBB /* HomePageViewController.xib */,
 				FEBB28062678C2AA000D9616 /* NASAVPlayerViewController.h */,
 				FEBB28042678C2AA000D9616 /* NASAVPlayerViewController.m */,
 				FEBB28032678C2AA000D9616 /* NASIJKPlayerViewController.h */,
@@ -178,8 +178,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE95C7FA2602201000CD4BDC /* LoginViewController.xib in Resources */,
-				FE95C8022602249200CD4BDC /* SettingViewController.xib in Resources */,
+				FEE43461282372C200DEBEBB /* LoginViewController.xib in Resources */,
+				FEE43467282372DE00DEBEBB /* HomePageViewController.xib in Resources */,
 				FE95C7E12601FF9200CD4BDC /* LaunchScreen.storyboard in Resources */,
 				FE95C7DE2601FF9200CD4BDC /* Assets.xcassets in Resources */,
 				FE95C7DC2601FF9000CD4BDC /* Main.storyboard in Resources */,
@@ -218,12 +218,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE95C7F92602201000CD4BDC /* LoginViewController.m in Sources */,
 				FE95C7D32601FF9000CD4BDC /* AppDelegate.m in Sources */,
 				FE95C7E42601FF9200CD4BDC /* main.m in Sources */,
 				FEBB28082678C2AA000D9616 /* NASAVPlayerViewController.m in Sources */,
 				FEBB280A2678C2AA000D9616 /* NASVideoPlayViewController.m in Sources */,
-				FE95C8012602249200CD4BDC /* SettingViewController.m in Sources */,
+				FEE43466282372DE00DEBEBB /* HomePageViewController.m in Sources */,
+				FEE43462282372C200DEBEBB /* LoginViewController.m in Sources */,
 				FEBB28092678C2AA000D9616 /* NASIJKPlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

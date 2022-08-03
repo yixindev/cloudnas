@@ -9,15 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol LoginViewControllerDelegate <NSObject>
-
--(void)loginSuccess:(NSString*)token;
-
-@end
-
 @interface LoginViewController : UIViewController
-
-@property (weak,nonatomic)id<LoginViewControllerDelegate> delegate;
 
 @end
 

@@ -6,10 +6,12 @@
 //
 
 #import "LoginViewController.h"
+#import "HomePageViewController.h"
 #import <NASSDK/NASSDK.h>
 
 @interface LoginViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *tokenTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *mobileTextField;
 
 @end
 
@@ -21,20 +23,10 @@
 
 
 - (IBAction)loginButtonPressed:(id)sender {
-    NSString* token = _tokenTextField.text;
     
-    if (token.length > 0) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(loginSuccess:)]) {
-            [self.delegate loginSuccess:token];
-        }
-    }
+    HomePageViewController* homePageVC = [[HomePageViewController alloc] initWithNibName:@"HomePageViewController" bundle:nil];
+    UINavigationController* navi = [[UINavigationController alloc] initWithRootViewController:homePageVC];
+    [UIApplication sharedApplication].keyWindow.rootViewController = navi;
 }
-
-
-//模拟从服务器获取Token
--(void)requestTokenFromServer:(NSString*)mobile{
-    
-}
-
 
 @end
