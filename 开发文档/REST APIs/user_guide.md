@@ -7,9 +7,9 @@
 
 ## 变更记录
 
-| 日期 | 版本 | 变更内容 |
-| :------: | :------: | :------: | 
-| 2021-03-11  | 0.0.1 | 初稿 |
+| 日期 | 版本 | 作者 | 变更内容 |
+| :------: | :------: | :------: | :------: | 
+| 2021-03-11  | 1.0.0 | hzwangqh | 初稿 |
 
 ## 准备工作
 
@@ -44,7 +44,10 @@ Rest API对每个访问请求进行身份验证，验证失败的请求无法调
 
 /**
  * 签名算法说明：
- * 按序拼接字符串 appId + timestamp + bodymd5 + nonce + clientType + clientVersion + deviceId + version + appSecret, 进行SHA256哈希计算，转化成16进制字符(String，小写)
+ * 1. 计算md5hex(request body)计算获取bodysign(缺失情况下忽略)
+ * 2. 按序拼接字符串 appId + timestamp + bodymd5 + nonce + clientType + clientVersion + deviceId + version + appSecret 组成原串
+ * 3. 计算原串sha256hex获取最终签名
+ *
  * 注意：
  * * appSecret为平台分配的应用appId对应的秘钥
  * * apache commons-codec参考版本1.13

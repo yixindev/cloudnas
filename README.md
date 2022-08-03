@@ -7,9 +7,10 @@
 1. [iOS SDK 更新日志](开发文档/SDK集成/iOS/CHANGELOG.md)
 2. [Android SDK 更新日志](开发文档/SDK集成/Android/CHANGELOG.md)
 
-## 使用手册
+## 客户端集成文档
 1. [iOS SDK API使用手册](开发文档/SDK集成/iOS/user_guide.md)
 2. [Android SDK API使用手册](开发文档/SDK集成/Android/user_guide.md)
+3. [Flutter Plugin使用手册]()
 
 
 ## 服务端 APIs
