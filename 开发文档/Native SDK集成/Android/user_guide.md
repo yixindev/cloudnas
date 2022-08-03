@@ -14,7 +14,6 @@
 * android-minsdk >= 17
 * app额外权限申请： sdk通过gradle方式导入，无需额外进行配置
 * android.useAndroidX=true
-
 > manifest配置
 ```xml
 略；
@@ -33,9 +32,9 @@ allprojects {
                 username 'yixinnas'
                 password '****' //联系对应的开发人员进行提供
             }
-        }       
+        }
     }
-    
+
     //配置snapshot版本时需要添加，release版本不需要
     configurations.all {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
@@ -43,18 +42,54 @@ allprojects {
 }
 ```
 
-> 项目app目录下的build.gradle，添加sdk依赖
-```xml
+
+> 在项目gradle.properties下增加如下配置
+```
+android.jetifier.blacklist=bcprov-jdk15on
+```
+
+* 集成方可选择以下其中一种方式添加云nas依赖库
+    * flutter插件方式：对于集成方已经接入flutter框架，云nas仅以插件形式提供集成
+    * 原生sdk方式：集成方未接入flutter框架，云nas以flutterFramework+sdk形式集成
+
+##### 2.2.1 flutter插件方式
+> pubsepc.yaml配置flutter插件远程依赖
+```
+dependencies:
+    cloud_nas:
+        git:
+            url: https://github.com/yixindev/cloud_nas_plugin
+
+```
+> app/build.gradle配置sdk依赖
+```
 defaultConfig {
     multiDexEnabled true
     ndk {
+        //集成方依自身项目实际情况选择cpu架构
+        abiFilters 'armeabi-v7a'//, 'arm64-v8a', 'x86_64'
+    }
+}
+
+dependencies {
+    implementation 'im.yixin.nas.plugin:nasFlutterSDK:1.0.9-SNAPSHOT'
+}
+```
+
+##### 2.2.2 原生sdk方式
+
+> 项目app目录下的build.gradle，添加sdk依赖
+```
+defaultConfig {
+    multiDexEnabled true
+    ndk {
+        //集成方依自身项目实际情况选择cpu架构
         abiFilters 'armeabi-v7a'//, 'arm64-v8a', 'x86_64'
     }
 }
 
 dependencies{
-    //下方为裁剪库依赖方式，非剪裁库去掉.clip即可
-    implementation "im.yixin.nas:nasFlutterSDK.clip:1.0.4-SNAPSHOT"    
+    implementation "im.yixin.nas.plugin:flutter:1.0.9-SNAPSHOT"
 }
 ```
 
@@ -142,7 +177,7 @@ startActivity(YXNasSDK.instance.obtainFlutterIntent())
         * TypeUniversal：用于翼之家等app集成时传参
         * TypeXiaoYi：小易管家类型
     * callback: 类型interface | 建议必传 | 用户授权登录回调，当云nas授权结束后将结果回调给主app
-* 接口调用说明: 
+* 接口调用说明:
     * 前置条件: SDK初始化成功，即初始化回调中 `code==200`
     * 在SDK.init初始化成功之后调用
 
@@ -202,6 +237,26 @@ YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
 })
 ```
 
+#### 3.7 天翼云盘TokenCode请求接口
+* 参数列表
+    * listener: 类型interface | 建议必传 | token刷新监听器
+        * methodCall: 结果回调
+* 接口调用说明：
+    * 前置条件：sdk.init调用
+    * 通过success向sdk传递天翼云盘TokenCode，通过error返回错误码及提示信息
+
+> 调用示例
+```
+YXNasSDK.instance.setTokenCodeRequestListener(object : ITokenRequestListener {
+    override fun onTokenRequest(methodCall: ITokenRefreshCall?) {
+        //获取tokenCode
+        methodCall?.success("${tokenCode}")
+        //未获取可以回传错误信息 如：methodCall?.error("tokenCode为空")
+    }
+})
+```
+
+
 ### 4.统一错误码对照表
 
 |错误码|描述 |
@@ -221,6 +276,7 @@ YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
 
 ```xml
 
+
 #flutter 基础混淆配置
 -keep class io.flutter.app.** {*;}
 -keep class io.flutter.plugin.** {*;}
@@ -238,27 +294,22 @@ YXNasSDK.instance.setVideoPlayListener(object : IVideoPlayListener {
 -keep class com.tencent.smtt.** {*;}
 -keep class com.tencent.tbs.** {*;}
 
-## 云nas混淆配置
--keep class im.yixin.nas.sdk.**{*;}
+-keep class im.yixin.**{*;}
 -keep class com.mr.flutter.plugin.filepicker.**{*;}
+
 -keep class com.baseflow.permissionhandler.**{*;}
+
+-keep class com.hierynomus.**{*;}
+-keep class org.slf4j.**{*;}
+-keep class net.engio.**{*;}
+-keep class com.yanzhenjie.andserver.**{*;}
+
 ```
 
 
 ### 6.附录
-#### 6.1 环境配置
-| api环境 | base-url地址 |
-| :-- | :-- |
-| 测试环境 | http://test.yixin.im |
-| 生产环境 | https://zjdrive.cn|
 
-> SDK 环境切换保留接口
-```
-//集成方可以通过以下方式切换联调环境, dev对应测试环境，online对应生产环境，默认为生产环境
-YXNasSDK.instance.serverEnv = ServerEnv.dev
-```
-
-#### 6.2 关于Demo
+#### 6.1 关于Demo
 * 请联系SDK开发人员提供demo.apk
 * 或者前往 [云NasSDK Git库地址](https://github.com/yixindev/cloudnas/tree/main/SampleCode/NasSDKDemo_Android)自行编译打包
 <!--* 下载地址: https://www.pgyer.com/kNQy-->
@@ -272,3 +323,8 @@ YXNasSDK.instance.serverEnv = ServerEnv.dev
 | 1.0.2 | 1.支持小易管家接入<br> 2.授权接口入参变更，废弃token刷新接口 | 2021/6/25 |
 | 1.0.3 | 1.修复重命名文件导致的页面变空白问题 <br>2.修复文件下载引发的app卡死问题| 2021/8/2 |
 | 1.0.4 | 1.支持云宽带环境下切换smb协议完成文件上传/下载 <br>2.增加图片本地缩略图功能 <br>3.增加相册自动备份功能 <br>4.增加清除缓存功能| 2021/8/27 |
+| 1.0.5 | -- | 2021/10/15 |
+| 1.0.6 | 支持64位so库动态加载 | 2021/11/15 |
+| 1.0.7 | 1.增加天翼云盘转存功能 | 2021/11/30 |
+| 1.0.8 | 1.支持32/64打包<br>2.支持上海专区配置动态下发 | 2022/1/12 |
+| 1.0.9 | 1.增加智能相册功能（上海专区）<br>2.增加停机状态下判断 <br>3.fluttersdk更新至2.5.0 <br>**4.提供以flutter插件方式集成进目标app** | 2022/4/29 <br/>**2022/8/3** |
