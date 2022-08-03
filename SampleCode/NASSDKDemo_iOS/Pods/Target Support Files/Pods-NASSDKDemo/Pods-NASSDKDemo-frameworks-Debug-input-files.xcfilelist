@@ -6,6 +6,7 @@ ${BUILT_PRODUCTS_DIR}/DKPhotoGallery/DKPhotoGallery.framework
 ${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/App.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/audioplayers.framework
+${PODS_ROOT}/NASSDK/nas_sdk/cloud_nas.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/connectivity.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/des.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/device_info.framework
@@ -16,6 +17,7 @@ ${PODS_ROOT}/NASSDK/nas_sdk/fluttertoast.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/flutter_filereader.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/flutter_icmp_ping.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/gallery_saver.framework
+${PODS_ROOT}/NASSDK/nas_sdk/md5_file_checksum.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/nas_smb_flutter.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/nas_stream_flutter.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/package_info.framework
@@ -32,12 +34,9 @@ ${PODS_ROOT}/NASSDK/nas_sdk/sqlite3_flutter_libs.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/Toast.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/url_launcher_ios.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/webview_flutter_wkwebview.framework
+${PODS_ROOT}/NASSDK/nas_sdk/YXImagePickerController.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/YXSMB2.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/YXSMBClient.framework
-${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
-${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework
-${BUILT_PRODUCTS_DIR}/Sentry/Sentry.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework
-${PODS_ROOT}/YXADX/YXADX/YXADX.framework
 ${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework

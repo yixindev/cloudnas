@@ -7,7 +7,7 @@
 //
 
 #import "HomePageViewController.h"
-#import <NASSDK/NASSDK.h>
+#import <NASSDK/NASSDKNative.h>
 #import "NASVideoPlayViewController.h"
 
 #define APP_KEY @"appkey"
@@ -36,7 +36,7 @@
         
         weakSelf.token = token;
         
-        UIViewController* sdkVC = [[NASSDK sharedInstance] contentViewController];
+        UIViewController* sdkVC = [NASSDKNative contentViewController];
         sdkVC.modalPresentationStyle = UIModalPresentationFullScreen;
         [weakSelf presentViewController:sdkVC animated:YES completion:nil];
         
@@ -49,7 +49,7 @@
 
 //SDK初始化
 -(void)NASSDKInit{
-    [[NASSDK sharedInstance] initWithAppKey:APP_KEY completion:^(NSInteger resultCode, NSString *resultMsg) {
+    [NASSDKNative initWithAppKey:APP_KEY completion:^(NSInteger resultCode, NSString *resultMsg) {
         //SDK初始化成功
         if (resultCode == NAS_RESULT_SUCCESS) {
             
@@ -68,7 +68,7 @@
 //SDK授权
 -(void)NASSDKAuth{
     
-    [[NASSDK sharedInstance] setAuthToken:self.token type:NASAuthTypeXiaoYi completion:^(NSInteger resultCode, NSString *resultMsg) {
+    [NASSDKNative setAuthToken:self.token type:NASAuthTypeXiaoYi completion:^(NSInteger resultCode, NSString *resultMsg) {
         NSLog(@"logon result code %ld, message %@",resultCode,resultMsg);
     }];
 }
@@ -77,7 +77,7 @@
 
 //SDK退出登录
 -(void)NASSDKLogout{
-    [[NASSDK sharedInstance] logoutWithCompletion:^(NSInteger resultCode, NSString *resultMsg) {
+    [NASSDKNative logoutWithCompletion:^(NSInteger resultCode, NSString *resultMsg) {
         //SDK退出登录成功
         if (resultCode == NAS_RESULT_SUCCESS) {
 
@@ -91,7 +91,7 @@
 
 //监听SDK 视频播放请求
 -(void)NASSDKVideoPlayRequest{
-    [[NASSDK sharedInstance] addVideoPlayRequestListener:^(NSString *videoName, NSString *videoURL, NASVideoPlayResponseBlock responseBlock) {
+    [NASSDKNative addVideoPlayRequestListener:^(NSString *videoName, NSString *videoURL, NASVideoPlayResponseBlock responseBlock) {
         NSLog(@"request play video : %@ ,url :%@",videoName,videoURL);
         
         NASVideoPlayViewController* videoPlayVC = [[NASVideoPlayViewController alloc] initWithVideoUrl:videoURL];
@@ -108,7 +108,7 @@
 
 //监听SDK tokenCode请求
 -(void)NASSDKTokenCodeRequest{
-    [[NASSDK sharedInstance] addTokenCodeRequestListener:^(NASTokenCodeResponseBlock responseBlock) {
+    [NASSDKNative addTokenCodeRequestListener:^(NASTokenCodeResponseBlock responseBlock) {
         [self fetchTokenCodeWithCompletion:^(NSString *tokenCode) {
             responseBlock(tokenCode);
         }];

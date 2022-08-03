@@ -7,7 +7,7 @@ target 'NASSDKDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-   pod 'NASSDK','1.2.4'
+   pod 'NASSDK','1.2.5'
 
    pod 'ZFPlayer/ijkplayer', '~> 4.0'
    pod 'ZFPlayer/ControlView', '~> 4.0'
