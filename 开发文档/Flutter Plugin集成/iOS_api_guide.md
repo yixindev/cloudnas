@@ -1,33 +1,20 @@
-## 变更记录
-
-| 日期 | 版本 | 变更记录 |
-| :------: | :------: | :------ |
-| 2021-03-22 | 1.0.2 | 正式发布 |
-| 2021-06-24 | 1.0.3 | 1.支持视频转流播放 2.支持小翼管家接入 3.问题修复 |
-| 2021-06-25 | 1.0.4 | 优化业务逻辑 | 
-| 2021-06-29 | 1.1.0 | 1.去掉多余权限申请 2.缺陷修复 |
-| 2021-06-30 | 1.1.1 | 修复音视频播放问题 |
-| 2021-07-09 | 1.1.2 | 解决了swift标准库引入问题 |
-| 2021-08-26 | 1.1.3 | 1.新增相册自动备份 2.新增smb协议支持 3.新增网络自动切换 4.新增文件缩略图和缓存清理 | 
-| 2021-08-31 | 1.1.4 | 去掉FLEX依赖 |
-| 2021-10-15 | 1.1.5 | 1.修改验证码限制 2.配合运营推广 3.问题修复 |
-| 2021-10-21 | 1.1.7 | 修复激活流程中的问题 |
-| 2021-11-30 | 1.2.0 | 新增转存功能 |
-| 2022-01-12 | 1.2.1 | 1.增加区域动态配置  2.缺陷修复 |
-| 2022-03-07 | 1.2.2 | 修复部分缺陷 |
-| 2022-05-05 | 1.2.3 | 1.新增智能相册功能 2.开发框架升级 3.性能优化 |
-| 2022-05-12 | 1.2.4 | 1.优化文件选择功能 2.缺陷修复 |
-
-
-#### 注意事项
-
-- 由于SDK底层使用Flutter跨平台进行开发，目前不支持x86_64架构的AOT包导出，所以SDK无法在模拟器上编译运行。
-
 ## 接口指南
 
-### 1 引入头文件
+### 引入头文件
 ```
-#import <cloud_nas/NASSDKPlugin.h>
+#import <cloud_nas/NASSDK.h>
+```
+
+### 1 获取全局实例
+
+#### 1.1 接口描述
+
+获取SDK的全局实例对象。
+
+#### 接口定义
+
+```
++(instancetype)sharedInstance;
 ```
 
 ### 2 获取界面容器
@@ -39,7 +26,7 @@
 #### 2.2 接口定义
 
 ```
-+(UIViewController*)contentViewController;
+-(UIViewController*)contentViewController;
 ```
 
 #### 2.3 注意事项
@@ -57,7 +44,7 @@
 #### 3.2 接口定义
 
 ```
-+(void)initWithAppKey:(NSString*)appKey
+-(void)initWithAppKey:(NSString*)appKey
         flutterEngine:(FlutterEngine*)engine
            completion:(NASCompletionBlock)completion;
 ```
@@ -65,9 +52,9 @@
 #### 3.3 调用示例
 
 ```
-[NASSDKPlugin initializeWithAppKey:appKey
-                     flutterEngine:nasEngine
-                        completion:^(NSInteger resultCode, NSString *resultMsg) {
+[[NASSDK sharedInstance] initializeWithAppKey:appKey
+                     			  flutterEngine:nasEngine
+                        			  completion:^(NSInteger resultCode, NSString *resultMsg) {
     if (resultCode == NAS_RESULT_SUCCESS) {
         //初始化成功
     }
@@ -100,7 +87,7 @@
 #### 4.2 接口定义
 
 ```
-+(void)setAuthToken:(NSString*)token
+-(void)setAuthToken:(NSString*)token
                type:(NASAuthType)type
          completion:(NASCompletionBlock)completion;
 ```
@@ -108,7 +95,9 @@
 #### 4.3 调用示例
 
 ```
-[NASSDKPlugin setAuthToken:self.token type:NASAuthTypeXiaoYi completion:^(NSInteger resultCode, NSString *resultMsg) {
+[[NASSDK sharedInstance] setAuthToken:self.token 
+										type:NASAuthTypeXiaoYi 
+								 completion:^(NSInteger resultCode, NSString *resultMsg) {
    //SDK登录成功
    if (resultCode == NAS_RESULT_SUCCESS) {
    }
@@ -132,7 +121,7 @@
 #### 5.2 接口定义
 
 ```
-+(void)logoutWithCompletion:(NASCompletionBlock)completion;
+-(void)logoutWithCompletion:(NASCompletionBlock)completion;
 ```
 
 --------------------
@@ -143,12 +132,13 @@
 
 #### 6.2 接口定义
 ```
-+(void)addVideoPlayRequestListener:(NASVideoPlayRequestBlock)listener
+-(void)addVideoPlayRequestListener:(NASVideoPlayRequestBlock)listener
 ```
 
 #### 6.3 调用示例
 ```
-[NASSDKPlugin addVideoPlayRequestListener:^(NSString *videoName, NSString *videoURL, NASVideoPlayResponseBlock responseBlock) {
+[[NASSDK sharedInstance] addVideoPlayRequestListener:^(NSString *videoName, NSString *videoURL, NASVideoPlayResponseBlock responseBlock) {
+
      NASVideoPlayViewController* videoPlayVC = [[NASVideoPlayViewController alloc] initWithVideoUrl:videoURL];
      UINavigationController* navi = [[UINavigationController alloc] initWithRootViewController:videoPlayVC];
      [self.window.rootViewController presentViewController:navi animated:YES completion:nil];
