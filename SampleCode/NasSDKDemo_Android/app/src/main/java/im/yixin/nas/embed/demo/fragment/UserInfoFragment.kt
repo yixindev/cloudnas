@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.kaopiz.kprogresshud.KProgressHUD
+//import com.kaopiz.kprogresshud.KProgressHUD
 import im.yixin.nas.embed.demo.NasDemoApp
 import im.yixin.nas.embed.demo.R
 import im.yixin.nas.embed.demo.impl.NasInvocationProxy
@@ -41,7 +41,7 @@ class UserInfoFragment : Fragment(R.layout.nas_demo_fragment_user_info) {
         }
         val currentUserInfo = NasInvocationProxy.instance.getCurrentUserInfo()
         btn_quit.setOnClickListener {
-            showLoading()
+//            showLoading()
             NasInvocationProxy.instance.execUserLogout(object : INasInvokeCallback<Void> {
                 override fun onResult(code: Int, message: String?, data: Void?) {
                     Log.i(NasDemoApp.TAG, "logout result code: $code, message: $message ~")
@@ -58,17 +58,17 @@ class UserInfoFragment : Fragment(R.layout.nas_demo_fragment_user_info) {
         }
     }
 
-    private var _loadingDialog: KProgressHUD? = null
+//    private var _loadingDialog: KProgressHUD? = null
 
-    private fun showLoading() {
-        _loadingDialog = KProgressHUD.create(requireContext()).also {
-            it.setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-            it.setCancellable(true)
-            it.setDimAmount(0.5f)
-        }.show()
-    }
+//    private fun showLoading() {
+//        _loadingDialog = KProgressHUD.create(requireContext()).also {
+//            it.setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+//            it.setCancellable(true)
+//            it.setDimAmount(0.5f)
+//        }.show()
+//    }
 
     private fun hideLoading() {
-        _loadingDialog?.dismiss()
+//        _loadingDialog?.dismiss()
     }
 }

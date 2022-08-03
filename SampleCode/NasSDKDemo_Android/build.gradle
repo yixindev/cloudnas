@@ -18,13 +18,14 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
 
         maven { url 'http://download.flutter.io' }
         maven {
             url "http://nexus.yixin.im/repository/maven-public/"
             credentials {
                 username 'yixinnas'
-                password '****' // 请联系对应安卓开发@蔡继侠 提供nexus接入密码
+                password '*******' // 请联系对应安卓开发@蔡继侠 提供nexus接入密码
             }
         }
     }

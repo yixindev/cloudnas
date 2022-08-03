@@ -72,6 +72,6 @@ class NasDemoApp : Application() {
                 }
             }
         })
-        YXNasSDK.instance.setCpuABIForce(CPU_ABI.arm64_v8a) //强制v8架构
+//        YXNasSDK.instance.setCpuABIForce(CPU_ABI.arm64_v8a) //强制v8架构
     }
 }
