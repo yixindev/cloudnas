@@ -43,7 +43,7 @@ void mainNas() {
 1.在flutter主工程编译成功的前提下，在iOS主工程相关位置引入头文件：
 
 ```
-#import <cloud_nas/NASSDKPlugin.h>
+#import <cloud_nas/NASSDK.h>
 ```
 2.创建flutter引擎，并指定入口函数，推荐使用**FlutterEngineGroup**生成轻量级引擎:
 
@@ -57,11 +57,12 @@ self.nasEngine = [self.engineGroup makeEngineWithEntrypoint:@"mainNas" libraryUR
 3.调用原生接口的初始化方法，传入flutter引擎等参数：
 
 ```
-[NASSDKPlugin initWithAppKey:APP_KEY
-               flutterEngine:self.nasEngine
-                  completion:^(NSInteger resultCode, NSString *resultMsg) {
+[[NASSDK sharedInstance]initWithAppKey:APP_KEY
+               	       flutterEngine:self.nasEngine
+                           completion:^(NSInteger resultCode, NSString *resultMsg) {
     ...
 }]
 ```
+1. 4.详细功能请参照[接口文档](iOS_api_guide.md)
 
 ### android工程
