@@ -36,9 +36,9 @@
         
         weakSelf.token = token;
         
-        UIViewController* sdkVC = [NASSDKNative contentViewController];
-        sdkVC.modalPresentationStyle = UIModalPresentationFullScreen;
-        [weakSelf presentViewController:sdkVC animated:YES completion:nil];
+//        UIViewController* sdkVC = [NASSDKNative contentViewController];
+//        sdkVC.modalPresentationStyle = UIModalPresentationFullScreen;
+//        [weakSelf presentViewController:sdkVC animated:YES completion:nil];
         
         [weakSelf NASSDKInit];
     }];
@@ -68,7 +68,23 @@
 //SDK授权
 -(void)NASSDKAuth{
     
-    [NASSDKNative setAuthToken:self.token type:NASAuthTypeXiaoYi completion:^(NSInteger resultCode, NSString *resultMsg) {
+    [NASSDKNative setAuthToken:self.token type:NASAuthTypeCloudBroadband completion:^(NSInteger resultCode, NSString *resultMsg) {
+        //授权成功
+        if(resultCode == NAS_RESULT_SUCCESS){
+            //推出 [NASSDKNative contentViewController]
+            UIViewController* sdkVC = [NASSDKNative contentViewController];
+            sdkVC.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:sdkVC animated:YES completion:nil];
+        }
+        //用户未开通
+        else if(resultCode == NAS_RESULT_USER_NOT_EXIST){
+            //跳转开通入口
+        }
+        //其他错误
+        else{
+            
+        }
+        
         NSLog(@"logon result code %ld, message %@",resultCode,resultMsg);
     }];
 }
