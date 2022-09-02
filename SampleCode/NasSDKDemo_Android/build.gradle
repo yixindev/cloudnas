@@ -25,7 +25,7 @@ allprojects {
             url "http://nexus.yixin.im/repository/maven-public/"
             credentials {
                 username 'yixinnas'
-                password '*******' // 请联系对应安卓开发@蔡继侠 提供nexus接入密码
+                password 'nas1234' // 请联系对应安卓开发@蔡继侠 提供nexus接入密码
             }
         }
     }

@@ -29,7 +29,7 @@ class NasDemoApp : Application() {
 
             override fun onResult(code: Int, message: String?, data: Void?) {
                 Log.i(TAG, "init nas-sdk with code: $code, message: $message ~")
-                NasInvocationProxy.instance.notifySDKInitResult(code, message)
+//                NasInvocationProxy.instance.notifySDKInitResult(code, message)
             }
         })
 

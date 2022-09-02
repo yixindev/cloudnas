@@ -73,20 +73,20 @@ class EmptyFragment(private var title: String? = null, private var message: Stri
 
     override fun onSDKInitSuccess() {
         //判断当前是否已经登录
-        val current = NasInvocationProxy.instance.getCurrentUserInfo()
-        if (current != null && current.isLogin == true && !current.token.isNullOrEmpty()) {
-            NasInvocationProxy.instance.execUserLogin(
-                    current.token,
-                    object : INasInvokeCallback<Void> {
-                        override fun onResult(code: Int, message: String?, data: Void?) {
-                            Log.i(
-                                NasDemoApp.TAG,
-                                "nas-sdk auth result code: $code, message: $message ~"
-                            )
-                        }
-                    }
-                )
-        }
+//        val current = NasInvocationProxy.instance.getCurrentUserInfo()
+//        if (current != null && current.isLogin == true && !current.token.isNullOrEmpty()) {
+//            NasInvocationProxy.instance.execUserLogin(
+//                    current.token,
+//                    object : INasInvokeCallback<Void> {
+//                        override fun onResult(code: Int, message: String?, data: Void?) {
+//                            Log.i(
+//                                NasDemoApp.TAG,
+//                                "nas-sdk auth result code: $code, message: $message ~"
+//                            )
+//                        }
+//                    }
+//                )
+//        }
     }
 
     override fun onUserAuthSuccess() {
