@@ -12,6 +12,7 @@ import im.yixin.nas.sdk.YXNasSDK
 /**
  * Created by jixia.cai on 2021/3/1 7:33 PM
  */
+@Deprecated("")
 class DemoHomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
