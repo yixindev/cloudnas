@@ -68,7 +68,7 @@
 //SDK授权
 -(void)NASSDKAuth{
     
-    [NASSDKNative setAuthToken:self.token type:NASAuthTypeCloudBroadband completion:^(NSInteger resultCode, NSString *resultMsg) {
+    [NASSDKNative setAuthToken:self.token type:NASAuthTypeXiaoYi completion:^(NSInteger resultCode, NSString *resultMsg) {
         //授权成功
         if(resultCode == NAS_RESULT_SUCCESS){
             //推出 [NASSDKNative contentViewController]
