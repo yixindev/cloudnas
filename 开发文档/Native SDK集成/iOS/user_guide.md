@@ -21,6 +21,11 @@
 | 2022-03-07 | 1.2.2 | 修复部分缺陷 |
 | 2022-05-05 | 1.2.3 | 1.新增智能相册功能 2.开发框架升级 3.性能优化 |
 | 2022-05-12 | 1.2.4 | 1.优化文件选择功能 2.缺陷修复 |
+| 2022-08-16 | 1.2.6 | 1.新增文件移动功能 2.修复大文件上传和自动备份中的问题 3.完善日志打印模块 4.支持用户反馈 5.支持flutter plugin插件化 |
+| 2022-08-23 | 1.2.7 | 优化日志输出 |
+| 2022-09-01 | 1.2.8 | 1.新增授权类型：云宽带 2.返回授权结果 3.新增错误码：用户不存在 |
+| 2022-11-04 | 1.2.9 | 1.新增微信备份功能 2.缺陷修复 |
+| 2023-01-06 | 1.3.0 | 1.新增印鸽打印功能 2.音频播放支持拖拽 3.缺陷修复 |
 
 ## 快速接入
 
@@ -78,56 +83,48 @@
 	
 ## 接口开发
 
-### 获取全局实例
-
-#### 接口描述
-
-获取SDK的全局实例对象。
-
-#### 接口定义
+### 1 引入头文件
 
 ```
-+(instancetype)sharedInstance;
+#import <NASSDK/NASSDKNative.h>
 ```
 
---------------------
+### 2 获取界面容器
 
-### 获取界面容器
-
-#### 接口描述
+#### 2.1 接口描述
 
 获取SDK的业务界面，返回值是UIViewController类的实例，将获取的对象添加到相应的位置，例如：TabbarController。
 
-#### 接口定义
+#### 2.2 接口定义
 
 ```
--(UIViewController*)contentViewController;
++(UIViewController*)contentViewController;
 ```
 
-#### 注意事项
+#### 2.3 注意事项
 
 - 容器内部的导航栏样式和跳转由SDK内部定制，不跟随App的全局样式。
 
 --------------------
 
-### 初始化
+### 3 初始化
 
-#### 描述
+#### 3.1 描述
 
 在调用SDK其他接口之前，首先需要传入应用的**appKey**完成SDK的初始化。
 
-#### 接口定义
+#### 3.2 接口定义
 
 ```
--(void)initializeWithAppKey:(NSString*)appKey
++(void)initializeWithAppKey:(NSString*)appKey
                  completion:(NASCompletionBlock)completion
 ```
 
-#### 调用示例
+#### 3.3 调用示例
 
 ```
-[[NASSDK sharedInstance] initializeWithAppKey:appKey
-                                   completion:^(NSInteger resultCode, NSString *resultMsg) {
+[NASSDKNative initializeWithAppKey:appKey
+                        completion:^(NSInteger resultCode, NSString *resultMsg) {
     if (resultCode == NAS_RESULT_SUCCESS) {
         //初始化成功
     }
@@ -137,32 +134,34 @@
 }];
 ```
 
-#### 注意事项
+#### 3.4 注意事项
 
 - 其他操作必须要等到初始化接口的回调执行之后再进行，否则会失败
 
 --------------------
 
-### 设置授权令牌
+### 4 设置授权令牌
 
-#### 接口描述
+#### 4.1 接口描述
 
 设置SDK登录授权所必须的token、授权类型以及登录结果回调。
 
 目前小翼管家接入授权类型为**NASAuthTypeXiaoYi**，其他接入方授权类型为**NASAuthTypeUniversal**。
 
-#### 接口定义
+#### 4.2 接口定义
 
 ```
--(void)setAuthToken:(NSString*)token
++(void)setAuthToken:(NSString*)token
                type:(NASAuthType)type
          completion:(NASCompletionBlock)completion;
 ```
 
-#### 调用示例
+#### 4.3 调用示例
 
 ```
-[[NASSDK sharedInstance] setAuthToken:self.token type:NASAuthTypeXiaoYi completion:^(NSInteger resultCode, NSString *resultMsg) {
+[NASSDKNative setAuthToken:self.token
+							type:NASAuthTypeXiaoYi 
+					completion:^(NSInteger resultCode, NSString *resultMsg) {
    //SDK登录成功
    if (resultCode == NAS_RESULT_SUCCESS) {
    }
@@ -172,35 +171,38 @@
 }];
 ```
 
-#### 注意事项
+#### 4.4 注意事项
 - 根据接入方授权流程的不同，授权类型请确保输入正确。
 
 --------------------
 
-### 注销
+### 5 注销
 
-#### 接口描述
+#### 5.1 接口描述
 
 请求SDK注销自己当前的登录账号，变成未登录状态。
 
-#### 接口定义
+#### 5.2 接口定义
 
 ```
--(void)logoutWithCompletion:(NASCompletionBlock)completion;
++(void)logoutWithCompletion:(NASCompletionBlock)completion;
 ```
 
 --------------------
 
-### 监听视频播放请求
-#### 接口描述
+### 6 监听视频播放请求
+#### 6.1 接口描述
 当SDK点击视频文件进行在线播放时，会调用传入的回调函数，并将处理后的视频地址作为参数传入，应用获取到视频的播放地址时，将传入应用自定义的播放组件进行播放。
 
-#### 接口定义
-```-(void)addVideoPlayRequestListener:(NASVideoPlayRequestBlock)listener```
+#### 6.2 接口定义
 
-#### 调用示例
 ```
-[[NASSDK sharedInstance] addVideoPlayRequestListener:^(NSString *videoName, NSString *videoURL, NASVideoPlayResponseBlock responseBlock) {
++(void)addVideoPlayRequestListener:(NASVideoPlayRequestBlock)listener
+```
+
+#### 6.3 调用示例
+```
+[NASSDKNative addVideoPlayRequestListener:^(NSString *videoName, NSString *videoURL, NASVideoPlayResponseBlock responseBlock) {
      NASVideoPlayViewController* videoPlayVC = [[NASVideoPlayViewController alloc] initWithVideoUrl:videoURL];
      UINavigationController* navi = [[UINavigationController alloc] initWithRootViewController:videoPlayVC];
      [self.window.rootViewController presentViewController:navi animated:YES completion:nil];
@@ -218,8 +220,13 @@
 | :------: | :------ |
 | 200 | 调用成功 |
 | 400 | 请求错误 |
-| 4001 | 调用中断 |
-| 4002 | 数据解析失败 |
+| 3000 | flutter插件未注册 |
+| 3001 | flutter引擎异常 |
+| 4001 | 用户登录失败 |
+| 4002 | 用户重复退出 |
+| 4003 | 用户退出失败 |
+| 4004 | 方法未实现 |
+| 4005 | 数据解析异常 |
 
 
 
