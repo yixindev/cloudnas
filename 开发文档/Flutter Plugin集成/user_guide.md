@@ -63,6 +63,6 @@ self.nasEngine = [self.engineGroup makeEngineWithEntrypoint:@"mainNas" libraryUR
     ...
 }]
 ```
-1. 4.详细功能请参照[接口文档](iOS_api_guide.md)
+4.详细接口请参照[接口文档](iOS_api_guide.md)
 
 ### android工程
