@@ -6,7 +6,6 @@ import android.util.Log
 import im.yixin.nas.embed.demo.impl.NasInvocationProxy
 import im.yixin.nas.sdk.YXNasSDK
 import im.yixin.nas.sdk.api.*
-import im.yixin.nas.sdk.util.CPU_ABI
 
 /**
  * Created by jixia.cai on 2021/2/22 5:16 PM
