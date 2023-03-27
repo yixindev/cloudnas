@@ -109,7 +109,7 @@ dependencies {
 //    implementation 'com.kaopiz:kprogresshud:1.2.0'
     implementation 'com.google.code.gson:gson:2.8.6'
 
-    implementation("im.yixin.nas.plugin.cloudApp:nasFlutterSDK.clip:1.0.17-SNAPSHOT") {
+    implementation("im.yixin.nas.plugin.cloudApp:nasFlutterSDK.clip:1.1.1-SNAPSHOT") {
         exclude group: 'com.tencent.tbs', module: 'tbssdk'
     }
 
