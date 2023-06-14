@@ -1,6 +1,0 @@
-framework module YXSMBClient {
-  umbrella header "YXSMBClient-umbrella.h"
-
-  export *
-  module * { export * }
-}
