@@ -1,0 +1,279 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name audioplayers
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import AVKit
+import AudioToolbox
+import CoreMedia
+import Flutter
+import Foundation
+import MediaPlayer
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+@_exported import audioplayers
+import os.log
+import os
+public enum ConverterError : Foundation.LocalizedError {
+  case cannotLockQueue
+  case converterFailed(Darwin.OSStatus)
+  case cannotCreatePCMBufferWithoutConverter
+  case failedToCreateDestinationFormat
+  case failedToCreatePCMBuffer
+  case notEnoughData
+  case parserMissingDataFormat
+  case reachedEndOfFile
+  case unableToCreateConverter(Darwin.OSStatus)
+  case superConcerningShouldNeverHappen
+  case throttleParsingBuffersForEngine
+  case failedToCreateParser
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension Swift.UInt32 {
+  public var description: Swift.String {
+    get
+  }
+}
+public protocol LockScreenViewPresenter : AnyObject {
+  func getIsPlaying() -> Swift.Bool
+  func handlePlay()
+  func handlePause()
+  func handleSkipBackward()
+  func handleSkipForward()
+  func handleSeek(toNeedle needle: Swift.Double)
+}
+public protocol LockScreenViewProtocol {
+  var skipForwardSeconds: Swift.Double { get set }
+  var skipBackwardSeconds: Swift.Double { get set }
+}
+extension audioplayers.LockScreenViewProtocol {
+  public func clearLockScreenInfo()
+  @available(iOS 10.0, tvOS 10.0, *)
+  public func setLockScreenInfo(withMediaInfo info: audioplayers.SALockScreenInfo?, duration: Swift.Double)
+  public func setLockScreenControls(presenter: any audioplayers.LockScreenViewPresenter)
+  public func updateLockScreenElapsedTime(needle: Swift.Double)
+  public func updateLockScreenPlaybackDuration(duration: Swift.Double)
+  public func updateLockScreenPaused()
+  public func updateLockScreenPlaying()
+  public func updateLockScreenChangePlaybackRate(speed: Swift.Float)
+  public func updateLockScreenSkipIntervals()
+}
+public struct SAAudioAvailabilityRange {
+  public var bufferingProgress: Swift.Double {
+    get
+  }
+  public var startingBufferTimePositon: Swift.Double {
+    get
+  }
+  public var totalDurationBuffered: Swift.Double {
+    get
+  }
+  public var isReadyForPlaying: Swift.Bool {
+    get
+  }
+  public func contains(_ needle: Swift.Double) -> Swift.Bool
+  public func reachedEndOfAudio(needle: Swift.Double) -> Swift.Bool
+  public func isCompletelyBuffered() -> Swift.Bool
+}
+@_hasMissingDesignatedInitializers public class SAPlayer {
+  public var DEBUG_MODE: Swift.Bool {
+    get
+    set
+  }
+  public static let shared: audioplayers.SAPlayer
+  public var HTTPHeaderFields: [Swift.String : Swift.String]? {
+    get
+    set
+  }
+  public var engine: AVFAudio.AVAudioEngine? {
+    get
+  }
+  public var engineUID: Swift.String? {
+    get
+  }
+  public var playerNode: AVFAudio.AVAudioPlayerNode? {
+    get
+  }
+  public var volume: Swift.Float? {
+    get
+    set
+  }
+  public var rate: Swift.Float? {
+    get
+    set
+  }
+  public var skipForwardSeconds: Swift.Double {
+    get
+    set
+  }
+  public var skipBackwardSeconds: Swift.Double {
+    get
+    set
+  }
+  public var audioModifiers: [AVFAudio.AVAudioUnit]
+  public var audioQueued: [audioplayers.SAAudioQueueItem] {
+    get
+    set
+  }
+  public var duration: Swift.Double? {
+    get
+  }
+  public var prettyDuration: Swift.String? {
+    get
+  }
+  public var elapsedTime: Swift.Double? {
+    get
+  }
+  public var prettyElapsedTime: Swift.String? {
+    get
+  }
+  public var mediaInfo: audioplayers.SALockScreenInfo?
+  public func clearAudioModifiers()
+  public func addAudioModifier(_ modifer: AVFAudio.AVAudioUnit)
+  public static func prettifyTimestamp(_ timestamp: Swift.Double) -> Swift.String
+  @objc deinit
+}
+public enum SAPlayerBitrate {
+  case low
+  case high
+  public static func == (a: audioplayers.SAPlayerBitrate, b: audioplayers.SAPlayerBitrate) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension audioplayers.SAPlayer {
+  public func togglePlayAndPause()
+  public func play()
+  public func pause()
+  public func skipForward()
+  public func skipBackwards()
+  public func seekTo(seconds: Swift.Double)
+  public func playbackRateOfAudioChanged(rate: Swift.Float)
+  public func startSavedAudio(withSavedUrl url: Foundation.URL, mediaInfo: audioplayers.SALockScreenInfo? = nil)
+  public func startRemoteAudio(withRemoteUrl url: Foundation.URL, bitrate: audioplayers.SAPlayerBitrate = .high, mediaInfo: audioplayers.SALockScreenInfo? = nil)
+  public func stopStreamingRemoteAudio()
+  public func queueRemoteAudio(withRemoteUrl url: Foundation.URL, bitrate: audioplayers.SAPlayerBitrate = .high, mediaInfo: audioplayers.SALockScreenInfo? = nil)
+  public func queueSavedAudio(withSavedUrl url: Foundation.URL, mediaInfo: audioplayers.SALockScreenInfo? = nil)
+  public func removeFirstQueuedAudio() -> Foundation.URL?
+  public func clearAllQueuedAudio() -> [Foundation.URL]
+  public func clear()
+}
+extension audioplayers.SAPlayer {
+  public struct Downloader {
+    public static func downloadAudio(withRemoteUrl url: Foundation.URL, completion: @escaping (_ savedUrl: Foundation.URL, _ error: (any Swift.Error)?) -> ())
+    public static func cancelDownload(withRemoteUrl url: Foundation.URL)
+    public static func deleteDownloaded(withSavedUrl url: Foundation.URL)
+    public static func isDownloaded(withRemoteUrl url: Foundation.URL) -> Swift.Bool
+    public static func getSavedUrl(forRemoteUrl url: Foundation.URL) -> Foundation.URL?
+    public static func setBackgroundCompletionHandler(_ completionHandler: @escaping () -> ())
+    public static var allowUsingCellularData: Swift.Bool {
+      get
+      set
+    }
+    public static var downloadDirectory: Foundation.FileManager.SearchPathDirectory {
+      get
+      set
+    }
+  }
+}
+extension audioplayers.SAPlayer {
+  public struct Features {
+    public struct SkipSilences {
+      public static func enable() -> Swift.Bool
+      public static func disable() -> Swift.Bool
+      public static func setRateSafely(_ rate: Swift.Float)
+    }
+    public struct SleepTimer {
+      public static func enable(afterDelay delay: Swift.Double)
+      public static func disable()
+    }
+    public struct Loop {
+      public static func enable()
+      public static func disable()
+    }
+  }
+}
+public typealias UTC = Swift.Int
+public struct SALockScreenInfo {
+  public init(title: Swift.String, artist: Swift.String, albumTitle: Swift.String?, artwork: UIKit.UIImage?, releaseDate: audioplayers.UTC)
+}
+public struct SAAudioQueueItem {
+  public var loc: audioplayers.SAAudioQueueItem.Location
+  public var url: Foundation.URL
+  public var mediaInfo: audioplayers.SALockScreenInfo?
+  public var bitrate: audioplayers.SAPlayerBitrate
+  public init(loc: audioplayers.SAAudioQueueItem.Location, url: Foundation.URL, mediaInfo: audioplayers.SALockScreenInfo?, bitrate: audioplayers.SAPlayerBitrate = .high)
+  public enum Location {
+    case remote
+    case saved
+    public static func == (a: audioplayers.SAAudioQueueItem.Location, b: audioplayers.SAAudioQueueItem.Location) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+extension audioplayers.SAPlayer {
+  public struct Updates {
+    public struct ElapsedTime {
+      @available(*, deprecated, message: "Use subscribe without the url in the closure for current audio updates")
+      public static func subscribe(_ closure: @escaping (_ url: Foundation.URL, _ timePosition: Swift.Double) -> ()) -> Swift.UInt
+      public static func subscribe(_ closure: @escaping (_ timePosition: Swift.Double) -> ()) -> Swift.UInt
+      public static func unsubscribe(_ id: Swift.UInt)
+    }
+    public struct Duration {
+      @available(*, deprecated, message: "Use subscribe without the url in the closure for current audio updates")
+      public static func subscribe(_ closure: @escaping (_ url: Foundation.URL, _ duration: Swift.Double) -> ()) -> Swift.UInt
+      public static func subscribe(_ closure: @escaping (_ duration: Swift.Double) -> ()) -> Swift.UInt
+      public static func unsubscribe(_ id: Swift.UInt)
+    }
+    public struct PlayingStatus {
+      @available(*, deprecated, message: "Use subscribe without the url in the closure for current audio updates")
+      public static func subscribe(_ closure: @escaping (_ url: Foundation.URL, _ playingStatus: audioplayers.SAPlayingStatus) -> ()) -> Swift.UInt
+      public static func subscribe(_ closure: @escaping (_ playingStatus: audioplayers.SAPlayingStatus) -> ()) -> Swift.UInt
+      public static func unsubscribe(_ id: Swift.UInt)
+    }
+    public struct StreamingBuffer {
+      @available(*, deprecated, message: "Use subscribe without the url in the closure for current audio updates")
+      public static func subscribe(_ closure: @escaping (_ url: Foundation.URL, _ buffer: audioplayers.SAAudioAvailabilityRange) -> ()) -> Swift.UInt
+      public static func subscribe(_ closure: @escaping (_ buffer: audioplayers.SAAudioAvailabilityRange) -> ()) -> Swift.UInt
+      public static func unsubscribe(_ id: Swift.UInt)
+    }
+    public struct AudioDownloading {
+      public static func subscribe(_ closure: @escaping (_ url: Foundation.URL, _ progress: Swift.Double) -> ()) -> Swift.UInt
+      public static func unsubscribe(_ id: Swift.UInt)
+    }
+    public struct AudioQueue {
+      public static func subscribe(_ closure: @escaping (_ newUrl: Foundation.URL) -> ()) -> Swift.UInt
+      public static func unsubscribe(_ id: Swift.UInt)
+    }
+  }
+}
+public enum SAPlayingStatus {
+  case playing
+  case paused
+  case buffering
+  case ended
+  public static func == (a: audioplayers.SAPlayingStatus, b: audioplayers.SAPlayingStatus) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers public class SwiftAudioplayersPlugin : ObjectiveC.NSObject, Flutter.FlutterPlugin {
+  @objc public static func register(with registrar: any Flutter.FlutterPluginRegistrar)
+  @objc public func handle(_ call: Flutter.FlutterMethodCall, result: @escaping Flutter.FlutterResult)
+  @objc deinit
+}
+extension audioplayers.SAPlayer : audioplayers.LockScreenViewProtocol {}
+extension audioplayers.SAPlayerBitrate : Swift.Equatable {}
+extension audioplayers.SAPlayerBitrate : Swift.Hashable {}
+extension audioplayers.SAAudioQueueItem.Location : Swift.Equatable {}
+extension audioplayers.SAAudioQueueItem.Location : Swift.Hashable {}
+extension audioplayers.SAPlayingStatus : Swift.Equatable {}
+extension audioplayers.SAPlayingStatus : Swift.Hashable {}

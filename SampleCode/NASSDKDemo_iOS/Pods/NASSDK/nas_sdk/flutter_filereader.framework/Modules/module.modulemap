@@ -1,0 +1,11 @@
+framework module flutter_filereader {
+  umbrella header "flutter_filereader-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module flutter_filereader.Swift {
+  header "flutter_filereader-Swift.h"
+  requires objc
+}

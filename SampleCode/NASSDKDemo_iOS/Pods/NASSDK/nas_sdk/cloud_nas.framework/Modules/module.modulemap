@@ -1,0 +1,6 @@
+framework module cloud_nas {
+  umbrella header "cloud_nas-umbrella.h"
+
+  export *
+  module * { export * }
+}

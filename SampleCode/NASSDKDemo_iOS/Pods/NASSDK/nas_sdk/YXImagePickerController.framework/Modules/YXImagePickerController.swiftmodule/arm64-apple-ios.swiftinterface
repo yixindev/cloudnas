@@ -1,0 +1,619 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name YXImagePickerController
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import DKPhotoGallery
+import Foundation
+import Photos
+import Swift
+import UIKit
+@_exported import YXImagePickerController
+import _Concurrency
+import _StringProcessing
+extension CoreFoundation.CGSize {
+  public func toPixel() -> CoreFoundation.CGSize
+}
+@objc public enum DKAssetType : Swift.Int {
+  case photo
+  case video
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc open class DKAsset : ObjectiveC.NSObject {
+  @objc public var type: YXImagePickerController.DKAssetType {
+    get
+  }
+  @objc public var localIdentifier: Swift.String
+  @objc public var location: CoreLocation.CLLocation? {
+    get
+  }
+  @objc public var duration: Swift.Double {
+    get
+  }
+  @objc public var pixelWidth: Swift.Int {
+    get
+  }
+  @objc public var pixelHeight: Swift.Int {
+    get
+  }
+  @objc public var originalAsset: Photos.PHAsset? {
+    get
+  }
+  public init(originalAsset: Photos.PHAsset)
+  public var image: UIKit.UIImage? {
+    get
+  }
+  public init(image: UIKit.UIImage)
+  @objc override dynamic open func isEqual(_ object: Any?) -> Swift.Bool
+  @objc deinit
+}
+extension AVFoundation.AVAsset {
+  @objc dynamic public func calculateFileSize() -> Swift.Float
+}
+@objc extension YXImagePickerController.DKAsset {
+  @objc dynamic public var localTemporaryPath: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc dynamic public var fileName: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc dynamic public var localPath: Foundation.URL? {
+    @objc get
+  }
+  @objc dynamic public var fileSize: Swift.UInt {
+    @objc get
+    @objc set
+  }
+  @objc dynamic public var progress: Swift.Double {
+    @objc get
+    @objc set
+  }
+  @objc dynamic public var error: (any Swift.Error)? {
+    @objc get
+    @objc set
+  }
+}
+extension YXImagePickerController.DKAsset {
+  @objc dynamic public func fetchImage(with size: CoreFoundation.CGSize, options: Photos.PHImageRequestOptions? = nil, contentMode: Photos.PHImageContentMode = .aspectFit, completeBlock: @escaping (_ image: UIKit.UIImage?, _ info: [Swift.AnyHashable : Any]?) -> Swift.Void)
+  @objc dynamic public func fetchFullScreenImage(completeBlock: @escaping (_ image: UIKit.UIImage?, _ info: [Swift.AnyHashable : Any]?) -> Swift.Void)
+  @objc dynamic public func fetchOriginalImage(options: Photos.PHImageRequestOptions? = nil, completeBlock: @escaping (_ image: UIKit.UIImage?, _ info: [Swift.AnyHashable : Any]?) -> Swift.Void)
+  @objc dynamic public func fetchImageData(options: Photos.PHImageRequestOptions? = nil, compressionQuality: CoreFoundation.CGFloat = 0.9, completeBlock: @escaping (_ imageData: Foundation.Data?, _ info: [Swift.AnyHashable : Any]?) -> Swift.Void)
+  @objc dynamic public func fetchAVAsset(options: Photos.PHVideoRequestOptions? = nil, completeBlock: @escaping (_ AVAsset: AVFoundation.AVAsset?, _ info: [Swift.AnyHashable : Any]?) -> Swift.Void)
+  @objc dynamic public func cancelRequests()
+  public var fullScreenImage: (image: UIKit.UIImage?, info: [Swift.AnyHashable : Any]?)? {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers public class DKAssetGroup : ObjectiveC.NSObject {
+  final public let groupId: Swift.String
+  public var groupName: Swift.String?
+  public var originalCollection: Photos.PHAssetCollection?
+  public var fetchResult: Photos.PHFetchResult<Photos.PHAsset>?
+  public var totalCount: Swift.Int {
+    get
+  }
+  @objc deinit
+}
+@objc public protocol DKAssetGroupCellItemProtocol {
+  @objc weak var asset: YXImagePickerController.DKAsset! { get set }
+  @objc var selectedIndex: Swift.Int { get set }
+  @objc var thumbnailImage: UIKit.UIImage? { get set }
+  @objc var thumbnailImageView: UIKit.UIImageView { get }
+}
+@_inheritsConvenienceInitializers @objc @_Concurrency.MainActor(unsafe) open class DKAssetGroupDetailBaseCell : UIKit.UICollectionViewCell, YXImagePickerController.DKAssetGroupCellItemProtocol {
+  @_Concurrency.MainActor(unsafe) open class func cellReuseIdentifier() -> Swift.String
+  @_Concurrency.MainActor(unsafe) @objc weak open var asset: YXImagePickerController.DKAsset?
+  @_Concurrency.MainActor(unsafe) weak open var imagePickerController: YXImagePickerController.DKImagePickerController?
+  @_Concurrency.MainActor(unsafe) @objc open var selectedIndex: Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc open var thumbnailImage: UIKit.UIImage?
+  @_Concurrency.MainActor(unsafe) @objc open var thumbnailImageView: UIKit.UIImageView {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var isHighlighted: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers @_Concurrency.MainActor(unsafe) public class DKAssetGroupDetailCameraCell : YXImagePickerController.DKAssetGroupDetailBaseCell {
+  @objc @_Concurrency.MainActor(unsafe) override public class func cellReuseIdentifier() -> Swift.String
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers @_Concurrency.MainActor(unsafe) public class DKAssetGroupDetailImageCell : YXImagePickerController.DKAssetGroupDetailBaseCell {
+  @objc @_Concurrency.MainActor(unsafe) override public class func cellReuseIdentifier() -> Swift.String
+  @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) open class DKImageCheckView : UIKit.UIView {
+    @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+    @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
+    @objc deinit
+  }
+  @_Concurrency.MainActor(unsafe) @objc override public var thumbnailImage: UIKit.UIImage? {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override public var selectedIndex: Swift.Int {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override public var thumbnailImageView: UIKit.UIImageView {
+    @objc get
+  }
+  @objc @_Concurrency.MainActor(unsafe) final public let checkView: YXImagePickerController.DKAssetGroupDetailImageCell.DKImageCheckView
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var isSelected: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class DKAssetGroupDetailVC : UIKit.UIViewController, UIKit.UIGestureRecognizerDelegate, UIKit.UICollectionViewDelegate, UIKit.UICollectionViewDataSource, YXImagePickerController.DKImagePickerControllerAware {
+  @_Concurrency.MainActor(unsafe) public var selectedGroupId: Swift.String?
+  @_Concurrency.MainActor(unsafe) @objc weak public var imagePickerController: YXImagePickerController.DKImagePickerController?
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillLayoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLayoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc open func reload()
+  @_Concurrency.MainActor(unsafe) open func updateTitleView()
+  @_Concurrency.MainActor(unsafe) public func selectAsset(atIndex indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) public func deselectAsset(atIndex indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) public func adjustAssetIndex(_ index: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) public func scroll(to indexPath: Foundation.IndexPath, animted: Swift.Bool = false)
+  @_Concurrency.MainActor(unsafe) public func scrollToLastIndexPath(animated: Swift.Bool = false)
+  @_Concurrency.MainActor(unsafe) public func thumbnailImageView(for indexPath: Foundation.IndexPath) -> UIKit.UIImageView?
+  @_Concurrency.MainActor(unsafe) @objc public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+  @_Concurrency.MainActor(unsafe) @objc public func collectionView(_ collectionView: UIKit.UICollectionView, willDisplay cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc public func collectionView(_ collectionView: UIKit.UICollectionView, didEndDisplaying cell: UIKit.UICollectionViewCell, forItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc public func collectionView(_ collectionView: UIKit.UICollectionView, shouldSelectItemAt indexPath: Foundation.IndexPath) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc public func collectionView(_ collectionView: UIKit.UICollectionView, didDeselectItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor(unsafe) open func enableCaching() -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers @_Concurrency.MainActor(unsafe) public class DKAssetGroupDetailVideoCell : YXImagePickerController.DKAssetGroupDetailImageCell {
+  @_Concurrency.MainActor(unsafe) @objc override public class func cellReuseIdentifier() -> Swift.String
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override weak public var asset: YXImagePickerController.DKAsset? {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var isSelected: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class DKAssetGroupGridLayout : UIKit.UICollectionViewFlowLayout {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func prepare()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init()
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc public protocol DKAssetGroupCellType {
+  @objc static var preferredHeight: CoreFoundation.CGFloat { get }
+  @objc func configure(with assetGroup: YXImagePickerController.DKAssetGroup, tag: Swift.Int, dataManager: YXImagePickerController.DKImageGroupDataManager, imageRequestOptions: Photos.PHImageRequestOptions)
+}
+@_hasMissingDesignatedInitializers public class DKImageAssetDiskPurger {
+  @objc deinit
+  public func add(directory: Foundation.URL)
+  public func clear()
+}
+@objc public enum DKImageAssetExporterError : Swift.Int {
+  case cancelled, exportFailed
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum DKImageExportPresent : Swift.Int {
+  case compatible, current
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public typealias DKImageAssetExportRequestID = Swift.Int32
+public let DKImageAssetExportInvalidRequestID: YXImagePickerController.DKImageAssetExportRequestID
+public let DKImageAssetExporterDomain: Swift.String
+public let DKImageAssetExportResultRequestIDKey: Swift.String
+public let DKImageAssetExportResultCancelledKey: Swift.String
+@objc public protocol DKImageAssetExporterObserver {
+  @objc optional func exporterWillBeginExporting(exporter: YXImagePickerController.DKImageAssetExporter, asset: YXImagePickerController.DKAsset)
+  @objc optional func exporterDidUpdateProgress(exporter: YXImagePickerController.DKImageAssetExporter, asset: YXImagePickerController.DKAsset)
+  @objc optional func exporterDidEndExporting(exporter: YXImagePickerController.DKImageAssetExporter, asset: YXImagePickerController.DKAsset)
+}
+@_inheritsConvenienceInitializers @objc public class DKImageAssetExporterConfiguration : ObjectiveC.NSObject, Foundation.NSCopying {
+  @objc public var imageExportPreset: YXImagePickerController.DKImageExportPresent
+  @objc public var videoExportPreset: Swift.String
+  @objc public var avOutputFileType: AVFoundation.AVFileType
+  @objc public var exportDirectory: Foundation.URL
+  @objc public var compressionQuality: CoreFoundation.CGFloat
+  @objc required override dynamic public init()
+  @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc deinit
+}
+@objc open class DKImageAssetExporter : YXImagePickerController.DKImageBaseManager {
+  @objc public static let sharedInstance: YXImagePickerController.DKImageAssetExporter
+  @objc public init(configuration: YXImagePickerController.DKImageAssetExporterConfiguration)
+  @discardableResult
+  @objc public func exportAssetsAsynchronously(assets: [YXImagePickerController.DKAsset], completion: ((_ info: [Swift.AnyHashable : Any]) -> Swift.Void)?) -> YXImagePickerController.DKImageAssetExportRequestID
+  @objc public func cancel(requestID: YXImagePickerController.DKImageAssetExportRequestID)
+  @objc public func cancelAll()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class DKImageBaseManager : ObjectiveC.NSObject {
+  @objc open func add(observer object: Swift.AnyObject)
+  @objc open func remove(observer object: Swift.AnyObject)
+  open func notify(with selector: ObjectiveC.Selector, object: Swift.AnyObject?)
+  open func notify(with selector: ObjectiveC.Selector, object: Swift.AnyObject?, objectTwo: Swift.AnyObject?)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public typealias DKImageRequestID = Swift.Int32
+public let DKImageInvalidRequestID: YXImagePickerController.DKImageRequestID
+public func getImageDataManager() -> YXImagePickerController.DKImageDataManager
+@_hasMissingDesignatedInitializers public class DKImageDataManager {
+  public class func checkPhotoPermission(_ handler: @escaping (_ granted: Swift.Bool) -> Swift.Void)
+  @discardableResult
+  public func fetchImage(for asset: YXImagePickerController.DKAsset, size: CoreFoundation.CGSize, options: Photos.PHImageRequestOptions? = nil, contentMode: Photos.PHImageContentMode = .aspectFill, completeBlock: @escaping (_ image: UIKit.UIImage?, _ info: [Swift.AnyHashable : Any]?) -> Swift.Void) -> YXImagePickerController.DKImageRequestID
+  @discardableResult
+  public func fetchImageData(for asset: YXImagePickerController.DKAsset, options: Photos.PHImageRequestOptions? = nil, completeBlock: @escaping (_ data: Foundation.Data?, _ info: [Swift.AnyHashable : Any]?) -> Swift.Void) -> YXImagePickerController.DKImageRequestID
+  @discardableResult
+  public func fetchAVAsset(for asset: YXImagePickerController.DKAsset, options: Photos.PHVideoRequestOptions? = nil, completeBlock: @escaping (_ avAsset: AVFoundation.AVAsset?, _ info: [Swift.AnyHashable : Any]?) -> Swift.Void) -> YXImagePickerController.DKImageRequestID
+  public func cancelRequest(requestID: YXImagePickerController.DKImageRequestID)
+  public func cancelRequests(requestIDs: [YXImagePickerController.DKImageRequestID])
+  public func startCachingAssets(for assets: [Photos.PHAsset], targetSize: CoreFoundation.CGSize, contentMode: Photos.PHImageContentMode, options: Photos.PHImageRequestOptions?)
+  public func stopCachingAssets(for assets: [Photos.PHAsset], targetSize: CoreFoundation.CGSize, contentMode: Photos.PHImageContentMode, options: Photos.PHImageRequestOptions?)
+  public func stopCachingForAllAssets()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class DKImageExtensionContext {
+  weak public var imagePickerController: YXImagePickerController.DKImagePickerController! {
+    get
+  }
+  public var groupDetailVC: YXImagePickerController.DKAssetGroupDetailVC? {
+    get
+  }
+  @objc deinit
+}
+@objc public enum DKImageExtensionType : Swift.Int {
+  case gallery, camera, inlineCamera, photoEditor
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol DKImageExtensionProtocol {
+  func perform(with extraInfo: [Swift.AnyHashable : Any])
+  func finish()
+}
+@objc open class DKImageBaseExtension : ObjectiveC.NSObject, YXImagePickerController.DKImageExtensionProtocol {
+  final public let context: YXImagePickerController.DKImageExtensionContext
+  required public init(context: YXImagePickerController.DKImageExtensionContext)
+  open func perform(with extraInfo: [Swift.AnyHashable : Any])
+  open func finish()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc open class DKImageExtensionNone : YXImagePickerController.DKImageBaseExtension {
+  required public init(context: YXImagePickerController.DKImageExtensionContext)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @objcMembers open class DKImageExtensionController : ObjectiveC.NSObject {
+  @objc public func perform(extensionType: YXImagePickerController.DKImageExtensionType, with extraInfo: [Swift.AnyHashable : Any])
+  @objc public func finish(extensionType: YXImagePickerController.DKImageExtensionType)
+  @objc public func enable(extensionType: YXImagePickerController.DKImageExtensionType)
+  @objc public func disable(extensionType: YXImagePickerController.DKImageExtensionType)
+  @objc public func isExtensionTypeAvailable(_ extensionType: YXImagePickerController.DKImageExtensionType) -> Swift.Bool
+  @objc public class func registerExtension(extensionClass: YXImagePickerController.DKImageBaseExtension.Type, for type: YXImagePickerController.DKImageExtensionType)
+  @objc public class func unregisterExtension(for type: YXImagePickerController.DKImageExtensionType)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class DKImageExtensionGallery : YXImagePickerController.DKImageBaseExtension, DKPhotoGallery.DKPhotoGalleryDelegate {
+  weak open var gallery: DKPhotoGallery.DKPhotoGallery?
+  open var group: YXImagePickerController.DKAssetGroup!
+  override open func perform(with extraInfo: [Swift.AnyHashable : Any])
+  open func createGallery(with extraInfo: [Swift.AnyHashable : Any], group: YXImagePickerController.DKAssetGroup) -> DKPhotoGallery.DKPhotoGallery?
+  open var backItem: UIKit.UIBarButtonItem {
+    get
+    set
+  }
+  @objc open func photoGallery(_ gallery: DKPhotoGallery.DKPhotoGallery, didShow index: Swift.Int)
+  @objc open func selectAssetFromGallery(button: UIKit.UIButton)
+  open func updateGalleryAssetSelection()
+  @objc open func dismissGallery()
+  required public init(context: YXImagePickerController.DKImageExtensionContext)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class DKImageGroupDataManagerConfiguration : ObjectiveC.NSObject, Foundation.NSCopying {
+  public var assetGroupTypes: [Photos.PHAssetCollectionSubtype]
+  public var groupFetchPredicate: Foundation.NSPredicate?
+  @objc public var assetFetchOptions: Photos.PHFetchOptions?
+  @objc public var fetchLimit: Swift.Int
+  @objc required override dynamic public init()
+  @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc deinit
+}
+@objc open class DKImageGroupDataManager : YXImagePickerController.DKImageBaseManager, Photos.PHPhotoLibraryChangeObserver {
+  public var groupIds: [Swift.String]?
+  public init(configuration: YXImagePickerController.DKImageGroupDataManagerConfiguration)
+  @objc deinit
+  open func invalidate()
+  open func fetchGroups(_ completeBlock: @escaping (_ groups: [Swift.String]?, _ error: Foundation.NSError?) -> Swift.Void)
+  open func fetchGroup(with groupId: Swift.String) -> YXImagePickerController.DKAssetGroup?
+  open func fetchGroupThumbnail(with groupId: Swift.String, size: CoreFoundation.CGSize, options: Photos.PHImageRequestOptions, completeBlock: @escaping (_ image: UIKit.UIImage?, _ info: [Swift.AnyHashable : Any]?) -> Swift.Void)
+  open func fetchAsset(_ group: YXImagePickerController.DKAssetGroup, index: Swift.Int) -> YXImagePickerController.DKAsset?
+  open func fetchPHAsset(_ group: YXImagePickerController.DKAssetGroup, index: Swift.Int) -> Photos.PHAsset?
+  open func makeDKAssetGroup(with collection: Photos.PHAssetCollection) -> YXImagePickerController.DKAssetGroup
+  open func collectionType(for subtype: Photos.PHAssetCollectionSubtype) -> Photos.PHAssetCollectionType
+  open func fetchGroups(assetGroupTypes: [Photos.PHAssetCollectionSubtype], groupFetchPredicate: Foundation.NSPredicate? = nil, block: @escaping (Photos.PHAssetCollection) -> Swift.Void)
+  open func updatePartial(groups: [Swift.String : YXImagePickerController.DKAssetGroup], groupIds: [Swift.String], completeBlock: @escaping (_ groups: [Swift.String]?, _ error: Foundation.NSError?) -> Swift.Void)
+  open func updateGroup(_ group: YXImagePickerController.DKAssetGroup, collection: Photos.PHAssetCollection)
+  open func updateGroup(_ group: YXImagePickerController.DKAssetGroup, fetchResult: Photos.PHFetchResult<Photos.PHAsset>)
+  @objc open func photoLibraryDidChange(_ changeInstance: Photos.PHChange)
+}
+@objc public enum DKImagePickerControllerAssetType : Swift.Int {
+  case allPhotos, allVideos, allAssets
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum DKImagePickerControllerSourceType : Swift.Int {
+  case camera, photo, both
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum DKImagePickerControllerExportStatus : Swift.Int {
+  case none, exporting
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol DKImagePickerControllerAware {
+  @objc weak var imagePickerController: YXImagePickerController.DKImagePickerController! { get set }
+  @objc func reload()
+}
+@_inheritsConvenienceInitializers @objc @_Concurrency.MainActor(unsafe) open class DKUINavigationController : UIKit.UINavigationController {
+  @available(iOS 5.0, *)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(navigationBarClass: Swift.AnyClass?, toolbarClass: Swift.AnyClass?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(rootViewController: UIKit.UIViewController)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc @_Concurrency.MainActor(unsafe) open class DKImagePickerController : YXImagePickerController.DKUINavigationController, UIKit.UIAdaptivePresentationControllerDelegate {
+  @objc @_Concurrency.MainActor(unsafe) public var UIDelegate: YXImagePickerController.DKImagePickerControllerBaseUIDelegate! {
+    @objc get
+    @objc set
+  }
+  @available(iOS 13.0, *)
+  @objc @_Concurrency.MainActor(unsafe) public var shouldDismissViaUserAction: Swift.Bool {
+    @objc get
+  }
+  @objc @_Concurrency.MainActor(unsafe) public var singleSelect: Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) public var autoCloseOnSingleSelect: Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) public var maxSelectableCount: Swift.Int
+  @_Concurrency.MainActor(unsafe) open var containsGPSInMetadata: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var defaultAssetGroup: Photos.PHAssetCollectionSubtype?
+  @objc @_Concurrency.MainActor(unsafe) public var allowSwipeToSelect: Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) public var allowSelectAll: Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) public var inline: Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) public var assetType: YXImagePickerController.DKImagePickerControllerAssetType
+  @objc @_Concurrency.MainActor(unsafe) public var sourceType: YXImagePickerController.DKImagePickerControllerSourceType
+  @objc @_Concurrency.MainActor(unsafe) public var allowMultipleTypes: Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) public var allowsLandscape: Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) public var showsEmptyAlbums: Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) public var showsCancelButton: Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) public var fetchLimit: Swift.Int
+  @objc @_Concurrency.MainActor(unsafe) public var didCancel: (() -> Swift.Void)?
+  @objc @_Concurrency.MainActor(unsafe) public var didSelectAssets: ((_ assets: [YXImagePickerController.DKAsset]) -> Swift.Void)?
+  @objc @_Concurrency.MainActor(unsafe) public var selectedChanged: (() -> Swift.Void)?
+  @objc @_Concurrency.MainActor(unsafe) public var permissionViewColors: YXImagePickerController.DKPermissionViewColors
+  @objc @_Concurrency.MainActor(unsafe) public var exportsWhenCompleted: Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) public var exporter: YXImagePickerController.DKImageAssetExporter?
+  @objc @_Concurrency.MainActor(unsafe) public var exportStatus: YXImagePickerController.DKImagePickerControllerExportStatus {
+    @objc get
+  }
+  @objc @_Concurrency.MainActor(unsafe) public var exportStatusChanged: ((YXImagePickerController.DKImagePickerControllerExportStatus) -> Swift.Void)?
+  @objc @_Concurrency.MainActor(unsafe) public var groupDataManager: YXImagePickerController.DKImageGroupDataManager {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) public var selectedAssetIdentifiers: [Swift.String] {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var extensionController: YXImagePickerController.DKImageExtensionController! {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) convenience public init(groupDataManager: YXImagePickerController.DKImageGroupDataManager? = nil)
+  @objc deinit
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @objc @_Concurrency.MainActor(unsafe) open func makeRootVC() -> any UIKit.UIViewController & YXImagePickerController.DKImagePickerControllerAware
+  @objc @_Concurrency.MainActor(unsafe) open func presentCamera()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func present(_ viewControllerToPresent: UIKit.UIViewController, animated flag: Swift.Bool = true, completion: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func dismiss(animated flag: Swift.Bool, completion: (() -> Swift.Void)? = nil)
+  @objc @_Concurrency.MainActor(unsafe) open func dismissCamera()
+  @objc @_Concurrency.MainActor(unsafe) open func dismiss()
+  @objc @_Concurrency.MainActor(unsafe) open func done()
+  @objc @_Concurrency.MainActor(unsafe) open func reload(with dataManager: YXImagePickerController.DKImageGroupDataManager)
+  @objc @_Concurrency.MainActor(unsafe) open func saveImage(_ image: UIKit.UIImage, _ metadata: [Swift.AnyHashable : Any]?, _ completeBlock: @escaping ((_ asset: YXImagePickerController.DKAsset) -> Swift.Void))
+  @objc @_Concurrency.MainActor(unsafe) open func saveImageToAlbum(_ image: UIKit.UIImage, _ completeBlock: @escaping ((_ asset: YXImagePickerController.DKAsset) -> Swift.Void))
+  @objc @_Concurrency.MainActor(unsafe) open func saveImageDataToAlbumForiOS9(_ imageDataWithMetadata: Foundation.Data, _ completeBlock: @escaping ((_ asset: YXImagePickerController.DKAsset) -> Swift.Void))
+  @objc @_Concurrency.MainActor(unsafe) open func writeMetadata(_ metadata: Swift.Dictionary<Swift.AnyHashable, Any>, into imageData: Foundation.Data) -> Foundation.Data?
+  @objc @_Concurrency.MainActor(unsafe) open func select(asset: YXImagePickerController.DKAsset)
+  @objc @_Concurrency.MainActor(unsafe) open func select(assets: [YXImagePickerController.DKAsset])
+  @objc @_Concurrency.MainActor(unsafe) open func handleSelectAll()
+  @objc @_Concurrency.MainActor(unsafe) open func deselect(asset: YXImagePickerController.DKAsset)
+  @objc @_Concurrency.MainActor(unsafe) open func removeSelection(asset: YXImagePickerController.DKAsset)
+  @objc @_Concurrency.MainActor(unsafe) open func deselectAll()
+  @objc @_Concurrency.MainActor(unsafe) open func setSelectedAssets(assets: [YXImagePickerController.DKAsset])
+  @_Concurrency.MainActor(unsafe) open func index(of asset: YXImagePickerController.DKAsset) -> Swift.Int?
+  @objc @_Concurrency.MainActor(unsafe) open func contains(asset: YXImagePickerController.DKAsset) -> Swift.Bool
+  @objc @_Concurrency.MainActor(unsafe) open func scroll(to indexPath: Foundation.IndexPath, animated: Swift.Bool = false)
+  @objc @_Concurrency.MainActor(unsafe) open func scrollToLastTappedIndexPath(animated: Swift.Bool = false)
+  @objc @_Concurrency.MainActor(unsafe) public var selectedAssets: [YXImagePickerController.DKAsset] {
+    @objc get
+  }
+  @objc @_Concurrency.MainActor(unsafe) open func canSelect(asset: YXImagePickerController.DKAsset, showAlert: Swift.Bool = true) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var shouldAutorotate: Swift.Bool {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
+    @objc get
+  }
+  @available(iOS 13.0, *)
+  @_Concurrency.MainActor(unsafe) @objc public func presentationControllerShouldDismiss(_ presentationController: UIKit.UIPresentationController) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc public func presentationControllerDidDismiss(_ presentationController: UIKit.UIPresentationController)
+  @_Concurrency.MainActor(unsafe) open func showGallery(with presentationIndex: Swift.Int?, presentingFromImageView: UIKit.UIImageView?, groupId: Swift.String)
+  @available(iOS 5.0, *)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(navigationBarClass: Swift.AnyClass?, toolbarClass: Swift.AnyClass?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(rootViewController: UIKit.UIViewController)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+}
+@objc public enum DKImagePickerGroupListPresentationStyle : Swift.Int {
+  case popover
+  case presented
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol DKImagePickerControllerUIDelegate {
+  @objc func prepareLayout(_ imagePickerController: YXImagePickerController.DKImagePickerController, vc: UIKit.UIViewController)
+  @objc func layoutForImagePickerController(_ imagePickerController: YXImagePickerController.DKImagePickerController) -> UIKit.UICollectionViewLayout.Type
+  @objc func imagePickerController(_ imagePickerController: YXImagePickerController.DKImagePickerController, showsCancelButtonForVC vc: UIKit.UIViewController)
+  @objc func imagePickerController(_ imagePickerController: YXImagePickerController.DKImagePickerController, hidesCancelButtonForVC vc: UIKit.UIViewController)
+  @objc func imagePickerController(_ imagePickerController: YXImagePickerController.DKImagePickerController, didSelectAssets: [YXImagePickerController.DKAsset])
+  @objc func imagePickerController(_ imagePickerController: YXImagePickerController.DKImagePickerController, didDeselectAssets: [YXImagePickerController.DKAsset])
+  @objc func imagePickerControllerDidReachMaxLimit(_ imagePickerController: YXImagePickerController.DKImagePickerController)
+  @objc func imagePickerControllerFooterView(_ imagePickerController: YXImagePickerController.DKImagePickerController) -> UIKit.UIView?
+  @objc func imagePickerControllerHeaderView(_ imagePickerController: YXImagePickerController.DKImagePickerController) -> UIKit.UIView?
+  @objc func imagePickerControllerCollectionViewBackgroundColor() -> UIKit.UIColor
+  @objc func imagePickerControllerCollectionImageCell() -> YXImagePickerController.DKAssetGroupDetailBaseCell.Type
+  @objc func imagePickerControllerCollectionCameraCell() -> YXImagePickerController.DKAssetGroupDetailBaseCell.Type
+  @objc func imagePickerControllerCollectionVideoCell() -> YXImagePickerController.DKAssetGroupDetailBaseCell.Type
+  @objc func imagePickerControllerGroupCell() -> any YXImagePickerController.DKAssetGroupCellType.Type
+  @objc func imagePickerControllerSelectGroupButton(_ imagePickerController: YXImagePickerController.DKImagePickerController, selectedGroup: YXImagePickerController.DKAssetGroup) -> UIKit.UIButton
+  @objc func imagePickerControllerGroupListPresentationStyle() -> YXImagePickerController.DKImagePickerGroupListPresentationStyle
+  @objc func imagePickerControllerPrepareGroupListViewController(_ listViewController: UIKit.UITableViewController)
+}
+@_inheritsConvenienceInitializers @objc open class DKImagePickerControllerBaseUIDelegate : ObjectiveC.NSObject, YXImagePickerController.DKImagePickerControllerUIDelegate {
+  weak open var imagePickerController: YXImagePickerController.DKImagePickerController!
+  open var doneButton: UIKit.UIButton?
+  open var selectGroupButton: UIKit.UIButton?
+  open func createDoneButtonIfNeeded() -> UIKit.UIButton
+  open func createSelectGroupButtonIfNeeded() -> UIKit.UIButton
+  open func updateDoneButtonTitle(_ button: UIKit.UIButton)
+  @objc open func prepareLayout(_ imagePickerController: YXImagePickerController.DKImagePickerController, vc: UIKit.UIViewController)
+  @objc open func layoutForImagePickerController(_ imagePickerController: YXImagePickerController.DKImagePickerController) -> UIKit.UICollectionViewLayout.Type
+  @objc open func imagePickerController(_ imagePickerController: YXImagePickerController.DKImagePickerController, showsCancelButtonForVC vc: UIKit.UIViewController)
+  @objc open func imagePickerController(_ imagePickerController: YXImagePickerController.DKImagePickerController, hidesCancelButtonForVC vc: UIKit.UIViewController)
+  @objc open func imagePickerController(_ imagePickerController: YXImagePickerController.DKImagePickerController, didSelectAssets: [YXImagePickerController.DKAsset])
+  @objc open func imagePickerController(_ imagePickerController: YXImagePickerController.DKImagePickerController, didDeselectAssets: [YXImagePickerController.DKAsset])
+  open var isMaxLimitAlertDisplayed: Swift.Bool {
+    get
+  }
+  @objc open func imagePickerControllerDidReachMaxLimit(_ imagePickerController: YXImagePickerController.DKImagePickerController)
+  @objc open func imagePickerControllerFooterView(_ imagePickerController: YXImagePickerController.DKImagePickerController) -> UIKit.UIView?
+  @objc open func imagePickerControllerHeaderView(_ imagePickerController: YXImagePickerController.DKImagePickerController) -> UIKit.UIView?
+  @objc open func imagePickerControllerCollectionViewBackgroundColor() -> UIKit.UIColor
+  @objc open func imagePickerControllerCollectionImageCell() -> YXImagePickerController.DKAssetGroupDetailBaseCell.Type
+  @objc open func imagePickerControllerCollectionCameraCell() -> YXImagePickerController.DKAssetGroupDetailBaseCell.Type
+  @objc open func imagePickerControllerCollectionVideoCell() -> YXImagePickerController.DKAssetGroupDetailBaseCell.Type
+  @objc open func imagePickerControllerGroupCell() -> any YXImagePickerController.DKAssetGroupCellType.Type
+  open func needsToShowPreviewOnLongPress() -> Swift.Bool
+  @objc open func imagePickerControllerSelectGroupButton(_ imagePickerController: YXImagePickerController.DKImagePickerController, selectedGroup: YXImagePickerController.DKAssetGroup) -> UIKit.UIButton
+  @objc open func imagePickerControllerGroupListPresentationStyle() -> YXImagePickerController.DKImagePickerGroupListPresentationStyle
+  @objc open func imagePickerControllerPrepareGroupListViewController(_ listViewController: UIKit.UITableViewController)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class DKImagePickerControllerResource : ObjectiveC.NSObject {
+  @objc public static var customLocalizationBlock: ((_ title: Swift.String) -> Swift.String?)?
+  public class func localizedStringWithKey(_ key: Swift.String, value: Swift.String? = nil) -> Swift.String
+  @objc public static var customImageBlock: ((_ imageName: Swift.String) -> UIKit.UIImage?)?
+  public class func checkedImage() -> UIKit.UIImage
+  public class func blueTickImage() -> UIKit.UIImage
+  public class func cameraImage() -> UIKit.UIImage
+  public class func videoCameraIcon() -> UIKit.UIImage
+  public class func emptyAlbumIcon() -> UIKit.UIImage
+  public class func photoGalleryCheckedImage() -> UIKit.UIImage
+  public class func photoGalleryUncheckedImage() -> UIKit.UIImage
+  public class func photoGalleryBackArrowImage() -> UIKit.UIImage
+  public class func imageForResource(_ name: Swift.String, stretchable: Swift.Bool = false, cacheable: Swift.Bool = false) -> UIKit.UIImage
+  public class func stretchImgFromMiddle(_ image: UIKit.UIImage) -> UIKit.UIImage
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc @_Concurrency.MainActor(unsafe) open class DKPermissionView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) open class func permissionView(_ style: YXImagePickerController.DKImagePickerControllerSourceType, withColors colors: YXImagePickerController.DKPermissionViewColors = DKPermissionViewColors()) -> YXImagePickerController.DKPermissionView
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didMoveToWindow()
+  @objc @_Concurrency.MainActor(unsafe) open func gotoSettings()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc public class DKPermissionViewColors : ObjectiveC.NSObject {
+  public init(forBackground background: UIKit.UIColor = UIColor.black, forPhotoTitle photoTitle: UIKit.UIColor = UIColor.gray, forCameraTitle cameraTitle: UIKit.UIColor = UIColor.white, forButton button: UIKit.UIColor = UIColor(red: 0, green: 122.0 / 255, blue: 1, alpha: 1))
+  @objc deinit
+}
+public func ArrowDefaultColor() -> UIKit.UIColor
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class DKPopoverViewController : UIKit.UIViewController {
+  @objc @_Concurrency.MainActor(unsafe) open class func popoverViewController(_ viewController: UIKit.UIViewController, fromView: UIKit.UIView, arrowColor: UIKit.UIColor = ArrowDefaultColor())
+  @objc @_Concurrency.MainActor(unsafe) open class func dismissPopoverViewController()
+  @objc @_Concurrency.MainActor(unsafe) public var arrowColor: UIKit.UIColor
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func loadView()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
+  @available(iOS, deprecated: 8.0)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didRotate(from fromInterfaceOrientation: UIKit.UIInterfaceOrientation)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension YXImagePickerController.DKAssetType : Swift.Equatable {}
+extension YXImagePickerController.DKAssetType : Swift.Hashable {}
+extension YXImagePickerController.DKAssetType : Swift.RawRepresentable {}
+extension YXImagePickerController.DKImageAssetExporterError : Swift.Equatable {}
+extension YXImagePickerController.DKImageAssetExporterError : Swift.Hashable {}
+extension YXImagePickerController.DKImageAssetExporterError : Swift.RawRepresentable {}
+extension YXImagePickerController.DKImageExportPresent : Swift.Equatable {}
+extension YXImagePickerController.DKImageExportPresent : Swift.Hashable {}
+extension YXImagePickerController.DKImageExportPresent : Swift.RawRepresentable {}
+extension YXImagePickerController.DKImageExtensionType : Swift.Equatable {}
+extension YXImagePickerController.DKImageExtensionType : Swift.Hashable {}
+extension YXImagePickerController.DKImageExtensionType : Swift.RawRepresentable {}
+extension YXImagePickerController.DKImagePickerControllerAssetType : Swift.Equatable {}
+extension YXImagePickerController.DKImagePickerControllerAssetType : Swift.Hashable {}
+extension YXImagePickerController.DKImagePickerControllerAssetType : Swift.RawRepresentable {}
+extension YXImagePickerController.DKImagePickerControllerSourceType : Swift.Equatable {}
+extension YXImagePickerController.DKImagePickerControllerSourceType : Swift.Hashable {}
+extension YXImagePickerController.DKImagePickerControllerSourceType : Swift.RawRepresentable {}
+extension YXImagePickerController.DKImagePickerControllerExportStatus : Swift.Equatable {}
+extension YXImagePickerController.DKImagePickerControllerExportStatus : Swift.Hashable {}
+extension YXImagePickerController.DKImagePickerControllerExportStatus : Swift.RawRepresentable {}
+extension YXImagePickerController.DKImagePickerGroupListPresentationStyle : Swift.Equatable {}
+extension YXImagePickerController.DKImagePickerGroupListPresentationStyle : Swift.Hashable {}
+extension YXImagePickerController.DKImagePickerGroupListPresentationStyle : Swift.RawRepresentable {}

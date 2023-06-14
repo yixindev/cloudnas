@@ -1,0 +1,11 @@
+framework module wx_file_backup_manager {
+  umbrella header "wx_file_backup_manager-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module wx_file_backup_manager.Swift {
+  header "wx_file_backup_manager-Swift.h"
+  requires objc
+}

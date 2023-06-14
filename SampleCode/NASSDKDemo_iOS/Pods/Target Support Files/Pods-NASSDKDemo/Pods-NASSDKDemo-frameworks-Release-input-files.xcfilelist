@@ -4,6 +4,7 @@ ${BUILT_PRODUCTS_DIR}/DKCamera/DKCamera.framework
 ${BUILT_PRODUCTS_DIR}/DKImagePickerController/DKImagePickerController.framework
 ${BUILT_PRODUCTS_DIR}/DKPhotoGallery/DKPhotoGallery.framework
 ${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework
+${BUILT_PRODUCTS_DIR}/JLRoutes/JLRoutes.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/App.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/audioplayers.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/cloud_nas.framework
@@ -20,6 +21,7 @@ ${PODS_ROOT}/NASSDK/nas_sdk/flutter_image_compress.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/gallery_saver.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/image_editor.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/image_picker.framework
+${PODS_ROOT}/NASSDK/nas_sdk/JLRoutes.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/libwebp.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/Mantle.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/md5_file_checksum.framework
@@ -27,12 +29,14 @@ ${PODS_ROOT}/NASSDK/nas_sdk/nas_smb_flutter.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/nas_stream_flutter.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/package_info.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/package_info_plus.framework
+${PODS_ROOT}/NASSDK/nas_sdk/path_provider_foundation.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/path_provider_ios.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/pdf_render.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/photo_manager.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/SDWebImageWebPCoder.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/Sentry.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/sentry_flutter.framework
+${PODS_ROOT}/NASSDK/nas_sdk/shared_preferences_foundation.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/shared_preferences_ios.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/sqflite.framework
 ${PODS_ROOT}/NASSDK/nas_sdk/sqlite3.framework

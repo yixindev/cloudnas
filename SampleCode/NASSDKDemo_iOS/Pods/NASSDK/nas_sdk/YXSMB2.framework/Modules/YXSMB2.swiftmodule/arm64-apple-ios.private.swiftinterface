@@ -1,0 +1,127 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name YXSMB2
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Foundation
+import SMB2.Raw
+import SMB2
+import Swift
+@_exported import YXSMB2
+import _Concurrency
+import _StringProcessing
+@objc @objcMembers public class AMSMB2 : ObjectiveC.NSObject, Foundation.NSSecureCoding, Swift.Codable, Foundation.NSCopying, Swift.CustomReflectable {
+  public typealias SimpleCompletionHandler = ((_ error: (any Swift.Error)?) -> Swift.Void)?
+  public typealias ReadProgressHandler = ((_ bytes: Swift.Int64, _ total: Swift.Int64) -> Swift.Bool)?
+  public typealias WriteProgressHandler = ((_ bytes: Swift.Int64) -> Swift.Bool)?
+  @objc final public let url: Foundation.URL
+  @objc open var timeout: Foundation.TimeInterval {
+    @objc get
+    @objc set
+  }
+  @objc override dynamic public var debugDescription: Swift.String {
+    @objc get
+  }
+  public var customMirror: Swift.Mirror {
+    get
+  }
+  @objc public init?(url: Foundation.URL, domain: Swift.String = "", credential: Foundation.URLCredential?)
+  @objc required public init?(coder aDecoder: Foundation.NSCoder)
+  @objc open func encode(with aCoder: Foundation.NSCoder)
+  @objc public static var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
+  required public init(from decoder: any Swift.Decoder) throws
+  open func encode(to encoder: any Swift.Encoder) throws
+  @objc open func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc(connectShareWithName:encrypted:completionHandler:) open func connectShare(name: Swift.String, encrypted: Swift.Bool = false, completionHandler: @escaping (_ error: (any Swift.Error)?) -> Swift.Void)
+  @objc(disconnectShareGracefully:completionHandler:) open func disconnectShare(gracefully: Swift.Bool = false, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler = nil)
+  @objc(echoWithCompletionHandler:) open func echo(completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  open func listShares(enumerateHidden: Swift.Bool = false, completionHandler: @escaping (_ result: Swift.Result<[(name: Swift.String, comment: Swift.String)], any Swift.Error>) -> Swift.Void)
+  open func contentsOfDirectory(atPath path: Swift.String, recursive: Swift.Bool = false, completionHandler: @escaping (_ result: Swift.Result<[[Foundation.URLResourceKey : Any]], any Swift.Error>) -> Swift.Void)
+  open func attributesOfFileSystem(forPath path: Swift.String, completionHandler: @escaping (_ result: Swift.Result<[Foundation.FileAttributeKey : Any], any Swift.Error>) -> Swift.Void)
+  open func attributesOfItem(atPath path: Swift.String, completionHandler: @escaping (_ result: Swift.Result<[Foundation.URLResourceKey : Any], any Swift.Error>) -> Swift.Void)
+  open func destinationOfSymbolicLink(atPath path: Swift.String, completionHandler: @escaping (_ result: Swift.Result<Swift.String, any Swift.Error>) -> Swift.Void)
+  @objc(createDirectoryAtPath:completionHandler:) open func createDirectory(atPath path: Swift.String, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(removeDirectoryAtPath:recursive:completionHandler:) open func removeDirectory(atPath path: Swift.String, recursive: Swift.Bool, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(removeFileAtPath:completionHandler:) open func removeFile(atPath path: Swift.String, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(removeItemAtPath:completionHandler:) open func removeItem(atPath path: Swift.String, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(truncateFileAtPath:atOffset:completionHandler:) open func truncateFile(atPath path: Swift.String, atOffset: Swift.UInt64, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(moveItemAtPath:toPath:completionHandler:) open func moveItem(atPath path: Swift.String, toPath: Swift.String, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  open func contents(atPath path: Swift.String, progress: YXSMB2.AMSMB2.ReadProgressHandler, completionHandler: @escaping (_ result: Swift.Result<Foundation.Data, any Swift.Error>) -> Swift.Void)
+  open func contents<R>(atPath path: Swift.String, range: R? = nil, progress: YXSMB2.AMSMB2.ReadProgressHandler, completionHandler: @escaping (_ result: Swift.Result<Foundation.Data, any Swift.Error>) -> Swift.Void) where R : Swift.RangeExpression, R.Bound : Swift.FixedWidthInteger
+  @objc(contentsAtPath:fromOffset:fetchedData:completionHandler:) open func contents(atPath path: Swift.String, offset: Swift.Int64 = 0, fetchedData: @escaping ((_ offset: Swift.Int64, _ total: Swift.Int64, _ data: Foundation.Data) -> Swift.Bool), completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(contentsAtPath:fromOffset:length:fetchedData:completionHandler:) open func contents(atPath path: Swift.String, offset: Swift.Int64 = 0, length: Swift.Int64 = 0, fetchedData: @escaping ((_ offset: Swift.Int64, _ total: Swift.Int64, _ data: Foundation.Data) -> Swift.Bool), completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  open func write<DataType>(data: DataType, toPath path: Swift.String, progress: YXSMB2.AMSMB2.WriteProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler) where DataType : Foundation.DataProtocol
+  @objc(writeStream:toPath:chunkSize:progress:completionHandler:) open func write(stream: Foundation.InputStream, toPath path: Swift.String, chunkSize: Swift.Int = 0, progress: YXSMB2.AMSMB2.WriteProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @available(*, deprecated, renamed: "copyItem(atPath:toPath:recursive:progress:completionHandler:)", message: "New method does server-side copy and is much faster.")
+  @objc(copyContentsOfItemAtPath:toPath:recursiveprogress::completionHandler:) open func copyContentsOfItem(atPath path: Swift.String, toPath: Swift.String, recursive: Swift.Bool, progress: YXSMB2.AMSMB2.ReadProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(copyItemAtPath:toPath:recursive:progress:completionHandler:) open func copyItem(atPath path: Swift.String, toPath: Swift.String, recursive: Swift.Bool, progress: YXSMB2.AMSMB2.ReadProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(uploadItemAtURL:toPath:isUpdate:progress:completionHandler:) open func uploadItem(at url: Foundation.URL, toPath: Swift.String, isUpdate: Swift.Bool, progress: YXSMB2.AMSMB2.WriteProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(uploadAppend:toPath:isUpdate:progress:completionHandler:) open func uploadAppend(content: Foundation.Data, to path: Swift.String, is update: Swift.Bool, progress: YXSMB2.AMSMB2.WriteProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(uploadItemAtURL:toPath:progress:completionHandler:) open func uploadItem(at url: Foundation.URL, toPath: Swift.String, progress: YXSMB2.AMSMB2.WriteProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(uploadPath:toPath:offset:size:isUpdate:progress:completionHandler:) open func uploadPath(at url: Foundation.URL, toPath: Swift.String, offset: Swift.Int64, size: Swift.Int64, is update: Swift.Bool, progress: YXSMB2.AMSMB2.WriteProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(downloadItemAtPath:toURL:progress:completionHandler:) open func downloadItem(atPath path: Swift.String, to url: Foundation.URL, progress: YXSMB2.AMSMB2.ReadProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(downloadItemAtPath:toURL:resume:progress:completionHandler:) open func downloadItem(atPath path: Swift.String, to url: Foundation.URL, resume: Swift.Bool, progress: YXSMB2.AMSMB2.ReadProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(downloadItemAppendAtPath:toURL:offset:buffsize:progress:completionHandler:) open func downloadItemAppend(atPath path: Swift.String, to url: Foundation.URL, offset: Swift.Int64, buffsize: Swift.Int64, progress: YXSMB2.AMSMB2.ReadProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc(downloadItemAtPath:toStream:progress:completionHandler:) open func downloadItem(atPath path: Swift.String, to stream: Foundation.OutputStream, progress: YXSMB2.AMSMB2.ReadProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @objc deinit
+}
+extension Swift.Dictionary where Key == Foundation.URLResourceKey, Value == Any {
+  public var name: Swift.String? {
+    get
+  }
+  public var path: Swift.String? {
+    get
+  }
+  public var fileResourceType: Foundation.URLFileResourceType? {
+    get
+  }
+  public var isDirectory: Swift.Bool {
+    get
+  }
+  public var isRegularFile: Swift.Bool {
+    get
+  }
+  public var isSymbolicLink: Swift.Bool {
+    get
+  }
+  public var fileSize: Swift.Int64? {
+    get
+  }
+  public var attributeModificationDate: Foundation.Date? {
+    get
+  }
+  public var contentModificationDate: Foundation.Date? {
+    get
+  }
+  public var contentAccessDate: Foundation.Date? {
+    get
+  }
+  public var creationDate: Foundation.Date? {
+    get
+  }
+}
+extension YXSMB2.AMSMB2 {
+  @available(swift, obsoleted: 1.0)
+  @objc(connectShareWithName:completionHandler:) dynamic open func __connectShare(name: Swift.String, completionHandler: @escaping (_ error: (any Swift.Error)?) -> Swift.Void)
+  @available(swift, obsoleted: 1.0)
+  @objc(disconnectShare) dynamic open func __disconnectShare()
+  @available(swift, obsoleted: 1.0)
+  @objc(disconnectShareWithCompletionHandler:) dynamic open func __disconnectShare(completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+  @available(swift, obsoleted: 1.0)
+  @objc(listSharesWithCompletionHandler:) dynamic public func __listShares(completionHandler: @escaping (_ names: [Swift.String], _ comments: [Swift.String], _ error: (any Swift.Error)?) -> Swift.Void)
+  @available(swift, obsoleted: 1.0)
+  @objc(listSharesWithEnumerateHidden:completionHandler:) dynamic public func __listShares(enumerateHidden: Swift.Bool, completionHandler: @escaping (_ names: [Swift.String], _ comments: [Swift.String], _ error: (any Swift.Error)?) -> Swift.Void)
+  @available(swift, obsoleted: 1.0)
+  @objc(contentsOfDirectoryAtPath:recursive:completionHandler:) dynamic public func __contentsOfDirectory(atPath path: Swift.String, recursive: Swift.Bool = false, completionHandler: @escaping (_ contents: [[Foundation.URLResourceKey : Any]]?, _ error: (any Swift.Error)?) -> Swift.Void)
+  @available(swift, obsoleted: 1.0)
+  @objc(attributesOfFileSystemForPath:completionHandler:) dynamic public func __attributesOfFileSystem(forPath path: Swift.String, completionHandler: @escaping (_ attrubutes: [Foundation.FileAttributeKey : Any]?, _ error: (any Swift.Error)?) -> Swift.Void)
+  @available(swift, obsoleted: 1.0)
+  @objc(attributesOfItemAtPath:completionHandler:) dynamic public func __attributesOfItem(atPath path: Swift.String, completionHandler: @escaping (_ file: [Foundation.URLResourceKey : Any]?, _ error: (any Swift.Error)?) -> Swift.Void)
+  @available(swift, obsoleted: 1.0)
+  @objc(destinationOfSymbolicLinkAtPath:completionHandler:) dynamic open func __destinationOfSymbolicLink(atPath path: Swift.String, completionHandler: @escaping (_ destinationPath: Swift.String?, _ error: (any Swift.Error)?) -> Swift.Void)
+  @available(swift, obsoleted: 1.0)
+  @objc(contentsAtPath:fromOffset:toLength:progress:completionHandler:) dynamic open func __contents(atPath path: Swift.String, offset: Swift.Int64 = 0, length: Swift.Int = -1, progress: YXSMB2.AMSMB2.ReadProgressHandler, completionHandler: @escaping (_ contents: Foundation.Data?, _ error: (any Swift.Error)?) -> Swift.Void)
+  @available(swift, obsoleted: 1.0)
+  @objc(writeData:toPath:progress:completionHandler:) dynamic open func __write(data: Foundation.Data, toPath path: Swift.String, progress: YXSMB2.AMSMB2.WriteProgressHandler, completionHandler: YXSMB2.AMSMB2.SimpleCompletionHandler)
+}

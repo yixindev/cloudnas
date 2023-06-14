@@ -1,0 +1,327 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "shared_preferences_foundation",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Flutter",
+        "printedName": "Flutter",
+        "declKind": "Import",
+        "moduleName": "shared_preferences_foundation"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "shared_preferences_foundation",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Flutter",
+        "printedName": "Flutter",
+        "declKind": "Import",
+        "moduleName": "shared_preferences_foundation"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SharedPreferencesPlugin",
+        "printedName": "SharedPreferencesPlugin",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "register",
+            "printedName": "register(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPluginRegistrar",
+                "printedName": "Flutter.FlutterPluginRegistrar",
+                "usr": "c:objc(pl)FlutterPluginRegistrar"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@shared_preferences_foundation@objc(cs)SharedPreferencesPlugin(cm)registerWithRegistrar:",
+            "mangledName": "$s29shared_preferences_foundation23SharedPreferencesPluginC8register4withySo07FlutterF9Registrar_p_tFZ",
+            "moduleName": "shared_preferences_foundation",
+            "static": true,
+            "objc_name": "registerWithRegistrar:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SharedPreferencesPlugin",
+                "printedName": "shared_preferences_foundation.SharedPreferencesPlugin",
+                "usr": "c:@M@shared_preferences_foundation@objc(cs)SharedPreferencesPlugin"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@shared_preferences_foundation@objc(cs)SharedPreferencesPlugin(im)init",
+            "mangledName": "$s29shared_preferences_foundation23SharedPreferencesPluginCACycfc",
+            "moduleName": "shared_preferences_foundation",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@shared_preferences_foundation@objc(cs)SharedPreferencesPlugin",
+        "mangledName": "$s29shared_preferences_foundation23SharedPreferencesPluginC",
+        "moduleName": "shared_preferences_foundation",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 689,
+      "length": 10,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 698,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 705,
+      "length": 20,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 724,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 731,
+      "length": 40,
+      "value": "\"Stacktrace: \""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 770,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 1707,
+      "length": 43,
+      "value": "\"dev.flutter.pigeon.UserDefaultsApi.remove\""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1930,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 2218,
+      "length": 44,
+      "value": "\"dev.flutter.pigeon.UserDefaultsApi.setBool\""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2443,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2485,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 2792,
+      "length": 46,
+      "value": "\"dev.flutter.pigeon.UserDefaultsApi.setDouble\""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3021,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3063,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 3375,
+      "length": 45,
+      "value": "\"dev.flutter.pigeon.UserDefaultsApi.setValue\""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3602,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3644,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 3951,
+      "length": 53,
+      "value": "\"dev.flutter.pigeon.UserDefaultsApi.getAllWithPrefix\""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4197,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "StringLiteral",
+      "offset": 4535,
+      "length": 52,
+      "value": "\"dev.flutter.pigeon.UserDefaultsApi.clearWithPrefix\""
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/messages.g.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4779,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/jinhua\/flutter-3.0.0\/.pub-cache\/hosted\/pub.dartlang.org\/shared_preferences_foundation-2.2.2\/ios\/Classes\/SharedPreferencesPlugin.swift",
+      "kind": "Dictionary",
+      "offset": 1540,
+      "length": 3,
+      "value": "[]"
+    }
+  ]
+}

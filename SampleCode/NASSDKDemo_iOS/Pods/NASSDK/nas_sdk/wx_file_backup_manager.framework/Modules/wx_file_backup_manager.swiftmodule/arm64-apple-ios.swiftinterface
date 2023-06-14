@@ -1,0 +1,16 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name wx_file_backup_manager
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Flutter
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+@_exported import wx_file_backup_manager
+@objc @_inheritsConvenienceInitializers public class SwiftWxFileBackupManagerPlugin : ObjectiveC.NSObject, Flutter.FlutterPlugin {
+  @objc public static func register(with registrar: any Flutter.FlutterPluginRegistrar)
+  @objc public func handle(_ call: Flutter.FlutterMethodCall, result: @escaping Flutter.FlutterResult)
+  @objc override dynamic public init()
+  @objc deinit
+}

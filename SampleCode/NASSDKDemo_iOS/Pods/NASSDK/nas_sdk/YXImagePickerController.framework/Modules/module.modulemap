@@ -1,0 +1,11 @@
+framework module YXImagePickerController {
+  umbrella header "YXImagePickerController-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module YXImagePickerController.Swift {
+  header "YXImagePickerController-Swift.h"
+  requires objc
+}

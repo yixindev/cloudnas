@@ -9,6 +9,7 @@ target 'NASSDKDemo' do
 
    pod 'NASSDK','1.4.7'
 
+   pod 'JLRoutes'
    pod 'ZFPlayer/ijkplayer', '~> 4.0'
    pod 'ZFPlayer/ControlView', '~> 4.0'
 end

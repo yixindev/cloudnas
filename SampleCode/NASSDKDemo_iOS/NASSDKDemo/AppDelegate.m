@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "NASVideoPlayViewController.h"
+#import <JLRoutes/JLRoutes.h>
 
 @interface AppDelegate ()
 
@@ -31,5 +32,15 @@
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    if ([url.scheme isEqualToString:@"nasdemo"]) {
+        
+        [[JLRoutes globalRoutes] routeURL:url];
+        
+        return YES;
+    }
+    
+    return NO;
+}
 
 @end
