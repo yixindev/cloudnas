@@ -73,6 +73,7 @@
             [self NASSDKAuth];
             [self NASSDKVideoPlayRequest];
             [self NASSDKTokenCodeRequest];
+            [self NASSDKContentVCDismissed];
         }
         //SDK初始化失败
         else{
@@ -148,7 +149,12 @@
     }];
 }
 
-
+//监听SDK 页面容器dimissed
+-(void)NASSDKContentVCDismissed{
+    [NASSDKNative addContentViewControllerDismissedListener:^{
+        NSLog(@"----NASSDK contentViewController dismissed ! ----");
+    }];
+}
 
 #pragma mark - private
 

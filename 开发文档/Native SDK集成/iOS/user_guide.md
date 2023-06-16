@@ -38,6 +38,7 @@
 | 2023-05-11 | 1.4.2 | 1.新增公共空间功能 2.新增子账号容量配置功能 |
 | 2023-05-12 | 1.4.3 | 修复子账号为空异常 |
 | 2023-06-13 | 1.4.7 | 新增接口支持外部传入文件上传 |
+| 2023-06-16 | 1.4.8 | 新增容器页面dismiss回调接口 |
 
 ## 快速接入
 
@@ -247,7 +248,7 @@
 +(void)openFileUpload:(NSArray *)paths WithCompletion:(NASCompletionBlock)completion
 ```
 
-#### 7.4 调用示例
+#### 7.3 调用示例
 
 ```
 [NASSDKNative openFileUpload:paths WithCompletion:^(NSInteger resultCode, NSString *resultMsg) {
@@ -262,6 +263,25 @@
 * 注：paths 是沙盒内可访问文件的绝对路径数组
 
 --------------------
+
+### 8 监听容器页面退出事件
+#### 8.1 接口描述
+当退出容器页面时，例如调用了*dismissViewControllerAnimated*方法，会在退出完成时执行回调函数。
+
+#### 8.2 接口定义
+```
++(void)addContentViewControllerDismissedListener:(NASContentVCDismissedBlock)listener;
+```
+#### 8.3 调用示例
+```
+ [NASSDKNative addContentViewControllerDismissedListener:^{
+      	//页面退出完成
+ }];
+```
+* 注：页面退出后并未销毁。
+* 
+--------------------
+
 
 ## 错误码对照表
 
