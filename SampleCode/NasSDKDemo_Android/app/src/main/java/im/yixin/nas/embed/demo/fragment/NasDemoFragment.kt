@@ -12,7 +12,6 @@ import im.yixin.nas.embed.demo.impl.NasInvocationProxy
 import im.yixin.nas.embed.demo.util.ToastUtil
 import im.yixin.nas.sdk.YXNasSDK
 import im.yixin.nas.sdk.api.INasInvokeCallback
-import im.yixin.nas.sdk.const.YXNasConstants
 
 /**
  * Created by jixia.cai on 2021/6/24 11:58 上午
@@ -39,7 +38,9 @@ class NasDemoFragment : Fragment(R.layout.nas_demo_fragment_nas_demo) {
                                     "nas-sdk auth result code: $code, message: $message ~"
                                 )
                                 if (code == 200) {
-                                    startActivity(YXNasSDK.instance.obtainFlutterIntent())
+                                    startActivity(
+                                        YXNasSDK.instance.obtainFlutterIntent()
+                                    )
                                 } else if (code == 4001) {
                                     ToastUtil.showToast(context!!, "用户激活失败，请先激活用户")
                                 } else {
