@@ -8,6 +8,7 @@
 
 #import "HomePageViewController.h"
 #import <NASSDK/NASSDKNative.h>
+#import <JLRoutes/JLRoutes.h>
 #import "NASVideoPlayViewController.h"
 
 #define APP_KEY @"appkey"
@@ -19,6 +20,22 @@
 @end
 
 @implementation HomePageViewController
+
++ (void)load {
+    [[JLRoutes globalRoutes] addRoute:@"upload" handler:^BOOL(NSDictionary<NSString *,id> * _Nonnull parameters) {
+        NSArray *paths = [self imagePaths];
+        [NASSDKNative openFileUpload:paths WithCompletion:^(NSInteger resultCode, NSString *resultMsg) {
+            if (resultCode == NAS_RESULT_SUCCESS) {
+                NSLog(@"调用文件选择器成功");
+            }
+            else{
+                NSLog(@"调用文件选择器失败");
+            }
+        }];
+        
+        return YES;
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,6 +73,7 @@
             [self NASSDKAuth];
             [self NASSDKVideoPlayRequest];
             [self NASSDKTokenCodeRequest];
+            [self NASSDKContentVCDismissed];
         }
         //SDK初始化失败
         else{
@@ -131,7 +149,12 @@
     }];
 }
 
-
+//监听SDK 页面容器dimissed
+-(void)NASSDKContentVCDismissed{
+    [NASSDKNative addContentViewControllerDismissedListener:^{
+        NSLog(@"----NASSDK contentViewController dismissed ! ----");
+    }];
+}
 
 #pragma mark - private
 
@@ -171,5 +194,21 @@
     }
 }
 
++ (NSArray *)imagePaths {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *url = [fileManager containerURLForSecurityApplicationGroupIdentifier:@"group.com.yixin.cloudNas"];
+    url = [url URLByAppendingPathComponent:@"image"];
+    NSError *error = nil;
+    NSArray *names = [fileManager contentsOfDirectoryAtURL:url includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:&error];
+    
+    NSMutableArray *paths = @[].mutableCopy;
+    
+    for (NSURL *name in names) {
+        NSString *path = name.path;
+        [paths addObject:path];
+    }
+    
+    return paths;
+}
 
 @end
